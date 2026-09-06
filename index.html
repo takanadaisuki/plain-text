@@ -1,761 +1,791 @@
+```html
 <!DOCTYPE html>
-
 <html lang="ja">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8">
+<title>逆再生＆ローマ字変換</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #f5f5f5;
+}
 
-  <title>逆再生＆ローマ字変換</title>
+h1 {
+  text-align: center;
+}
 
-  <style>
+section {
+  background: white;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 15px;
+}
 
-    body {
+button {
+  padding: 12px 18px;
+  margin: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background: #333;
+  color: white;
+}
 
-      font-family: sans-serif;
+button:disabled {
+  background: #aaa;
+}
 
-      max-width: 600px;
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
 
-      margin: 0 auto;
+audio {
+  width: 100%;
+  margin-top: 10px;
+}
 
-      padding: 20px;
+.result {
+  font-size: 24px;
+  font-weight: bold;
+  word-break: break-all;
+  margin: 10px 0 20px;
+}
 
-      text-align: center;
-
-      background: #f7f7f7;
-
-    }
-
-    h1 {
-
-      margin-bottom: 30px;
-
-    }
-
-    section {
-
-      background: white;
-
-      padding: 20px;
-
-      margin-bottom: 20px;
-
-      border-radius: 12px;
-
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-
-    }
-
-    button {
-
-      font-size: 16px;
-
-      padding: 12px 18px;
-
-      margin: 5px;
-
-      border: none;
-
-      border-radius: 8px;
-
-      background: #333;
-
-      color: white;
-
-      cursor: pointer;
-
-    }
-
-    button:disabled {
-
-      background: #aaa;
-
-    }
-
-    input {
-
-      width: 90%;
-
-      padding: 12px;
-
-      font-size: 18px;
-
-      border: 1px solid #ccc;
-
-      border-radius: 8px;
-
-      margin-bottom: 15px;
-
-    }
-
-    .result {
-
-      font-size: 22px;
-
-      font-weight: bold;
-
-      margin: 10px 0;
-
-      word-break: break-all;
-
-    }
-
-    audio {
-
-      width: 100%;
-
-      margin-top: 10px;
-
-    }
-
-    .label {
-
-      font-size: 14px;
-
-      color: #666;
-
-      margin-top: 15px;
-
-    }
-
-  </style>
-
+.status {
+  margin: 15px 0;
+  font-weight: bold;
+}
+</style>
 </head>
 
 <body>
 
-  <h1>🎙️ 逆再生＆ローマ字変換</h1>
+<h1>🎙️ 逆再生＆ローマ字変換</h1>
 
-  <!-- 音声録音 -->
 
-  <section>
+<!-- =========================
+     音声録音
+========================= -->
 
-    <h2>🎤 音声録音</h2>
+<section>
 
-    <button id="startBtn">録音開始</button>
+<h2>🎤 音声録音</h2>
 
-    <button id="stopBtn" disabled>録音停止</button>
+<button id="startButton">
+録音開始
+</button>
 
-    <div id="status">待機中</div>
+<button id="stopButton" disabled>
+録音停止
+</button>
 
-    <div class="label">通常再生</div>
+<div id="status" class="status">
+待機中
+</div>
 
-    <audio id="normalAudio" controls></audio>
+<p>通常再生</p>
 
-    <div class="label">逆再生</div>
+<audio id="normalAudio" controls></audio>
 
-    <audio id="reverseAudio" controls></audio>
 
-    <br>
+<p>逆再生</p>
 
-    <button id="downloadBtn" disabled>
+<audio id="reverseAudio" controls></audio>
 
-      逆再生音声を保存
+<br>
 
-    </button>
+<button id="downloadButton" disabled>
+逆再生を保存
+</button>
 
-  </section>
+</section>
 
-  <!-- ローマ字変換 -->
 
-  <section>
 
-    <h2>🔤 ローマ字逆変換</h2>
+<!-- =========================
+     ローマ字変換
+========================= -->
 
-    <input
+<section>
 
-      id="textInput"
+<h2>🔤 ローマ字変換</h2>
 
-      type="text"
+<input
+  id="textInput"
+  type="text"
+  placeholder="ひらがなを入力"
+>
 
-      placeholder="ひらがなを入力"
+<p>ローマ字</p>
 
-    >
+<div id="romanResult" class="result">
+---
+</div>
 
-    <div class="label">ローマ字</div>
 
-    <div id="romanResult" class="result">---</div>
+<p>逆から</p>
 
-    <div class="label">逆から</div>
+<div id="reverseRomanResult" class="result">
+---
+</div>
 
-    <div id="reverseRomanResult" class="result">---</div>
+</section>
 
-  </section>
+
 
 <script>
 
-  /* =========================
+/* ==================================================
+   音声録音
+================================================== */
 
-     音声録音
+let recorder = null;
+let chunks = [];
+let normalBlob = null;
+let reverseBlob = null;
 
-  ========================= */
+const startButton =
+  document.getElementById("startButton");
 
-  let mediaRecorder;
+const stopButton =
+  document.getElementById("stopButton");
 
-  let audioChunks = [];
+const status =
+  document.getElementById("status");
 
-  let recordedBlob = null;
+const normalAudio =
+  document.getElementById("normalAudio");
 
-  let reversedBlob = null;
+const reverseAudio =
+  document.getElementById("reverseAudio");
 
-  const startBtn = document.getElementById("startBtn");
+const downloadButton =
+  document.getElementById("downloadButton");
 
-  const stopBtn = document.getElementById("stopBtn");
 
-  const status = document.getElementById("status");
+/* 録音開始 */
 
-  const normalAudio = document.getElementById("normalAudio");
+startButton.addEventListener("click", async () => {
 
-  const reverseAudio = document.getElementById("reverseAudio");
+  try {
 
-  const downloadBtn = document.getElementById("downloadBtn");
+    if (!navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia) {
 
-  startBtn.addEventListener("click", async () => {
-
-    try {
-
-      const stream = await navigator.mediaDevices.getUserMedia({
-
-        audio: true
-
-      });
-
-      mediaRecorder = new MediaRecorder(stream);
-
-      audioChunks = [];
-
-      mediaRecorder.ondataavailable = event => {
-
-        audioChunks.push(event.data);
-
-      };
-
-      mediaRecorder.onstop = async () => {
-
-        const blob = new Blob(audioChunks, {
-
-          type: "audio/webm"
-
-        });
-
-        recordedBlob = blob;
-
-        normalAudio.src = URL.createObjectURL(blob);
-
-        status.textContent = "逆再生音声を作成中...";
-
-        reversedBlob = await reverseAudio(blob);
-
-        reverseAudio.src = URL.createObjectURL(reversedBlob);
-
-        downloadBtn.disabled = false;
-
-        status.textContent = "録音完了！";
-
-      };
-
-      mediaRecorder.start();
-
-      startBtn.disabled = true;
-
-      stopBtn.disabled = false;
-
-      status.textContent = "録音中...";
-
-    } catch (error) {
-
-      status.textContent =
-
-        "マイクを使用できませんでした。";
-
-      console.error(error);
-
-    }
-
-  });
-
-  stopBtn.addEventListener("click", () => {
-
-    mediaRecorder.stop();
-
-    startBtn.disabled = false;
-
-    stopBtn.disabled = true;
-
-    status.textContent = "処理中...";
-
-  });
-
-  /* =========================
-
-     音声を逆再生用に反転
-
-  ========================= */
-
-  async function reverseAudio(blob) {
-
-    const arrayBuffer = await blob.arrayBuffer();
-
-    const audioContext = new AudioContext();
-
-    const audioBuffer =
-
-      await audioContext.decodeAudioData(arrayBuffer);
-
-    const reversedBuffer =
-
-      audioContext.createBuffer(
-
-        audioBuffer.numberOfChannels,
-
-        audioBuffer.length,
-
-        audioBuffer.sampleRate
-
+      alert(
+        "このブラウザではマイクが使用できません。Safariで開いてください。"
       );
 
+      return;
+    }
+
+
+    const stream =
+      await navigator.mediaDevices.getUserMedia({
+        audio: true
+      });
+
+
+    chunks = [];
+
+
+    recorder =
+      new MediaRecorder(stream);
+
+
+    recorder.ondataavailable = (event) => {
+
+      if (event.data.size > 0) {
+        chunks.push(event.data);
+      }
+
+    };
+
+
+    recorder.onstop = async () => {
+
+      status.textContent =
+        "音声を処理しています…";
+
+
+      normalBlob =
+        new Blob(chunks, {
+          type: recorder.mimeType
+        });
+
+
+      normalAudio.src =
+        URL.createObjectURL(normalBlob);
+
+
+      try {
+
+        reverseBlob =
+          await makeReverseAudio(normalBlob);
+
+        reverseAudio.src =
+          URL.createObjectURL(reverseBlob);
+
+        downloadButton.disabled = false;
+
+        status.textContent =
+          "録音完了！";
+
+      } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+          "逆再生の作成に失敗しました。";
+
+      }
+
+
+      /* マイクを停止 */
+
+      stream.getTracks().forEach(track => {
+        track.stop();
+      });
+
+    };
+
+
+    recorder.start();
+
+
+    startButton.disabled = true;
+    stopButton.disabled = false;
+
+    status.textContent =
+      "🔴 録音中…";
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "マイクへのアクセスが許可されていません。\n\n" +
+      "iPhoneの設定 → Safari → マイク → 許可\n" +
+      "を確認してください。"
+    );
+
+  }
+
+});
+
+
+/* 録音停止 */
+
+stopButton.addEventListener("click", () => {
+
+  if (recorder &&
+      recorder.state === "recording") {
+
+    recorder.stop();
+
+  }
+
+  startButton.disabled = false;
+  stopButton.disabled = true;
+
+});
+
+
+
+/* ==================================================
+   音声を逆向きにする
+================================================== */
+
+async function makeReverseAudio(blob) {
+
+  const arrayBuffer =
+    await blob.arrayBuffer();
+
+
+  const audioContext =
+    new AudioContext();
+
+
+  const audioBuffer =
+    await audioContext.decodeAudioData(
+      arrayBuffer
+    );
+
+
+  const reversedBuffer =
+    audioContext.createBuffer(
+      audioBuffer.numberOfChannels,
+      audioBuffer.length,
+      audioBuffer.sampleRate
+    );
+
+
+  for (
+    let channel = 0;
+    channel < audioBuffer.numberOfChannels;
+    channel++
+  ) {
+
+    const original =
+      audioBuffer.getChannelData(channel);
+
+    const reversed =
+      reversedBuffer.getChannelData(channel);
+
+
     for (
-
-      let channel = 0;
-
-      channel < audioBuffer.numberOfChannels;
-
-      channel++
-
+      let i = 0;
+      i < original.length;
+      i++
     ) {
 
-      const original =
-
-        audioBuffer.getChannelData(channel);
-
-      const reversed =
-
-        reversedBuffer.getChannelData(channel);
-
-      for (
-
-        let i = 0;
-
-        i < original.length;
-
-        i++
-
-      ) {
-
-        reversed[i] =
-
-          original[original.length - 1 - i];
-
-      }
+      reversed[i] =
+        original[original.length - 1 - i];
 
     }
-
-    return audioBufferToWav(reversedBuffer);
 
   }
 
-  /* =========================
 
-     WAV変換
+  return convertToWav(reversedBuffer);
 
-  ========================= */
+}
 
-  function audioBufferToWav(buffer) {
 
-    const numChannels = buffer.numberOfChannels;
 
-    const sampleRate = buffer.sampleRate;
+/* ==================================================
+   WAVに変換
+================================================== */
 
-    const format = 1;
+function convertToWav(buffer) {
 
-    const bitDepth = 16;
+  const channels =
+    buffer.numberOfChannels;
 
-    const samples = buffer.length;
+  const sampleRate =
+    buffer.sampleRate;
 
-    const blockAlign =
+  const length =
+    buffer.length;
 
-      numChannels * bitDepth / 8;
+  const bitDepth = 16;
 
-    const byteRate =
+  const bytesPerSample =
+    bitDepth / 8;
 
-      sampleRate * blockAlign;
+  const dataSize =
+    length *
+    channels *
+    bytesPerSample;
 
-    const dataSize =
 
-      samples * blockAlign;
+  const arrayBuffer =
+    new ArrayBuffer(
+      44 + dataSize
+    );
 
-    const arrayBuffer =
 
-      new ArrayBuffer(44 + dataSize);
+  const view =
+    new DataView(arrayBuffer);
 
-    const view =
 
-      new DataView(arrayBuffer);
+  function writeString(offset, text) {
 
-    function writeString(offset, string) {
+    for (
+      let i = 0;
+      i < text.length;
+      i++
+    ) {
 
-      for (let i = 0; i < string.length; i++) {
-
-        view.setUint8(
-
-          offset + i,
-
-          string.charCodeAt(i)
-
-        );
-
-      }
+      view.setUint8(
+        offset + i,
+        text.charCodeAt(i)
+      );
 
     }
-
-    writeString(0, "RIFF");
-
-    view.setUint32(
-
-      4,
-
-      36 + dataSize,
-
-      true
-
-    );
-
-    writeString(8, "WAVE");
-
-    writeString(12, "fmt ");
-
-    view.setUint32(16, 16, true);
-
-    view.setUint16(20, format, true);
-
-    view.setUint16(22, numChannels, true);
-
-    view.setUint32(
-
-      24,
-
-      sampleRate,
-
-      true
-
-    );
-
-    view.setUint32(
-
-      28,
-
-      byteRate,
-
-      true
-
-    );
-
-    view.setUint16(
-
-      32,
-
-      blockAlign,
-
-      true
-
-    );
-
-    view.setUint16(
-
-      34,
-
-      bitDepth,
-
-      true
-
-    );
-
-    writeString(36, "data");
-
-    view.setUint32(
-
-      40,
-
-      dataSize,
-
-      true
-
-    );
-
-    let offset = 44;
-
-    for (let i = 0; i < samples; i++) {
-
-      for (
-
-        let channel = 0;
-
-        channel < numChannels;
-
-        channel++
-
-      ) {
-
-        let sample =
-
-          buffer.getChannelData(channel)[i];
-
-        sample =
-
-          Math.max(-1, Math.min(1, sample));
-
-        view.setInt16(
-
-          offset,
-
-          sample < 0
-
-            ? sample * 0x8000
-
-            : sample * 0x7FFF,
-
-          true
-
-        );
-
-        offset += 2;
-
-      }
-
-    }
-
-    return new Blob(
-
-      [arrayBuffer],
-
-      { type: "audio/wav" }
-
-    );
 
   }
 
-  /* =========================
 
-     ダウンロード
+  writeString(0, "RIFF");
 
-  ========================= */
+  view.setUint32(
+    4,
+    36 + dataSize,
+    true
+  );
 
-  downloadBtn.addEventListener("click", () => {
+  writeString(8, "WAVE");
 
-    if (!reversedBlob) return;
+  writeString(12, "fmt ");
+
+  view.setUint32(
+    16,
+    16,
+    true
+  );
+
+  view.setUint16(
+    20,
+    1,
+    true
+  );
+
+  view.setUint16(
+    22,
+    channels,
+    true
+  );
+
+  view.setUint32(
+    24,
+    sampleRate,
+    true
+  );
+
+  view.setUint32(
+    28,
+    sampleRate *
+    channels *
+    bytesPerSample,
+    true
+  );
+
+  view.setUint16(
+    32,
+    channels *
+    bytesPerSample,
+    true
+  );
+
+  view.setUint16(
+    34,
+    bitDepth,
+    true
+  );
+
+  writeString(36, "data");
+
+  view.setUint32(
+    40,
+    dataSize,
+    true
+  );
+
+
+  let offset = 44;
+
+
+  for (
+    let i = 0;
+    i < length;
+    i++
+  ) {
+
+    for (
+      let channel = 0;
+      channel < channels;
+      channel++
+    ) {
+
+      let sample =
+        buffer.getChannelData(channel)[i];
+
+
+      sample =
+        Math.max(
+          -1,
+          Math.min(1, sample)
+        );
+
+
+      view.setInt16(
+        offset,
+        sample < 0
+          ? sample * 0x8000
+          : sample * 0x7FFF,
+        true
+      );
+
+
+      offset += 2;
+
+    }
+
+  }
+
+
+  return new Blob(
+    [arrayBuffer],
+    { type: "audio/wav" }
+  );
+
+}
+
+
+
+/* ==================================================
+   逆再生音声を保存
+================================================== */
+
+downloadButton.addEventListener(
+  "click",
+  () => {
+
+    if (!reverseBlob) {
+      return;
+    }
+
 
     const url =
+      URL.createObjectURL(reverseBlob);
 
-      URL.createObjectURL(reversedBlob);
 
-    const a =
-
+    const link =
       document.createElement("a");
 
-    a.href = url;
 
-    a.download = "reverse-voice.wav";
+    link.href = url;
 
-    a.click();
+    link.download =
+      "reverse-voice.wav";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
 
     URL.revokeObjectURL(url);
 
-  });
+  }
+);
 
-  /* =========================
 
-     ひらがな → ローマ字
 
-  ========================= */
+/* ==================================================
+   ひらがな → ローマ字
+================================================== */
 
-  const kanaMap = {
+const kana = {
 
-    "あ":"a","い":"i","う":"u","え":"e","お":"o",
+"あ":"a","い":"i","う":"u","え":"e","お":"o",
 
-    "か":"ka","き":"ki","く":"ku","け":"ke","こ":"ko",
+"か":"ka","き":"ki","く":"ku","け":"ke","こ":"ko",
 
-    "さ":"sa","し":"shi","す":"su","せ":"se","そ":"so",
+"さ":"sa","し":"shi","す":"su","せ":"se","そ":"so",
 
-    "た":"ta","ち":"chi","つ":"tsu","て":"te","と":"to",
+"た":"ta","ち":"chi","つ":"tsu","て":"te","と":"to",
 
-    "な":"na","に":"ni","ぬ":"nu","ね":"ne","の":"no",
+"な":"na","に":"ni","ぬ":"nu","ね":"ne","の":"no",
 
-    "は":"ha","ひ":"hi","ふ":"fu","へ":"he","ほ":"ho",
+"は":"ha","ひ":"hi","ふ":"fu","へ":"he","ほ":"ho",
 
-    "ま":"ma","み":"mi","む":"mu","め":"me","も":"mo",
+"ま":"ma","み":"mi","む":"mu","め":"me","も":"mo",
 
-    "や":"ya","ゆ":"yu","よ":"yo",
+"や":"ya","ゆ":"yu","よ":"yo",
 
-    "ら":"ra","り":"ri","る":"ru","れ":"re","ろ":"ro",
+"ら":"ra","り":"ri","る":"ru","れ":"re","ろ":"ro",
 
-    "わ":"wa","を":"wo",
+"わ":"wa","を":"wo",
 
-    "ん":"n",
+"ん":"n",
 
-    "が":"ga","ぎ":"gi","ぐ":"gu","げ":"ge","ご":"go",
+"が":"ga","ぎ":"gi","ぐ":"gu","げ":"ge","ご":"go",
 
-    "ざ":"za","じ":"ji","ず":"zu","ぜ":"ze","ぞ":"zo",
+"ざ":"za","じ":"ji","ず":"zu","ぜ":"ze","ぞ":"zo",
 
-    "だ":"da","ぢ":"ji","づ":"zu","で":"de","ど":"do",
+"だ":"da","ぢ":"ji","づ":"zu","で":"de","ど":"do",
 
-    "ば":"ba","び":"bi","ぶ":"bu","べ":"be","ぼ":"bo",
+"ば":"ba","び":"bi","ぶ":"bu","べ":"be","ぼ":"bo",
 
-    "ぱ":"pa","ぴ":"pi","ぷ":"pu","ぺ":"pe","ぽ":"po",
+"ぱ":"pa","ぴ":"pi","ぷ":"pu","ぺ":"pe","ぽ":"po"
 
-    "ゃ":"ya","ゅ":"yu","ょ":"yo"
+};
 
-  };
 
-  const combinationMap = {
+const combinations = {
 
-    "きゃ":"kya","きゅ":"kyu","きょ":"kyo",
+"きゃ":"kya","きゅ":"kyu","きょ":"kyo",
 
-    "しゃ":"sha","しゅ":"shu","しょ":"sho",
+"しゃ":"sha","しゅ":"shu","しょ":"sho",
 
-    "ちゃ":"cha","ちゅ":"chu","ちょ":"cho",
+"ちゃ":"cha","ちゅ":"chu","ちょ":"cho",
 
-    "にゃ":"nya","にゅ":"nyu","にょ":"nyo",
+"にゃ":"nya","にゅ":"nyu","にょ":"nyo",
 
-    "ひゃ":"hya","ひゅ":"hyu","ひょ":"hyo",
+"ひゃ":"hya","ひゅ":"hyu","ひょ":"hyo",
 
-    "みゃ":"mya","みゅ":"myu","みょ":"myo",
+"みゃ":"mya","みゅ":"myu","みょ":"myo",
 
-    "りゃ":"rya","りゅ":"ryu","りょ":"ryo",
+"りゃ":"rya","りゅ":"ryu","りょ":"ryo",
 
-    "ぎゃ":"gya","ぎゅ":"gyu","ぎょ":"gyo",
+"ぎゃ":"gya","ぎゅ":"gyu","ぎょ":"gyo",
 
-    "じゃ":"ja","じゅ":"ju","じょ":"jo",
+"じゃ":"ja","じゅ":"ju","じょ":"jo",
 
-    "びゃ":"bya","びゅ":"byu","びょ":"byo",
+"びゃ":"bya","びゅ":"byu","びょ":"byo",
 
-    "ぴゃ":"pya","ぴゅ":"pyu","ぴょ":"pyo"
+"ぴゃ":"pya","ぴゅ":"pyu","ぴょ":"pyo"
 
-  };
+};
 
-  function hiraganaToRomaji(text) {
 
-    let result = "";
 
-    let i = 0;
+function convertHiragana(text) {
 
-    while (i < text.length) {
+  let result = "";
 
-      // 拗音
+  let i = 0;
 
-      const two =
 
-        text.substring(i, i + 2);
+  while (i < text.length) {
 
-      if (combinationMap[two]) {
 
-        result += combinationMap[two];
+    /* 拗音 */
 
-        i += 2;
+    const pair =
+      text.substring(i, i + 2);
 
-        continue;
 
-      }
+    if (combinations[pair]) {
 
-      // 促音「っ」
+      result +=
+        combinations[pair];
 
-      if (text[i] === "っ") {
+      i += 2;
 
-        const next =
+      continue;
 
-          text.substring(i + 1, i + 3);
+    }
 
-        if (combinationMap[next]) {
 
-          result +=
+    /* 促音「っ」 */
 
-            combinationMap[next][0];
+    if (text[i] === "っ") {
 
-        } else {
+      const nextPair =
+        text.substring(i + 1, i + 3);
 
-          const nextKana =
 
-            kanaMap[text[i + 1]];
+      if (combinations[nextPair]) {
 
-          if (nextKana) {
-
-            result += nextKana[0];
-
-          }
-
-        }
-
-        i++;
-
-        continue;
-
-      }
-
-      // 通常の文字
-
-      if (kanaMap[text[i]]) {
-
-        result += kanaMap[text[i]];
+        result +=
+          combinations[nextPair][0];
 
       } else {
 
-        result += text[i];
+        const next =
+          kana[text[i + 1]];
+
+        if (next) {
+          result += next[0];
+        }
 
       }
 
       i++;
 
+      continue;
+
     }
 
-    return result;
+
+    /* ー */
+
+    if (text[i] === "ー") {
+
+      i++;
+
+      continue;
+
+    }
+
+
+    /* 通常文字 */
+
+    if (kana[text[i]]) {
+
+      result += kana[text[i]];
+
+    } else {
+
+      result += text[i];
+
+    }
+
+
+    i++;
 
   }
 
-  /* =========================
 
-     入力時に自動変換
+  return result;
 
-  ========================= */
+}
 
-  const textInput =
 
-    document.getElementById("textInput");
 
-  const romanResult =
+/* ==================================================
+   入力した瞬間に変換
+================================================== */
 
-    document.getElementById("romanResult");
+const textInput =
+  document.getElementById("textInput");
 
-  const reverseRomanResult =
+const romanResult =
+  document.getElementById("romanResult");
 
-    document.getElementById("reverseRomanResult");
+const reverseRomanResult =
+  document.getElementById(
+    "reverseRomanResult"
+  );
 
-  textInput.addEventListener("input", () => {
+
+textInput.addEventListener(
+  "input",
+  () => {
 
     const text =
-
       textInput.value;
 
-    const roman =
 
-      hiraganaToRomaji(text);
+    const roman =
+      convertHiragana(text);
+
 
     const reversed =
+      roman
+        .split("")
+        .reverse()
+        .join("");
 
-      [...roman].reverse().join("");
 
     romanResult.textContent =
-
       roman || "---";
 
-    reverseRomanResult.textContent =
 
+    reverseRomanResult.textContent =
       reversed || "---";
 
-  });
+  }
+);
 
 </script>
 
 </body>
-
 </html>
+```
