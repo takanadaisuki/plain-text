@@ -20,9 +20,9 @@
 
     margin: 0 auto;
 
-    padding: 20px;
+    padding: 10px;
 
-    line-height: 1.6;
+    line-height: 1.4;
 
   }
 
@@ -30,19 +30,23 @@
 
     text-align: center;
 
+    font-size: 22px;
+
+    margin: 5px 0 8px;
+
   }
 
   button {
 
-    padding: 10px 15px;
+    padding: 8px 10px;
 
-    margin: 5px;
+    margin: 3px;
 
-    font-size: 16px;
+    font-size: 14px;
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     cursor: pointer;
 
@@ -58,17 +62,13 @@
 
   .description {
 
-    background: #f5f5f5;
+    padding: 0;
 
-    padding: 12px;
+    margin: 5px 0 10px;
 
-    margin: 15px 0;
+    font-size: 12px;
 
-    border-radius: 8px;
-
-    font-size: 14px;
-
-    line-height: 1.7;
+    line-height: 1.4;
 
   }
 
@@ -84,9 +84,9 @@
 
     align-items: center;
 
-    gap: 10px;
+    gap: 8px;
 
-    margin: 15px 0;
+    margin: 8px 0;
 
   }
 
@@ -98,9 +98,9 @@
 
     flex: 1;
 
-    font-size: 16px;
+    font-size: 14px;
 
-    padding: 12px;
+    padding: 9px 10px;
 
     font-weight: bold;
 
@@ -108,9 +108,11 @@
 
   #recordStatus {
 
+    font-size: 13px;
+
     font-weight: bold;
 
-    min-width: 100px;
+    min-width: 90px;
 
     text-align: left;
 
@@ -120,9 +122,13 @@
 
     text-align: center;
 
-    margin: 10px 0;
+    margin: 5px 0;
+
+    font-size: 13px;
 
     font-weight: bold;
+
+    min-height: 18px;
 
   }
 
@@ -130,9 +136,9 @@
 
     display: flex;
 
-    gap: 10px;
+    gap: 8px;
 
-    margin: 15px 0;
+    margin: 8px 0;
 
   }
 
@@ -140,11 +146,13 @@
 
     flex: 1;
 
-    font-size: 16px;
+    font-size: 14px;
 
-    padding: 12px;
+    padding: 9px 10px;
 
     font-weight: bold;
+
+    margin: 0;
 
   }
 
@@ -162,7 +170,7 @@
 
   hr {
 
-    margin: 25px 0;
+    margin: 12px 0;
 
   }
 
@@ -170,11 +178,11 @@
 
     background: #f5f5f5;
 
-    padding: 15px;
+    padding: 8px;
 
-    margin-top: 20px;
+    margin-top: 8px;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
   }
 
@@ -184,15 +192,17 @@
 
     box-sizing: border-box;
 
-    padding: 10px;
+    padding: 8px;
 
-    font-size: 16px;
+    font-size: 14px;
 
-    margin-top: 10px;
+    margin: 0;
 
-    border-radius: 8px;
+    border-radius: 6px;
 
     border: 1px solid #ccc;
+
+    resize: none;
 
   }
 
@@ -200,13 +210,17 @@
 
     background: #f7f7f7;
 
-    padding: 10px;
+    padding: 7px 9px;
 
-    margin-top: 10px;
+    margin-top: 6px;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     word-break: break-all;
+
+    font-size: 14px;
+
+    min-height: 24px;
 
   }
 
@@ -230,9 +244,9 @@
 
     margin: 0;
 
-    padding: 5px 10px;
+    padding: 4px 8px;
 
-    font-size: 13px;
+    font-size: 12px;
 
   }
 
@@ -242,7 +256,9 @@
 
     font-weight: bold;
 
-    margin-top: 8px;
+    margin-top: 4px;
+
+    font-size: 12px;
 
   }
 
@@ -250,21 +266,21 @@
 
     background: #f5f5f5;
 
-    padding: 12px;
+    padding: 8px;
 
-    margin-top: 15px;
+    margin-top: 8px;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
-    font-size: 14px;
+    font-size: 11px;
 
-    line-height: 1.7;
+    line-height: 1.4;
 
   }
 
   .conversion-description p {
 
-    margin: 0 0 8px;
+    margin: 0 0 5px;
 
   }
 
@@ -278,9 +294,9 @@
 
     text-align: center;
 
-    margin-top: 30px;
+    margin-top: 10px;
 
-    font-size: 13px;
+    font-size: 11px;
 
     color: #666;
 
@@ -326,7 +342,7 @@
 
     id="textInput"
 
-    rows="4"
+    rows="2"
 
     placeholder="文字入力変換&#10;全てひらがなで入力してください"
 
@@ -338,11 +354,7 @@
 
   <div class="result-header">
 
-    <span class="result-title">
-
-      ローマ字
-
-    </span>
+    <span class="result-title">ローマ字</span>
 
     <button
 
@@ -366,11 +378,7 @@
 
   <div class="result-header">
 
-    <span class="result-title">
-
-      逆順ローマ字
-
-    </span>
+    <span class="result-title">逆順ローマ字</span>
 
     <button
 
@@ -546,11 +554,7 @@ recordButton.onclick = async () => {
 
         if (event.data.size > 0) {
 
-          audioChunks.push(
-
-            event.data
-
-          );
+          audioChunks.push(event.data);
 
         }
 
@@ -574,21 +578,13 @@ recordButton.onclick = async () => {
 
       if (audioUrl) {
 
-        URL.revokeObjectURL(
-
-          audioUrl
-
-        );
+        URL.revokeObjectURL(audioUrl);
 
       }
 
       audioUrl =
 
-        URL.createObjectURL(
-
-          audioBlob
-
-        );
+        URL.createObjectURL(audioBlob);
 
       audio =
 
@@ -764,11 +760,7 @@ reverseButton.onclick = async () => {
 
         reversedData[i] =
 
-          originalData[
-
-            length - 1 - i
-
-          ];
+          originalData[length - 1 - i];
 
       }
 
@@ -802,11 +794,7 @@ reverseButton.onclick = async () => {
 
     const reverseUrl =
 
-      URL.createObjectURL(
-
-        wavBlob
-
-      );
+      URL.createObjectURL(wavBlob);
 
     const reverseAudio =
 
@@ -814,11 +802,7 @@ reverseButton.onclick = async () => {
 
     reverseAudio.onended = () => {
 
-      URL.revokeObjectURL(
-
-        reverseUrl
-
-      );
+      URL.revokeObjectURL(reverseUrl);
 
     };
 
@@ -872,21 +856,9 @@ function audioBufferToWav(buffer) {
 
   const view =
 
-    new DataView(
+    new DataView(arrayBuffer);
 
-      arrayBuffer
-
-    );
-
-  writeString(
-
-    view,
-
-    0,
-
-    "RIFF"
-
-  );
+  writeString(view, 0, "RIFF");
 
   view.setUint32(
 
@@ -898,25 +870,9 @@ function audioBufferToWav(buffer) {
 
   );
 
-  writeString(
+  writeString(view, 8, "WAVE");
 
-    view,
-
-    8,
-
-    "WAVE"
-
-  );
-
-  writeString(
-
-    view,
-
-    12,
-
-    "fmt "
-
-  );
+  writeString(view, 12, "fmt ");
 
   view.setUint32(
 
@@ -994,15 +950,7 @@ function audioBufferToWav(buffer) {
 
   );
 
-  writeString(
-
-    view,
-
-    36,
-
-    "data"
-
-  );
+  writeString(view, 36, "data");
 
   view.setUint32(
 
@@ -1144,213 +1092,57 @@ function writeString(
 
 const kanaMap = {
 
-  "あ":"a",
+  "あ":"a","い":"i","う":"u","え":"e","お":"o",
 
-  "い":"i",
+  "か":"ka","き":"ki","く":"ku","け":"ke","こ":"ko",
 
-  "う":"u",
+  "さ":"sa","し":"shi","す":"su","せ":"se","そ":"so",
 
-  "え":"e",
+  "た":"ta","ち":"chi","つ":"tsu","て":"te","と":"to",
 
-  "お":"o",
+  "な":"na","に":"ni","ぬ":"nu","ね":"ne","の":"no",
 
-  "か":"ka",
+  "は":"ha","ひ":"hi","ふ":"fu","へ":"he","ほ":"ho",
 
-  "き":"ki",
+  "ま":"ma","み":"mi","む":"mu","め":"me","も":"mo",
 
-  "く":"ku",
+  "や":"ya","ゆ":"yu","よ":"yo",
 
-  "け":"ke",
+  "ら":"ra","り":"ri","る":"ru","れ":"re","ろ":"ro",
 
-  "こ":"ko",
+  "わ":"wa","を":"wo","ん":"n",
 
-  "さ":"sa",
+  "が":"ga","ぎ":"gi","ぐ":"gu","げ":"ge","ご":"go",
 
-  "し":"shi",
+  "ざ":"za","じ":"ji","ず":"zu","ぜ":"ze","ぞ":"zo",
 
-  "す":"su",
+  "だ":"da","ぢ":"ji","づ":"zu","で":"de","ど":"do",
 
-  "せ":"se",
+  "ば":"ba","び":"bi","ぶ":"bu","べ":"be","ぼ":"bo",
 
-  "そ":"so",
+  "ぱ":"pa","ぴ":"pi","ぷ":"pu","ぺ":"pe","ぽ":"po",
 
-  "た":"ta",
+  "きゃ":"kya","きゅ":"kyu","きょ":"kyo",
 
-  "ち":"chi",
+  "しゃ":"sha","しゅ":"shu","しょ":"sho",
 
-  "つ":"tsu",
+  "ちゃ":"cha","ちゅ":"chu","ちょ":"cho",
 
-  "て":"te",
+  "にゃ":"nya","にゅ":"nyu","にょ":"nyo",
 
-  "と":"to",
+  "ひゃ":"hya","ひゅ":"hyu","ひょ":"hyo",
 
-  "な":"na",
+  "みゃ":"mya","みゅ":"myu","みょ":"myo",
 
-  "に":"ni",
+  "りゃ":"rya","りゅ":"ryu","りょ":"ryo",
 
-  "ぬ":"nu",
+  "ぎゃ":"gya","ぎゅ":"gyu","ぎょ":"gyo",
 
-  "ね":"ne",
+  "じゃ":"ja","じゅ":"ju","じょ":"jo",
 
-  "の":"no",
+  "びゃ":"bya","びゅ":"byu","びょ":"byo",
 
-  "は":"ha",
-
-  "ひ":"hi",
-
-  "ふ":"fu",
-
-  "へ":"he",
-
-  "ほ":"ho",
-
-  "ま":"ma",
-
-  "み":"mi",
-
-  "む":"mu",
-
-  "め":"me",
-
-  "も":"mo",
-
-  "や":"ya",
-
-  "ゆ":"yu",
-
-  "よ":"yo",
-
-  "ら":"ra",
-
-  "り":"ri",
-
-  "る":"ru",
-
-  "れ":"re",
-
-  "ろ":"ro",
-
-  "わ":"wa",
-
-  "を":"wo",
-
-  "ん":"n",
-
-  "が":"ga",
-
-  "ぎ":"gi",
-
-  "ぐ":"gu",
-
-  "げ":"ge",
-
-  "ご":"go",
-
-  "ざ":"za",
-
-  "じ":"ji",
-
-  "ず":"zu",
-
-  "ぜ":"ze",
-
-  "ぞ":"zo",
-
-  "だ":"da",
-
-  "ぢ":"ji",
-
-  "づ":"zu",
-
-  "で":"de",
-
-  "ど":"do",
-
-  "ば":"ba",
-
-  "び":"bi",
-
-  "ぶ":"bu",
-
-  "べ":"be",
-
-  "ぼ":"bo",
-
-  "ぱ":"pa",
-
-  "ぴ":"pi",
-
-  "ぷ":"pu",
-
-  "ぺ":"pe",
-
-  "ぽ":"po",
-
-  "きゃ":"kya",
-
-  "きゅ":"kyu",
-
-  "きょ":"kyo",
-
-  "しゃ":"sha",
-
-  "しゅ":"shu",
-
-  "しょ":"sho",
-
-  "ちゃ":"cha",
-
-  "ちゅ":"chu",
-
-  "ちょ":"cho",
-
-  "にゃ":"nya",
-
-  "にゅ":"nyu",
-
-  "にょ":"nyo",
-
-  "ひゃ":"hya",
-
-  "ひゅ":"hyu",
-
-  "ひょ":"hyo",
-
-  "みゃ":"mya",
-
-  "みゅ":"myu",
-
-  "みょ":"myo",
-
-  "りゃ":"rya",
-
-  "りゅ":"ryu",
-
-  "りょ":"ryo",
-
-  "ぎゃ":"gya",
-
-  "ぎゅ":"gyu",
-
-  "ぎょ":"gyo",
-
-  "じゃ":"ja",
-
-  "じゅ":"ju",
-
-  "じょ":"jo",
-
-  "びゃ":"bya",
-
-  "びゅ":"byu",
-
-  "びょ":"byo",
-
-  "ぴゃ":"pya",
-
-  "ぴゅ":"pyu",
-
-  "ぴょ":"pyo"
+  "ぴゃ":"pya","ぴゅ":"pyu","ぴょ":"pyo"
 
 };
 
@@ -1370,19 +1162,11 @@ function hiraganaToRomaji(text) {
 
     const two =
 
-      text.substring(
-
-        i,
-
-        i + 2
-
-      );
+      text.substring(i, i + 2);
 
     if (kanaMap[two]) {
 
-      result +=
-
-        kanaMap[two];
+      result += kanaMap[two];
 
       i++;
 
@@ -1392,15 +1176,11 @@ function hiraganaToRomaji(text) {
 
     if (kanaMap[text[i]]) {
 
-      result +=
-
-        kanaMap[text[i]];
+      result += kanaMap[text[i]];
 
     } else {
 
-      result +=
-
-        text[i];
+      result += text[i];
 
     }
 
@@ -1424,227 +1204,67 @@ function reverseRomaji(text) {
 
 const romajiMap = {
 
-  "shi":"し",
+  "shi":"し","si":"し",
 
-  "si":"し",
+  "chi":"ち","ti":"ち",
 
-  "chi":"ち",
+  "tsu":"つ","tu":"つ",
 
-  "ti":"ち",
+  "fu":"ふ","hu":"ふ",
 
-  "tsu":"つ",
+  "ka":"か","ki":"き","ku":"く","ke":"け","ko":"こ",
 
-  "tu":"つ",
+  "sa":"さ","su":"す","se":"せ","so":"そ",
 
-  "fu":"ふ",
+  "ta":"た","te":"て","to":"と",
 
-  "hu":"ふ",
+  "na":"な","ni":"に","nu":"ぬ","ne":"ね","no":"の",
 
-  "ka":"か",
+  "ha":"は","hi":"ひ","he":"へ","ho":"ほ",
 
-  "ki":"き",
+  "ma":"ま","mi":"み","mu":"む","me":"め","mo":"も",
 
-  "ku":"く",
+  "ya":"や","yu":"ゆ","yo":"よ",
 
-  "ke":"け",
+  "ra":"ら","ri":"り","ru":"る","re":"れ","ro":"ろ",
 
-  "ko":"こ",
+  "wa":"わ","wo":"を","n":"ん",
 
-  "sa":"さ",
+  "ga":"が","gi":"ぎ","gu":"ぐ","ge":"げ","go":"ご",
 
-  "su":"す",
+  "za":"ざ","ji":"じ","zi":"じ","zu":"ず","ze":"ぜ","zo":"ぞ",
 
-  "se":"せ",
+  "da":"だ","di":"ぢ","du":"づ","de":"で","do":"ど",
 
-  "so":"そ",
+  "ba":"ば","bi":"び","bu":"ぶ","be":"べ","bo":"ぼ",
 
-  "ta":"た",
+  "pa":"ぱ","pi":"ぴ","pu":"ぷ","pe":"ぺ","po":"ぽ",
 
-  "te":"て",
+  "kya":"きゃ","kyu":"きゅ","kyo":"きょ",
 
-  "to":"と",
+  "sha":"しゃ","shu":"しゅ","sho":"しょ",
 
-  "na":"な",
+  "cha":"ちゃ","chu":"ちゅ","cho":"ちょ",
 
-  "ni":"に",
+  "nya":"にゃ","nyu":"にゅ","nyo":"にょ",
 
-  "nu":"ぬ",
+  "hya":"ひゃ","hyu":"ひゅ","hyo":"ひょ",
 
-  "ne":"ね",
+  "mya":"みゃ","myu":"みゅ","myo":"みょ",
 
-  "no":"の",
+  "rya":"りゃ","ryu":"りゅ","ryo":"りょ",
 
-  "ha":"は",
+  "gya":"ぎゃ","gyu":"ぎゅ","gyo":"ぎょ",
 
-  "hi":"ひ",
+  "ja":"じゃ","ju":"じゅ","jo":"じょ",
 
-  "he":"へ",
+  "jya":"じゃ","jyu":"じゅ","jyo":"じょ",
 
-  "ho":"ほ",
+  "bya":"びゃ","byu":"びゅ","byo":"びょ",
 
-  "ma":"ま",
+  "pya":"ぴゃ","pyu":"ぴゅ","pyo":"ぴょ",
 
-  "mi":"み",
-
-  "mu":"む",
-
-  "me":"め",
-
-  "mo":"も",
-
-  "ya":"や",
-
-  "yu":"ゆ",
-
-  "yo":"よ",
-
-  "ra":"ら",
-
-  "ri":"り",
-
-  "ru":"る",
-
-  "re":"れ",
-
-  "ro":"ろ",
-
-  "wa":"わ",
-
-  "wo":"を",
-
-  "n":"ん",
-
-  "ga":"が",
-
-  "gi":"ぎ",
-
-  "gu":"ぐ",
-
-  "ge":"げ",
-
-  "go":"ご",
-
-  "za":"ざ",
-
-  "zi":"じ",
-
-  "zu":"ず",
-
-  "ze":"ぜ",
-
-  "zo":"ぞ",
-
-  "da":"だ",
-
-  "di":"ぢ",
-
-  "du":"づ",
-
-  "de":"で",
-
-  "do":"ど",
-
-  "ba":"ば",
-
-  "bi":"び",
-
-  "bu":"ぶ",
-
-  "be":"べ",
-
-  "bo":"ぼ",
-
-  "pa":"ぱ",
-
-  "pi":"ぴ",
-
-  "pu":"ぷ",
-
-  "pe":"ぺ",
-
-  "po":"ぽ",
-
-  "kya":"きゃ",
-
-  "kyu":"きゅ",
-
-  "kyo":"きょ",
-
-  "sha":"しゃ",
-
-  "shu":"しゅ",
-
-  "sho":"しょ",
-
-  "cha":"ちゃ",
-
-  "chu":"ちゅ",
-
-  "cho":"ちょ",
-
-  "nya":"にゃ",
-
-  "nyu":"にゅ",
-
-  "nyo":"にょ",
-
-  "hya":"ひゃ",
-
-  "hyu":"ひゅ",
-
-  "hyo":"ひょ",
-
-  "mya":"みゃ",
-
-  "myu":"みゅ",
-
-  "myo":"みょ",
-
-  "rya":"りゃ",
-
-  "ryu":"りゅ",
-
-  "ryo":"りょ",
-
-  "gya":"ぎゃ",
-
-  "gyu":"ぎゅ",
-
-  "gyo":"ぎょ",
-
-  "ja":"じゃ",
-
-  "ju":"じゅ",
-
-  "jo":"じょ",
-
-  "jya":"じゃ",
-
-  "jyu":"じゅ",
-
-  "jyo":"じょ",
-
-  "bya":"びゃ",
-
-  "byu":"びゅ",
-
-  "byo":"びょ",
-
-  "pya":"ぴゃ",
-
-  "pyu":"ぴゅ",
-
-  "pyo":"ぴょ",
-
-  "a":"あ",
-
-  "i":"い",
-
-  "u":"う",
-
-  "e":"え",
-
-  "o":"お"
+  "a":"あ","i":"い","u":"う","e":"え","o":"お"
 
 };
 
@@ -1682,9 +1302,7 @@ function romajiToHiragana(text) {
 
       if (romajiMap[part]) {
 
-        result +=
-
-          romajiMap[part];
+        result += romajiMap[part];
 
         pos += len;
 
@@ -1718,43 +1336,23 @@ function romajiToHiragana(text) {
 
 const textInput =
 
-  document.getElementById(
-
-    "textInput"
-
-  );
+  document.getElementById("textInput");
 
 const romajiResult =
 
-  document.getElementById(
-
-    "romajiResult"
-
-  );
+  document.getElementById("romajiResult");
 
 const reverseResult =
 
-  document.getElementById(
-
-    "reverseResult"
-
-  );
+  document.getElementById("reverseResult");
 
 const hiraganaResult =
 
-  document.getElementById(
-
-    "hiraganaResult"
-
-  );
+  document.getElementById("hiraganaResult");
 
 const warning =
 
-  document.getElementById(
-
-    "warning"
-
-  );
+  document.getElementById("warning");
 
 textInput.addEventListener(
 
@@ -1776,11 +1374,7 @@ textInput.addEventListener(
 
     const hiragana =
 
-      romajiToHiragana(
-
-        reversed
-
-      );
+      romajiToHiragana(reversed);
 
     romajiResult.textContent =
 
@@ -1826,11 +1420,7 @@ async function copyText(text) {
 
     const textarea =
 
-      document.createElement(
-
-        "textarea"
-
-      );
+      document.createElement("textarea");
 
     textarea.value = text;
 
@@ -1842,11 +1432,7 @@ async function copyText(text) {
 
     textarea.select();
 
-    document.execCommand(
-
-      "copy"
-
-    );
+    document.execCommand("copy");
 
     textarea.remove();
 
