@@ -30,7 +30,7 @@
 
     text-align: center;
 
-    font-size: 22px;
+    font-size: 32px;
 
     margin: 5px 0 8px;
 
@@ -1090,59 +1090,223 @@ function writeString(
 
 }
 
+/* =========================
+
+   ひらがな → ローマ字
+
+   逆順で読みやすい表記を優先
+
+========================= */
+
 const kanaMap = {
 
-  "あ":"a","い":"i","う":"u","え":"e","お":"o",
+  "あ":"a",
 
-  "か":"ka","き":"ki","く":"ku","け":"ke","こ":"ko",
+  "い":"i",
 
-  "さ":"sa","し":"shi","す":"su","せ":"se","そ":"so",
+  "う":"u",
 
-  "た":"ta","ち":"chi","つ":"tsu","て":"te","と":"to",
+  "え":"e",
 
-  "な":"na","に":"ni","ぬ":"nu","ね":"ne","の":"no",
+  "お":"o",
 
-  "は":"ha","ひ":"hi","ふ":"fu","へ":"he","ほ":"ho",
+  "か":"ka",
 
-  "ま":"ma","み":"mi","む":"mu","め":"me","も":"mo",
+  "き":"ki",
 
-  "や":"ya","ゆ":"yu","よ":"yo",
+  "く":"ku",
 
-  "ら":"ra","り":"ri","る":"ru","れ":"re","ろ":"ro",
+  "け":"ke",
 
-  "わ":"wa","を":"wo","ん":"n",
+  "こ":"ko",
 
-  "が":"ga","ぎ":"gi","ぐ":"gu","げ":"ge","ご":"go",
+  "さ":"sa",
 
-  "ざ":"za","じ":"ji","ず":"zu","ぜ":"ze","ぞ":"zo",
+  "し":"si",
 
-  "だ":"da","ぢ":"ji","づ":"zu","で":"de","ど":"do",
+  "す":"su",
 
-  "ば":"ba","び":"bi","ぶ":"bu","べ":"be","ぼ":"bo",
+  "せ":"se",
 
-  "ぱ":"pa","ぴ":"pi","ぷ":"pu","ぺ":"pe","ぽ":"po",
+  "そ":"so",
 
-  "きゃ":"kya","きゅ":"kyu","きょ":"kyo",
+  "た":"ta",
 
-  "しゃ":"sha","しゅ":"shu","しょ":"sho",
+  "ち":"ti",
 
-  "ちゃ":"cha","ちゅ":"chu","ちょ":"cho",
+  "つ":"tu",
 
-  "にゃ":"nya","にゅ":"nyu","にょ":"nyo",
+  "て":"te",
 
-  "ひゃ":"hya","ひゅ":"hyu","ひょ":"hyo",
+  "と":"to",
 
-  "みゃ":"mya","みゅ":"myu","みょ":"myo",
+  "な":"na",
 
-  "りゃ":"rya","りゅ":"ryu","りょ":"ryo",
+  "に":"ni",
 
-  "ぎゃ":"gya","ぎゅ":"gyu","ぎょ":"gyo",
+  "ぬ":"nu",
 
-  "じゃ":"ja","じゅ":"ju","じょ":"jo",
+  "ね":"ne",
 
-  "びゃ":"bya","びゅ":"byu","びょ":"byo",
+  "の":"no",
 
-  "ぴゃ":"pya","ぴゅ":"pyu","ぴょ":"pyo"
+  "は":"ha",
+
+  "ひ":"hi",
+
+  "ふ":"hu",
+
+  "へ":"he",
+
+  "ほ":"ho",
+
+  "ま":"ma",
+
+  "み":"mi",
+
+  "む":"mu",
+
+  "め":"me",
+
+  "も":"mo",
+
+  "や":"ya",
+
+  "ゆ":"yu",
+
+  "よ":"yo",
+
+  "ら":"ra",
+
+  "り":"ri",
+
+  "る":"ru",
+
+  "れ":"re",
+
+  "ろ":"ro",
+
+  "わ":"wa",
+
+  "を":"wo",
+
+  "ん":"n",
+
+  "が":"ga",
+
+  "ぎ":"gi",
+
+  "ぐ":"gu",
+
+  "げ":"ge",
+
+  "ご":"go",
+
+  "ざ":"za",
+
+  "じ":"zi",
+
+  "ず":"zu",
+
+  "ぜ":"ze",
+
+  "ぞ":"zo",
+
+  "だ":"da",
+
+  "ぢ":"di",
+
+  "づ":"du",
+
+  "で":"de",
+
+  "ど":"do",
+
+  "ば":"ba",
+
+  "び":"bi",
+
+  "ぶ":"bu",
+
+  "べ":"be",
+
+  "ぼ":"bo",
+
+  "ぱ":"pa",
+
+  "ぴ":"pi",
+
+  "ぷ":"pu",
+
+  "ぺ":"pe",
+
+  "ぽ":"po",
+
+  "きゃ":"kya",
+
+  "きゅ":"kyu",
+
+  "きょ":"kyo",
+
+  "しゃ":"sya",
+
+  "しゅ":"syu",
+
+  "しょ":"syo",
+
+  "ちゃ":"tya",
+
+  "ちゅ":"tyu",
+
+  "ちょ":"tyo",
+
+  "にゃ":"nya",
+
+  "にゅ":"nyu",
+
+  "にょ":"nyo",
+
+  "ひゃ":"hya",
+
+  "ひゅ":"hyu",
+
+  "ひょ":"hyo",
+
+  "みゃ":"mya",
+
+  "みゅ":"myu",
+
+  "みょ":"myo",
+
+  "りゃ":"rya",
+
+  "りゅ":"ryu",
+
+  "りょ":"ryo",
+
+  "ぎゃ":"gya",
+
+  "ぎゅ":"gyu",
+
+  "ぎょ":"gyo",
+
+  "じゃ":"jya",
+
+  "じゅ":"jyu",
+
+  "じょ":"jyo",
+
+  "びゃ":"bya",
+
+  "びゅ":"byu",
+
+  "びょ":"byo",
+
+  "ぴゃ":"pya",
+
+  "ぴゅ":"pyu",
+
+  "ぴょ":"pyo"
 
 };
 
@@ -1162,7 +1326,13 @@ function hiraganaToRomaji(text) {
 
     const two =
 
-      text.substring(i, i + 2);
+      text.substring(
+
+        i,
+
+        i + 2
+
+      );
 
     if (kanaMap[two]) {
 
@@ -1202,69 +1372,249 @@ function reverseRomaji(text) {
 
 }
 
+/* =========================
+
+   ローマ字 → ひらがな
+
+========================= */
+
 const romajiMap = {
 
-  "shi":"し","si":"し",
+  "shi":"し",
 
-  "chi":"ち","ti":"ち",
+  "si":"し",
 
-  "tsu":"つ","tu":"つ",
+  "chi":"ち",
 
-  "fu":"ふ","hu":"ふ",
+  "ti":"ち",
 
-  "ka":"か","ki":"き","ku":"く","ke":"け","ko":"こ",
+  "tsu":"つ",
 
-  "sa":"さ","su":"す","se":"せ","so":"そ",
+  "tu":"つ",
 
-  "ta":"た","te":"て","to":"と",
+  "fu":"ふ",
 
-  "na":"な","ni":"に","nu":"ぬ","ne":"ね","no":"の",
+  "hu":"ふ",
 
-  "ha":"は","hi":"ひ","he":"へ","ho":"ほ",
+  "ka":"か",
 
-  "ma":"ま","mi":"み","mu":"む","me":"め","mo":"も",
+  "ki":"き",
 
-  "ya":"や","yu":"ゆ","yo":"よ",
+  "ku":"く",
 
-  "ra":"ら","ri":"り","ru":"る","re":"れ","ro":"ろ",
+  "ke":"け",
 
-  "wa":"わ","wo":"を","n":"ん",
+  "ko":"こ",
 
-  "ga":"が","gi":"ぎ","gu":"ぐ","ge":"げ","go":"ご",
+  "sa":"さ",
 
-  "za":"ざ","ji":"じ","zi":"じ","zu":"ず","ze":"ぜ","zo":"ぞ",
+  "su":"す",
 
-  "da":"だ","di":"ぢ","du":"づ","de":"で","do":"ど",
+  "se":"せ",
 
-  "ba":"ば","bi":"び","bu":"ぶ","be":"べ","bo":"ぼ",
+  "so":"そ",
 
-  "pa":"ぱ","pi":"ぴ","pu":"ぷ","pe":"ぺ","po":"ぽ",
+  "ta":"た",
 
-  "kya":"きゃ","kyu":"きゅ","kyo":"きょ",
+  "te":"て",
 
-  "sha":"しゃ","shu":"しゅ","sho":"しょ",
+  "to":"と",
 
-  "cha":"ちゃ","chu":"ちゅ","cho":"ちょ",
+  "na":"な",
 
-  "nya":"にゃ","nyu":"にゅ","nyo":"にょ",
+  "ni":"に",
 
-  "hya":"ひゃ","hyu":"ひゅ","hyo":"ひょ",
+  "nu":"ぬ",
 
-  "mya":"みゃ","myu":"みゅ","myo":"みょ",
+  "ne":"ね",
 
-  "rya":"りゃ","ryu":"りゅ","ryo":"りょ",
+  "no":"の",
 
-  "gya":"ぎゃ","gyu":"ぎゅ","gyo":"ぎょ",
+  "ha":"は",
 
-  "ja":"じゃ","ju":"じゅ","jo":"じょ",
+  "hi":"ひ",
 
-  "jya":"じゃ","jyu":"じゅ","jyo":"じょ",
+  "he":"へ",
 
-  "bya":"びゃ","byu":"びゅ","byo":"びょ",
+  "ho":"ほ",
 
-  "pya":"ぴゃ","pyu":"ぴゅ","pyo":"ぴょ",
+  "ma":"ま",
 
-  "a":"あ","i":"い","u":"う","e":"え","o":"お"
+  "mi":"み",
+
+  "mu":"む",
+
+  "me":"め",
+
+  "mo":"も",
+
+  "ya":"や",
+
+  "yu":"ゆ",
+
+  "yo":"よ",
+
+  "ra":"ら",
+
+  "ri":"り",
+
+  "ru":"る",
+
+  "re":"れ",
+
+  "ro":"ろ",
+
+  "wa":"わ",
+
+  "wo":"を",
+
+  "n":"ん",
+
+  "ga":"が",
+
+  "gi":"ぎ",
+
+  "gu":"ぐ",
+
+  "ge":"げ",
+
+  "go":"ご",
+
+  "za":"ざ",
+
+  "ji":"じ",
+
+  "zi":"じ",
+
+  "zu":"ず",
+
+  "ze":"ぜ",
+
+  "zo":"ぞ",
+
+  "da":"だ",
+
+  "di":"ぢ",
+
+  "du":"づ",
+
+  "de":"で",
+
+  "do":"ど",
+
+  "ba":"ば",
+
+  "bi":"び",
+
+  "bu":"ぶ",
+
+  "be":"べ",
+
+  "bo":"ぼ",
+
+  "pa":"ぱ",
+
+  "pi":"ぴ",
+
+  "pu":"ぷ",
+
+  "pe":"ぺ",
+
+  "po":"ぽ",
+
+  "kya":"きゃ",
+
+  "kyu":"きゅ",
+
+  "kyo":"きょ",
+
+  "sha":"しゃ",
+
+  "shu":"しゅ",
+
+  "sho":"しょ",
+
+  "sya":"しゃ",
+
+  "syu":"しゅ",
+
+  "syo":"しょ",
+
+  "cha":"ちゃ",
+
+  "chu":"ちゅ",
+
+  "cho":"ちょ",
+
+  "tya":"ちゃ",
+
+  "tyu":"ちゅ",
+
+  "tyo":"ちょ",
+
+  "nya":"にゃ",
+
+  "nyu":"にゅ",
+
+  "nyo":"にょ",
+
+  "hya":"ひゃ",
+
+  "hyu":"ひゅ",
+
+  "hyo":"ひょ",
+
+  "mya":"みゃ",
+
+  "myu":"みゅ",
+
+  "myo":"みょ",
+
+  "rya":"りゃ",
+
+  "ryu":"りゅ",
+
+  "ryo":"りょ",
+
+  "gya":"ぎゃ",
+
+  "gyu":"ぎゅ",
+
+  "gyo":"ぎょ",
+
+  "ja":"じゃ",
+
+  "ju":"じゅ",
+
+  "jo":"じょ",
+
+  "jya":"じゃ",
+
+  "jyu":"じゅ",
+
+  "jyo":"じょ",
+
+  "bya":"びゃ",
+
+  "byu":"びゅ",
+
+  "byo":"びょ",
+
+  "pya":"ぴゃ",
+
+  "pyu":"ぴゅ",
+
+  "pyo":"ぴょ",
+
+  "a":"あ",
+
+  "i":"い",
+
+  "u":"う",
+
+  "e":"え",
+
+  "o":"お"
 
 };
 
@@ -1334,25 +1684,51 @@ function romajiToHiragana(text) {
 
 }
 
+/* =========================
+
+   文字入力
+
+========================= */
+
 const textInput =
 
-  document.getElementById("textInput");
+  document.getElementById(
+
+    "textInput"
+
+  );
 
 const romajiResult =
 
-  document.getElementById("romajiResult");
+  document.getElementById(
+
+    "romajiResult"
+
+  );
 
 const reverseResult =
 
-  document.getElementById("reverseResult");
+  document.getElementById(
+
+    "reverseResult"
+
+  );
 
 const hiraganaResult =
 
-  document.getElementById("hiraganaResult");
+  document.getElementById(
+
+    "hiraganaResult"
+
+  );
 
 const warning =
 
-  document.getElementById("warning");
+  document.getElementById(
+
+    "warning"
+
+  );
 
 textInput.addEventListener(
 
@@ -1374,7 +1750,11 @@ textInput.addEventListener(
 
     const hiragana =
 
-      romajiToHiragana(reversed);
+      romajiToHiragana(
+
+        reversed
+
+      );
 
     romajiResult.textContent =
 
@@ -1406,6 +1786,12 @@ textInput.addEventListener(
 
 );
 
+/* =========================
+
+   コピー
+
+========================= */
+
 async function copyText(text) {
 
   try {
@@ -1420,7 +1806,11 @@ async function copyText(text) {
 
     const textarea =
 
-      document.createElement("textarea");
+      document.createElement(
+
+        "textarea"
+
+      );
 
     textarea.value = text;
 
@@ -1432,7 +1822,11 @@ async function copyText(text) {
 
     textarea.select();
 
-    document.execCommand("copy");
+    document.execCommand(
+
+      "copy"
+
+    );
 
     textarea.remove();
 
