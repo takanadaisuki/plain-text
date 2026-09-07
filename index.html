@@ -48,6 +48,42 @@
 
   }
 
+  button:disabled {
+
+    opacity: 0.5;
+
+    cursor: default;
+
+  }
+
+  .description {
+
+    background: #f5f5f5;
+
+    padding: 12px;
+
+    margin: 15px 0;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+  }
+
+  .description p {
+
+    margin: 0 0 8px;
+
+  }
+
+  .description p:last-child {
+
+    margin-bottom: 0;
+
+  }
+
   .record-buttons {
 
     text-align: center;
@@ -65,6 +101,16 @@
   #stopButton {
 
     background: #eeeeee;
+
+  }
+
+  #status {
+
+    text-align: center;
+
+    margin: 10px 0;
+
+    font-weight: bold;
 
   }
 
@@ -102,31 +148,9 @@
 
   }
 
-  .description {
+  hr {
 
-    background: #f5f5f5;
-
-    padding: 12px;
-
-    margin: 15px 0;
-
-    border-radius: 8px;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-
-  }
-
-  .description p {
-
-    margin: 0 0 8px;
-
-  }
-
-  .description p:last-child {
-
-    margin-bottom: 0;
+    margin: 25px 0;
 
   }
 
@@ -162,21 +186,29 @@
 
   }
 
+  .result-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+  }
+
   .result-title {
 
     font-weight: bold;
-
-    margin-bottom: 5px;
 
   }
 
   .copy-button {
 
-    font-size: 14px;
+    margin: 0;
 
-    padding: 6px 10px;
+    padding: 5px 10px;
 
-    margin-top: 5px;
+    font-size: 13px;
 
   }
 
@@ -187,16 +219,6 @@
     font-weight: bold;
 
     margin-top: 8px;
-
-  }
-
-  #status {
-
-    text-align: center;
-
-    margin: 10px 0;
-
-    font-weight: bold;
 
   }
 
@@ -252,25 +274,41 @@
 
 <h2>📝 セリフ入力</h2>
 
-<textarea id="textInput" rows="4" placeholder="ひらがなを入力してください"></textarea>
+<textarea
+
+  id="textInput"
+
+  rows="4"
+
+  placeholder="すべてひらがなで入力してください"
+
+></textarea>
 
 <div class="result">
 
-  <div class="result-title">ローマ字</div>
+  <div class="result-header">
+
+    <span class="result-title">ローマ字</span>
+
+    <button class="copy-button" id="copyRomaji">コピー</button>
+
+  </div>
 
   <div id="romajiResult"></div>
-
-  <button class="copy-button" id="copyRomaji">コピー</button>
 
 </div>
 
 <div class="result">
 
-  <div class="result-title">逆順ローマ字</div>
+  <div class="result-header">
+
+    <span class="result-title">逆順ローマ字</span>
+
+    <button class="copy-button" id="copyReverse">コピー</button>
+
+  </div>
 
   <div id="reverseResult"></div>
-
-  <button class="copy-button" id="copyReverse">コピー</button>
 
 </div>
 
@@ -286,13 +324,17 @@
 
 <footer>
 
-  製作者：高菜大好き<br>
-
-  プログラム：AIが作成
+  製作者：高菜大好き
 
 </footer>
 
 <script>
+
+/* =========================
+
+   録音
+
+========================= */
 
 let mediaRecorder;
 
@@ -304,71 +346,107 @@ let audioUrl = null;
 
 let audio = null;
 
-const recordButton = document.getElementById("recordButton");
+const recordButton =
 
-const stopButton = document.getElementById("stopButton");
+  document.getElementById("recordButton");
 
-const playButton = document.getElementById("playButton");
+const stopButton =
 
-const reverseButton = document.getElementById("reverseButton");
+  document.getElementById("stopButton");
 
-const status = document.getElementById("status");
+const playButton =
+
+  document.getElementById("playButton");
+
+const reverseButton =
+
+  document.getElementById("reverseButton");
+
+const status =
+
+  document.getElementById("status");
 
 recordButton.onclick = async () => {
 
   try {
 
-    const stream = await navigator.mediaDevices.getUserMedia({
+    const stream =
 
-      audio: true
+      await navigator.mediaDevices.getUserMedia({
 
-    });
+        audio: true
+
+      });
 
     audioChunks = [];
 
     let mimeType = "";
 
-    if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) {
+    if (
 
-      mimeType = "audio/webm;codecs=opus";
+      MediaRecorder.isTypeSupported(
 
-    } else if (MediaRecorder.isTypeSupported("audio/mp4")) {
+        "audio/webm;codecs=opus"
+
+      )
+
+    ) {
+
+      mimeType =
+
+        "audio/webm;codecs=opus";
+
+    } else if (
+
+      MediaRecorder.isTypeSupported("audio/mp4")
+
+    ) {
 
       mimeType = "audio/mp4";
 
     }
 
-    mediaRecorder = new MediaRecorder(
+    mediaRecorder =
 
-      stream,
+      new MediaRecorder(
 
-      mimeType ? { mimeType } : undefined
+        stream,
 
-    );
+        mimeType
 
-    mediaRecorder.ondataavailable = event => {
+          ? { mimeType }
 
-      if (event.data.size > 0) {
+          : undefined
 
-        audioChunks.push(event.data);
+      );
 
-      }
+    mediaRecorder.ondataavailable =
 
-    };
+      event => {
 
-    mediaRecorder.onstop = () => {
+        if (event.data.size > 0) {
 
-      audioBlob = new Blob(
-
-        audioChunks,
-
-        {
-
-          type: mediaRecorder.mimeType
+          audioChunks.push(event.data);
 
         }
 
-      );
+      };
+
+    mediaRecorder.onstop = () => {
+
+      audioBlob =
+
+        new Blob(
+
+          audioChunks,
+
+          {
+
+            type: mediaRecorder.mimeType
+
+          }
+
+        );
 
       if (audioUrl) {
 
@@ -376,13 +454,27 @@ recordButton.onclick = async () => {
 
       }
 
-      audioUrl = URL.createObjectURL(audioBlob);
+      audioUrl =
 
-      audio = new Audio(audioUrl);
+        URL.createObjectURL(audioBlob);
 
-      status.textContent = "録音完了";
+      audio =
 
-      stream.getTracks().forEach(track => track.stop());
+        new Audio(audioUrl);
+
+      status.textContent =
+
+        "録音完了";
+
+      stream
+
+        .getTracks()
+
+        .forEach(
+
+          track => track.stop()
+
+        );
 
     };
 
@@ -392,7 +484,9 @@ recordButton.onclick = async () => {
 
     stopButton.disabled = false;
 
-    status.textContent = "🔴 録音中...";
+    status.textContent =
+
+      "🔴 録音中...";
 
   } catch (error) {
 
@@ -408,7 +502,13 @@ recordButton.onclick = async () => {
 
 stopButton.onclick = () => {
 
-  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+  if (
+
+    mediaRecorder &&
+
+    mediaRecorder.state !== "inactive"
+
+  ) {
 
     mediaRecorder.stop();
 
@@ -420,6 +520,12 @@ stopButton.onclick = () => {
 
 };
 
+/* =========================
+
+   通常再生
+
+========================= */
+
 playButton.onclick = () => {
 
   if (!audioUrl) {
@@ -430,13 +536,23 @@ playButton.onclick = () => {
 
   }
 
-  const normalAudio = new Audio(audioUrl);
+  const normalAudio =
+
+    new Audio(audioUrl);
 
   normalAudio.play();
 
-  status.textContent = "▶️ 通常再生中";
+  status.textContent =
+
+    "▶️ 通常再生中";
 
 };
+
+/* =========================
+
+   逆再生
+
+========================= */
 
 reverseButton.onclick = async () => {
 
@@ -450,63 +566,113 @@ reverseButton.onclick = async () => {
 
   try {
 
-    status.textContent = "🔄 逆再生を準備中...";
+    status.textContent =
 
-    const arrayBuffer = await audioBlob.arrayBuffer();
+      "🔄 逆再生を準備中...";
 
-    const audioContext = new AudioContext();
+    const arrayBuffer =
 
-    const decoded = await audioContext.decodeAudioData(
+      await audioBlob.arrayBuffer();
 
-      arrayBuffer
+    const audioContext =
 
-    );
+      new AudioContext();
 
-    const numberOfChannels = decoded.numberOfChannels;
+    const decoded =
 
-    const sampleRate = decoded.sampleRate;
+      await audioContext.decodeAudioData(
 
-    const length = decoded.length;
+        arrayBuffer
 
-    const offlineContext = new OfflineAudioContext(
+      );
 
-      numberOfChannels,
+    const numberOfChannels =
 
-      length,
+      decoded.numberOfChannels;
 
-      sampleRate
+    const sampleRate =
 
-    );
+      decoded.sampleRate;
 
-    const buffer = offlineContext.createBuffer(
+    const length =
 
-      numberOfChannels,
+      decoded.length;
 
-      length,
+    const offlineContext =
 
-      sampleRate
+      new OfflineAudioContext(
 
-    );
+        numberOfChannels,
 
-    for (let channel = 0; channel < numberOfChannels; channel++) {
+        length,
 
-      const originalData = decoded.getChannelData(channel);
+        sampleRate
 
-      const reversedData = buffer.getChannelData(channel);
+      );
 
-      for (let i = 0; i < length; i++) {
+    const buffer =
 
-        reversedData[i] = originalData[length - 1 - i];
+      offlineContext.createBuffer(
+
+        numberOfChannels,
+
+        length,
+
+        sampleRate
+
+      );
+
+    for (
+
+      let channel = 0;
+
+      channel < numberOfChannels;
+
+      channel++
+
+    ) {
+
+      const originalData =
+
+        decoded.getChannelData(channel);
+
+      const reversedData =
+
+        buffer.getChannelData(channel);
+
+      for (
+
+        let i = 0;
+
+        i < length;
+
+        i++
+
+      ) {
+
+        reversedData[i] =
+
+          originalData[
+
+            length - 1 - i
+
+          ];
 
       }
 
     }
 
-    const source = offlineContext.createBufferSource();
+    const source =
+
+      offlineContext.createBufferSource();
 
     source.buffer = buffer;
 
-    source.connect(offlineContext.destination);
+    source.connect(
+
+      offlineContext.destination
+
+    );
 
     source.start();
 
@@ -516,11 +682,19 @@ reverseButton.onclick = async () => {
 
     const wavBlob =
 
-      audioBufferToWav(renderedBuffer);
+      audioBufferToWav(
+
+        renderedBuffer
+
+      );
 
     const reverseUrl =
 
-      URL.createObjectURL(wavBlob);
+      URL.createObjectURL(
+
+        wavBlob
+
+      );
 
     const reverseAudio =
 
@@ -528,13 +702,19 @@ reverseButton.onclick = async () => {
 
     reverseAudio.onended = () => {
 
-      URL.revokeObjectURL(reverseUrl);
+      URL.revokeObjectURL(
+
+        reverseUrl
+
+      );
 
     };
 
     reverseAudio.play();
 
-    status.textContent = "🔄 逆再生中";
+    status.textContent =
+
+      "🔄 逆再生中";
 
   } catch (error) {
 
@@ -556,15 +736,19 @@ reverseButton.onclick = async () => {
 
 function audioBufferToWav(buffer) {
 
-  const numberOfChannels = buffer.numberOfChannels;
+  const numberOfChannels =
 
-  const sampleRate = buffer.sampleRate;
+    buffer.numberOfChannels;
+
+  const sampleRate =
+
+    buffer.sampleRate;
 
   const format = 1;
 
   const bitDepth = 16;
 
-  let dataLength =
+  const dataLength =
 
     buffer.length *
 
@@ -574,13 +758,29 @@ function audioBufferToWav(buffer) {
 
   const arrayBuffer =
 
-    new ArrayBuffer(44 + dataLength);
+    new ArrayBuffer(
+
+      44 + dataLength
+
+    );
 
   const view =
 
-    new DataView(arrayBuffer);
+    new DataView(
 
-  writeString(view, 0, "RIFF");
+      arrayBuffer
+
+    );
+
+  writeString(
+
+    view,
+
+    0,
+
+    "RIFF"
+
+  );
 
   view.setUint32(
 
@@ -592,13 +792,45 @@ function audioBufferToWav(buffer) {
 
   );
 
-  writeString(view, 8, "WAVE");
+  writeString(
 
-  writeString(view, 12, "fmt ");
+    view,
 
-  view.setUint32(16, 16, true);
+    8,
 
-  view.setUint16(20, format, true);
+    "WAVE"
+
+  );
+
+  writeString(
+
+    view,
+
+    12,
+
+    "fmt "
+
+  );
+
+  view.setUint32(
+
+    16,
+
+    16,
+
+    true
+
+  );
+
+  view.setUint16(
+
+    20,
+
+    format,
+
+    true
+
+  );
 
   view.setUint16(
 
@@ -656,7 +888,15 @@ function audioBufferToWav(buffer) {
 
   );
 
-  writeString(view, 36, "data");
+  writeString(
+
+    view,
+
+    36,
+
+    "data"
+
+  );
 
   view.setUint32(
 
@@ -764,9 +1004,25 @@ function audioBufferToWav(buffer) {
 
 }
 
-function writeString(view, offset, string) {
+function writeString(
 
-  for (let i = 0; i < string.length; i++) {
+  view,
+
+  offset,
+
+  string
+
+) {
+
+  for (
+
+    let i = 0;
+
+    i < string.length;
+
+    i++
+
+  ) {
 
     view.setUint8(
 
@@ -1002,15 +1258,31 @@ function hiraganaToRomaji(text) {
 
   let result = "";
 
-  for (let i = 0; i < text.length; i++) {
+  for (
+
+    let i = 0;
+
+    i < text.length;
+
+    i++
+
+  ) {
 
     const two =
 
-      text.substring(i, i + 2);
+      text.substring(
+
+        i,
+
+        i + 2
+
+      );
 
     if (kanaMap[two]) {
 
-      result += kanaMap[two];
+      result +=
+
+        kanaMap[two];
 
       i++;
 
@@ -1020,11 +1292,15 @@ function hiraganaToRomaji(text) {
 
     if (kanaMap[text[i]]) {
 
-      result += kanaMap[text[i]];
+      result +=
+
+        kanaMap[text[i]];
 
     } else {
 
-      result += text[i];
+      result +=
+
+        text[i];
 
     }
 
@@ -1055,6 +1331,8 @@ function reverseRomaji(text) {
 /* =========================
 
    ローマ字 → ひらがな
+
+   読めない文字だけ飛ばす
 
 ========================= */
 
@@ -1286,147 +1564,25 @@ const romajiMap = {
 
 };
 
-/* =========================
-
-   読める部分を探す
-
-========================= */
-
 function romajiToHiragana(text) {
 
-  const memo = {};
+  let result = "";
 
-  function search(pos) {
-
-    if (pos === text.length) {
-
-      return {
-
-        text: "",
-
-        complete: true,
-
-        length: 0
-
-      };
-
-    }
-
-    if (memo[pos]) {
-
-      return memo[pos];
-
-    }
-
-    let best = null;
-
-    for (
-
-      let len = 3;
-
-      len >= 1;
-
-      len--
-
-    ) {
-
-      const part =
-
-        text.substring(
-
-          pos,
-
-          pos + len
-
-        );
-
-      if (!romajiMap[part]) {
-
-        continue;
-
-      }
-
-      const next =
-
-        search(pos + len);
-
-      if (next.complete) {
-
-        const candidate = {
-
-          text:
-
-            romajiMap[part] +
-
-            next.text,
-
-          complete: true,
-
-          length:
-
-            len + next.length
-
-        };
-
-        if (
-
-          !best ||
-
-          candidate.length > best.length
-
-        ) {
-
-          best = candidate;
-
-        }
-
-      }
-
-    }
-
-    if (best) {
-
-      memo[pos] = best;
-
-      return best;
-
-    }
-
-    memo[pos] = {
-
-      text: "",
-
-      complete: false,
-
-      length: 0
-
-    };
-
-    return memo[pos];
-
-  }
-
-  const result = search(0);
-
-  if (result.complete) {
-
-    return {
-
-      text: result.text,
-
-      warning: false
-
-    };
-
-  }
-
-  let partial = "";
+  let warningFound = false;
 
   let pos = 0;
 
   while (pos < text.length) {
 
     let found = false;
+
+    /*
+
+      3文字 → 2文字 → 1文字
+
+      の順番で探す
+
+    */
 
     for (
 
@@ -1450,7 +1606,7 @@ function romajiToHiragana(text) {
 
       if (romajiMap[part]) {
 
-        partial +=
+        result +=
 
           romajiMap[part];
 
@@ -1464,9 +1620,21 @@ function romajiToHiragana(text) {
 
     }
 
+    /*
+
+      読めない文字があった場合、
+
+      その1文字だけ飛ばして
+
+      後ろの文字を続けて読む
+
+    */
+
     if (!found) {
 
-      break;
+      warningFound = true;
+
+      pos++;
 
     }
 
@@ -1474,9 +1642,9 @@ function romajiToHiragana(text) {
 
   return {
 
-    text: partial,
+    text: result,
 
-    warning: true
+    warning: warningFound
 
   };
 
@@ -1490,23 +1658,43 @@ function romajiToHiragana(text) {
 
 const textInput =
 
-  document.getElementById("textInput");
+  document.getElementById(
+
+    "textInput"
+
+  );
 
 const romajiResult =
 
-  document.getElementById("romajiResult");
+  document.getElementById(
+
+    "romajiResult"
+
+  );
 
 const reverseResult =
 
-  document.getElementById("reverseResult");
+  document.getElementById(
+
+    "reverseResult"
+
+  );
 
 const hiraganaResult =
 
-  document.getElementById("hiraganaResult");
+  document.getElementById(
+
+    "hiraganaResult"
+
+  );
 
 const warning =
 
-  document.getElementById("warning");
+  document.getElementById(
+
+    "warning"
+
+  );
 
 textInput.addEventListener(
 
@@ -1528,7 +1716,11 @@ textInput.addEventListener(
 
     const hiragana =
 
-      romajiToHiragana(reversed);
+      romajiToHiragana(
+
+        reversed
+
+      );
 
     romajiResult.textContent =
 
@@ -1550,7 +1742,9 @@ textInput.addEventListener(
 
     } else {
 
-      warning.textContent = "";
+      warning.textContent =
+
+        "";
 
     }
 
@@ -1568,21 +1762,37 @@ async function copyText(text) {
 
   try {
 
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(
+
+      text
+
+    );
 
   } catch {
 
     const textarea =
 
-      document.createElement("textarea");
+      document.createElement(
+
+        "textarea"
+
+      );
 
     textarea.value = text;
 
-    document.body.appendChild(textarea);
+    document.body.appendChild(
+
+      textarea
+
+    );
 
     textarea.select();
 
-    document.execCommand("copy");
+    document.execCommand(
+
+      "copy"
+
+    );
 
     textarea.remove();
 
