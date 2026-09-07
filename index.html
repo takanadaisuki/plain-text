@@ -74,19 +74,19 @@
 
   .description p {
 
-    margin: 0 0 8px;
-
-  }
-
-  .description p:last-child {
-
-    margin-bottom: 0;
+    margin: 0;
 
   }
 
   .record-buttons {
 
-    text-align: center;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
 
     margin: 15px 0;
 
@@ -96,11 +96,17 @@
 
     background: #ffe0e0;
 
+    margin: 0;
+
   }
 
-  #stopButton {
+  #recordStatus {
 
-    background: #eeeeee;
+    font-weight: bold;
+
+    min-width: 100px;
+
+    text-align: left;
 
   }
 
@@ -151,6 +157,38 @@
   hr {
 
     margin: 25px 0;
+
+  }
+
+  .input-box {
+
+    background: #f5f5f5;
+
+    padding: 15px;
+
+    margin-top: 20px;
+
+    border-radius: 8px;
+
+  }
+
+  .input-title {
+
+    font-weight: bold;
+
+    font-size: 18px;
+
+    margin-bottom: 3px;
+
+  }
+
+  .input-description {
+
+    font-size: 14px;
+
+    color: #555;
+
+    margin-bottom: 8px;
 
   }
 
@@ -222,6 +260,34 @@
 
   }
 
+  .conversion-description {
+
+    background: #f5f5f5;
+
+    padding: 12px;
+
+    margin-top: 15px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+  }
+
+  .conversion-description p {
+
+    margin: 0 0 8px;
+
+  }
+
+  .conversion-description p:last-child {
+
+    margin-bottom: 0;
+
+  }
+
   footer {
 
     text-align: center;
@@ -246,21 +312,21 @@
 
   <p>このサイトは、録音した音声を逆再生するサイトです。ご自由に使用ください。</p>
 
-  <p>ひらがなをローマ字に変換し、さらに逆順にして、逆から読めるひらがなも表示します。</p>
-
-  <p>ローマ字を反対から読むと「kyou」→「uoyk」のように、日本語で表記できない場合もあるため、表記できる部分のみをひらがなに変換します。</p>
-
 </div>
+
+<!-- 録音 -->
 
 <div class="record-buttons">
 
   <button id="recordButton">🎙️ 録音開始</button>
 
-  <button id="stopButton" disabled>⏹️ 録音停止</button>
+  <span id="recordStatus">録音待機中</span>
 
 </div>
 
-<div id="status">録音待機中</div>
+<div id="status"></div>
+
+<!-- 再生 -->
 
 <div class="play-buttons">
 
@@ -272,25 +338,57 @@
 
 <hr>
 
-<h2>📝 セリフ入力</h2>
+<!-- 文字入力 -->
 
-<textarea
+<div class="input-box">
 
-  id="textInput"
+  <div class="input-title">
 
-  rows="4"
+    文字入力変換
 
-  placeholder="すべてひらがなで入力してください"
+  </div>
 
-></textarea>
+  <div class="input-description">
+
+    全てひらがなで入力してください
+
+  </div>
+
+  <textarea
+
+    id="textInput"
+
+    rows="4"
+
+    placeholder="ここに入力してください"
+
+  ></textarea>
+
+</div>
+
+<!-- ローマ字 -->
 
 <div class="result">
 
   <div class="result-header">
 
-    <span class="result-title">ローマ字</span>
+    <span class="result-title">
 
-    <button class="copy-button" id="copyRomaji">コピー</button>
+      ローマ字
+
+    </span>
+
+    <button
+
+      class="copy-button"
+
+      id="copyRomaji"
+
+    >
+
+      コピー
+
+    </button>
 
   </div>
 
@@ -298,13 +396,29 @@
 
 </div>
 
+<!-- 逆順ローマ字 -->
+
 <div class="result">
 
   <div class="result-header">
 
-    <span class="result-title">逆順ローマ字</span>
+    <span class="result-title">
 
-    <button class="copy-button" id="copyReverse">コピー</button>
+      逆順ローマ字
+
+    </span>
+
+    <button
+
+      class="copy-button"
+
+      id="copyReverse"
+
+    >
+
+      コピー
+
+    </button>
 
   </div>
 
@@ -312,13 +426,37 @@
 
 </div>
 
+<!-- 逆から読めるひらがな -->
+
 <div class="result">
 
-  <div class="result-title">逆から読めるひらがな</div>
+  <div class="result-title">
+
+    逆から読めるひらがな
+
+  </div>
 
   <div id="hiraganaResult"></div>
 
   <div id="warning" class="warning"></div>
+
+</div>
+
+<!-- 変換についての説明 -->
+
+<div class="conversion-description">
+
+  <p>
+
+    ひらがなをローマ字に変換し、さらに逆順にして、逆から読めるひらがなも表示します。
+
+  </p>
+
+  <p>
+
+    ローマ字を反対から読むと「kyou」→「uoyk」のように、日本語で表記できない場合もあるため、表記できる部分のみをひらがなに変換します。
+
+  </p>
 
 </div>
 
@@ -350,9 +488,9 @@ const recordButton =
 
   document.getElementById("recordButton");
 
-const stopButton =
+const recordStatus =
 
-  document.getElementById("stopButton");
+  document.getElementById("recordStatus");
 
 const playButton =
 
@@ -366,7 +504,39 @@ const status =
 
   document.getElementById("status");
 
+/* =========================
+
+   録音開始・停止
+
+========================= */
+
 recordButton.onclick = async () => {
+
+  /* 録音中なら停止 */
+
+  if (
+
+    mediaRecorder &&
+
+    mediaRecorder.state === "recording"
+
+  ) {
+
+    mediaRecorder.stop();
+
+    recordButton.textContent =
+
+      "🎙️ 録音開始";
+
+    recordButton.style.background =
+
+      "#ffe0e0";
+
+    return;
+
+  }
+
+  /* 録音開始 */
 
   try {
 
@@ -398,11 +568,17 @@ recordButton.onclick = async () => {
 
     } else if (
 
-      MediaRecorder.isTypeSupported("audio/mp4")
+      MediaRecorder.isTypeSupported(
+
+        "audio/mp4"
+
+      )
 
     ) {
 
-      mimeType = "audio/mp4";
+      mimeType =
+
+        "audio/mp4";
 
     }
 
@@ -426,7 +602,11 @@ recordButton.onclick = async () => {
 
         if (event.data.size > 0) {
 
-          audioChunks.push(event.data);
+          audioChunks.push(
+
+            event.data
+
+          );
 
         }
 
@@ -450,21 +630,37 @@ recordButton.onclick = async () => {
 
       if (audioUrl) {
 
-        URL.revokeObjectURL(audioUrl);
+        URL.revokeObjectURL(
+
+          audioUrl
+
+        );
 
       }
 
       audioUrl =
 
-        URL.createObjectURL(audioBlob);
+        URL.createObjectURL(
+
+          audioBlob
+
+        );
 
       audio =
 
         new Audio(audioUrl);
 
-      status.textContent =
+      recordStatus.textContent =
 
         "録音完了";
+
+      recordButton.textContent =
+
+        "🎙️ 録音開始";
+
+      recordButton.style.background =
+
+        "#ffe0e0";
 
       stream
 
@@ -480,11 +676,15 @@ recordButton.onclick = async () => {
 
     mediaRecorder.start();
 
-    recordButton.disabled = true;
+    recordButton.textContent =
 
-    stopButton.disabled = false;
+      "⏹️ 録音停止";
 
-    status.textContent =
+    recordButton.style.background =
+
+      "#eeeeee";
+
+    recordStatus.textContent =
 
       "🔴 録音中...";
 
@@ -492,29 +692,9 @@ recordButton.onclick = async () => {
 
     console.error(error);
 
-    status.textContent =
+    recordStatus.textContent =
 
-      "マイクを使用できませんでした。ブラウザのマイク許可を確認してください。";
-
-  }
-
-};
-
-stopButton.onclick = () => {
-
-  if (
-
-    mediaRecorder &&
-
-    mediaRecorder.state !== "inactive"
-
-  ) {
-
-    mediaRecorder.stop();
-
-    recordButton.disabled = false;
-
-    stopButton.disabled = true;
+      "録音できませんでした。";
 
   }
 
@@ -1332,8 +1512,6 @@ function reverseRomaji(text) {
 
    ローマ字 → ひらがな
 
-   読めない文字だけ飛ばす
-
 ========================= */
 
 const romajiMap = {
@@ -1576,14 +1754,6 @@ function romajiToHiragana(text) {
 
     let found = false;
 
-    /*
-
-      3文字 → 2文字 → 1文字
-
-      の順番で探す
-
-    */
-
     for (
 
       let len = 3;
@@ -1622,11 +1792,9 @@ function romajiToHiragana(text) {
 
     /*
 
-      読めない文字があった場合、
+      読めない文字は1文字だけ飛ばして、
 
-      その1文字だけ飛ばして
-
-      後ろの文字を続けて読む
+      その後ろを続けて変換する
 
     */
 
@@ -1652,7 +1820,7 @@ function romajiToHiragana(text) {
 
 /* =========================
 
-   テキスト入力
+   文字入力
 
 ========================= */
 
