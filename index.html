@@ -8,299 +8,301 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<meta name="robots" content="noindex, nofollow">
+
 <title>逆再生セリフ作成用</title>
 
 <style>
 
-  body {
+body {
 
-    font-family: sans-serif;
+  font-family: sans-serif;
 
-    max-width: 600px;
+  max-width: 600px;
 
-    margin: 0 auto;
+  margin: 0 auto;
 
-    padding: 10px;
+  padding: 10px;
 
-    line-height: 1.4;
+  line-height: 1.4;
 
-  }
+}
 
-  h1 {
+h1 {
 
-    text-align: center;
+  text-align: center;
 
-    font-size: 32px;
+  font-size: 32px;
 
-    margin: 5px 0 8px;
+  margin: 5px 0 8px;
 
-  }
+}
 
-  button {
+button {
 
-    padding: 8px 10px;
+  padding: 8px 10px;
 
-    margin: 3px;
+  margin: 3px;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    border: none;
+  border: none;
 
-    border-radius: 7px;
+  border-radius: 7px;
 
-    cursor: pointer;
+  cursor: pointer;
 
-  }
+}
 
-  button:disabled {
+button:disabled {
 
-    opacity: 0.5;
+  opacity: 0.5;
 
-    cursor: default;
+  cursor: default;
 
-  }
+}
 
-  .description {
+.description {
 
-    padding: 0;
+  padding: 0;
 
-    margin: 5px 0 10px;
+  margin: 5px 0 10px;
 
-    font-size: 12px;
+  font-size: 12px;
 
-    line-height: 1.4;
+  line-height: 1.4;
 
-  }
+}
 
-  .description p {
+.description p {
 
-    margin: 0;
+  margin: 0;
 
-  }
+}
 
-  .record-buttons {
+.record-buttons {
 
-    display: flex;
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    gap: 8px;
+  gap: 8px;
 
-    margin: 8px 0;
+  margin: 8px 0;
 
-  }
+}
 
-  #recordButton {
+#recordButton {
 
-    background: #ffe0e0;
+  background: #ffe0e0;
 
-    margin: 0;
+  margin: 0;
 
-    flex: 1;
+  flex: 1;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    padding: 9px 10px;
+  padding: 9px 10px;
 
-    font-weight: bold;
+  font-weight: bold;
 
-  }
+}
 
-  #recordStatus {
+#recordStatus {
 
-    font-size: 13px;
+  font-size: 13px;
 
-    font-weight: bold;
+  font-weight: bold;
 
-    min-width: 90px;
+  min-width: 90px;
 
-    text-align: left;
+  text-align: left;
 
-  }
+}
 
-  #status {
+#status {
 
-    text-align: center;
+  text-align: center;
 
-    margin: 5px 0;
+  margin: 5px 0;
 
-    font-size: 13px;
+  font-size: 13px;
 
-    font-weight: bold;
+  font-weight: bold;
 
-    min-height: 18px;
+  min-height: 18px;
 
-  }
+}
 
-  .play-buttons {
+.play-buttons {
 
-    display: flex;
+  display: flex;
 
-    gap: 8px;
+  gap: 8px;
 
-    margin: 8px 0;
+  margin: 8px 0;
 
-  }
+}
 
-  .play-buttons button {
+.play-buttons button {
 
-    flex: 1;
+  flex: 1;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    padding: 9px 10px;
+  padding: 9px 10px;
 
-    font-weight: bold;
+  font-weight: bold;
 
-    margin: 0;
+  margin: 0;
 
-  }
+}
 
-  .normal-play {
+.normal-play {
 
-    background: #e8f4ff;
+  background: #e8f4ff;
 
-  }
+}
 
-  .reverse-play {
+.reverse-play {
 
-    background: #fff0f5;
+  background: #fff0f5;
 
-  }
+}
 
-  hr {
+hr {
 
-    margin: 12px 0;
+  margin: 12px 0;
 
-  }
+}
 
-  .input-box {
+.input-box {
 
-    background: #f5f5f5;
+  background: #f5f5f5;
 
-    padding: 8px;
+  padding: 8px;
 
-    margin-top: 8px;
+  margin-top: 8px;
 
-    border-radius: 7px;
+  border-radius: 7px;
 
-  }
+}
 
-  textarea {
+textarea {
 
-    width: 100%;
+  width: 100%;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    padding: 8px;
+  padding: 8px;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    margin: 0;
+  margin: 0;
 
-    border-radius: 6px;
+  border-radius: 6px;
 
-    border: 1px solid #ccc;
+  border: 1px solid #ccc;
 
-    resize: none;
+  resize: none;
 
-  }
+}
 
-  .result {
+.result {
 
-    background: #f7f7f7;
+  background: #f7f7f7;
 
-    padding: 7px 9px;
+  padding: 7px 9px;
 
-    margin-top: 6px;
+  margin-top: 6px;
 
-    border-radius: 7px;
+  border-radius: 7px;
 
-    word-break: break-all;
+  word-break: break-all;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    min-height: 24px;
+  min-height: 24px;
 
-  }
+}
 
-  .result-header {
+.result-header {
 
-    display: flex;
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    justify-content: space-between;
+  justify-content: space-between;
 
-  }
+}
 
-  .result-title {
+.result-title {
 
-    font-weight: bold;
+  font-weight: bold;
 
-  }
+}
 
-  .copy-button {
+.copy-button {
 
-    margin: 0;
+  margin: 0;
 
-    padding: 4px 8px;
+  padding: 4px 8px;
 
-    font-size: 12px;
+  font-size: 12px;
 
-  }
+}
 
-  .warning {
+.warning {
 
-    color: #d00;
+  color: #d00;
 
-    font-weight: bold;
+  font-weight: bold;
 
-    margin-top: 4px;
+  margin-top: 4px;
 
-    font-size: 12px;
+  font-size: 12px;
 
-  }
+}
 
-  .conversion-description {
+.conversion-description {
 
-    background: #f5f5f5;
+  background: #f5f5f5;
 
-    padding: 8px;
+  padding: 8px;
 
-    margin-top: 8px;
+  margin-top: 8px;
 
-    border-radius: 7px;
+  border-radius: 7px;
 
-    font-size: 11px;
+  font-size: 11px;
 
-    line-height: 1.4;
+  line-height: 1.4;
 
-  }
+}
 
-  .conversion-description p {
+.conversion-description p {
 
-    margin: 0 0 5px;
+  margin: 0 0 5px;
 
-  }
+}
 
-  .conversion-description p:last-child {
+.conversion-description p:last-child {
 
-    margin-bottom: 0;
+  margin-bottom: 0;
 
-  }
+}
 
-  footer {
+footer {
 
-    text-align: center;
+  text-align: center;
 
-    margin-top: 10px;
+  margin-top: 10px;
 
-    font-size: 11px;
+  font-size: 11px;
 
-    color: #666;
+  color: #666;
 
-  }
+}
 
 </style>
 
@@ -356,13 +358,7 @@
 
     <span class="result-title">ローマ字</span>
 
-    <button
-
-      class="copy-button"
-
-      id="copyRomaji"
-
-    >
+    <button class="copy-button" id="copyRomaji">
 
       コピー
 
@@ -380,13 +376,7 @@
 
     <span class="result-title">逆順ローマ字</span>
 
-    <button
-
-      class="copy-button"
-
-      id="copyReverse"
-
-    >
+    <button class="copy-button" id="copyReverse">
 
       コピー
 
@@ -436,7 +426,13 @@
 
 <script>
 
-let mediaRecorder;
+/* =========================
+
+   録音
+
+========================= */
+
+let mediaRecorder = null;
 
 let audioChunks = [];
 
@@ -445,6 +441,10 @@ let audioBlob = null;
 let audioUrl = null;
 
 let audio = null;
+
+let currentStream = null;
+
+let selectedMimeType = "";
 
 const recordButton =
 
@@ -466,7 +466,533 @@ const status =
 
   document.getElementById("status");
 
-recordButton.onclick = async () => {
+/*
+
+  ブラウザが録音に対応しているか確認
+
+*/
+
+function checkRecordingSupport() {
+
+  if (!window.isSecureContext) {
+
+    recordStatus.textContent =
+
+      "安全な接続が必要です。";
+
+    return false;
+
+  }
+
+  if (!navigator.mediaDevices) {
+
+    recordStatus.textContent =
+
+      "このブラウザは非対応です。";
+
+    return false;
+
+  }
+
+  if (!navigator.mediaDevices.getUserMedia) {
+
+    recordStatus.textContent =
+
+      "マイク録音に非対応です。";
+
+    return false;
+
+  }
+
+  if (!window.MediaRecorder) {
+
+    recordStatus.textContent =
+
+      "録音機能に非対応です。";
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+/*
+
+  使用できる録音形式を探す
+
+*/
+
+function getSupportedMimeType() {
+
+  const types = [
+
+    "audio/webm;codecs=opus",
+
+    "audio/webm",
+
+    "audio/mp4",
+
+    "audio/mp4;codecs=mp4a.40.2"
+
+  ];
+
+  for (const type of types) {
+
+    try {
+
+      if (MediaRecorder.isTypeSupported(type)) {
+
+        return type;
+
+      }
+
+    } catch (error) {
+
+      console.log(
+
+        "形式確認エラー:",
+
+        type,
+
+        error
+
+      );
+
+    }
+
+  }
+
+  return "";
+
+}
+
+/*
+
+  エラー内容を日本語に変換
+
+*/
+
+function getRecordingErrorMessage(error) {
+
+  if (!error) {
+
+    return "録音できませんでした。";
+
+  }
+
+  switch (error.name) {
+
+    case "NotAllowedError":
+
+      return "マイクの使用を許可してください。";
+
+    case "PermissionDeniedError":
+
+      return "マイクの使用を許可してください。";
+
+    case "NotFoundError":
+
+      return "マイクが見つかりません。";
+
+    case "DevicesNotFoundError":
+
+      return "マイクが見つかりません。";
+
+    case "NotReadableError":
+
+      return "マイクを使用できません。他のアプリが使用していないか確認してください。";
+
+    case "TrackStartError":
+
+      return "マイクを開始できませんでした。";
+
+    case "OverconstrainedError":
+
+      return "使用できるマイクがありません。";
+
+    case "SecurityError":
+
+      return "ブラウザのセキュリティ設定により録音できません。";
+
+    case "TypeError":
+
+      return "この環境ではマイク録音を利用できません。";
+
+    default:
+
+      return "録音できませんでした。ブラウザのマイク設定を確認してください。";
+
+  }
+
+}
+
+/*
+
+  録音開始
+
+*/
+
+async function startRecording() {
+
+  if (!checkRecordingSupport()) {
+
+    return;
+
+  }
+
+  recordButton.disabled = true;
+
+  recordStatus.textContent =
+
+    "マイクを確認中...";
+
+  try {
+
+    /*
+
+      まずマイクへのアクセスを取得
+
+    */
+
+    currentStream =
+
+      await navigator.mediaDevices.getUserMedia({
+
+        audio: {
+
+          echoCancellation: true,
+
+          noiseSuppression: true,
+
+          autoGainControl: true
+
+        }
+
+      });
+
+    /*
+
+      対応形式を選択
+
+    */
+
+    selectedMimeType =
+
+      getSupportedMimeType();
+
+    /*
+
+      MediaRecorderを作成
+
+    */
+
+    try {
+
+      if (selectedMimeType) {
+
+        mediaRecorder =
+
+          new MediaRecorder(
+
+            currentStream,
+
+            {
+
+              mimeType: selectedMimeType
+
+            }
+
+          );
+
+      } else {
+
+        mediaRecorder =
+
+          new MediaRecorder(
+
+            currentStream
+
+          );
+
+      }
+
+    } catch (error) {
+
+      /*
+
+        指定形式で失敗した場合は
+
+        ブラウザに自動選択させる
+
+      */
+
+      console.log(
+
+        "指定形式での録音に失敗。自動選択します。",
+
+        error
+
+      );
+
+      mediaRecorder =
+
+        new MediaRecorder(
+
+          currentStream
+
+        );
+
+    }
+
+    audioChunks = [];
+
+    /*
+
+      録音データを受け取る
+
+    */
+
+    mediaRecorder.ondataavailable =
+
+      event => {
+
+        if (
+
+          event.data &&
+
+          event.data.size > 0
+
+        ) {
+
+          audioChunks.push(
+
+            event.data
+
+          );
+
+        }
+
+      };
+
+    /*
+
+      録音停止
+
+    */
+
+    mediaRecorder.onstop =
+
+      () => {
+
+        try {
+
+          const actualType =
+
+            mediaRecorder.mimeType ||
+
+            selectedMimeType ||
+
+            "audio/webm";
+
+          audioBlob =
+
+            new Blob(
+
+              audioChunks,
+
+              {
+
+                type: actualType
+
+              }
+
+            );
+
+          /*
+
+            古いURLを解放
+
+          */
+
+          if (audioUrl) {
+
+            URL.revokeObjectURL(
+
+              audioUrl
+
+            );
+
+          }
+
+          audioUrl =
+
+            URL.createObjectURL(
+
+              audioBlob
+
+            );
+
+          audio =
+
+            new Audio(audioUrl);
+
+          recordStatus.textContent =
+
+            "録音完了";
+
+          recordButton.textContent =
+
+            "🎙️ 録音開始";
+
+          recordButton.style.background =
+
+            "#ffe0e0";
+
+          /*
+
+            マイクを確実に解放
+
+          */
+
+          if (currentStream) {
+
+            currentStream
+
+              .getTracks()
+
+              .forEach(track => {
+
+                track.stop();
+
+              });
+
+            currentStream = null;
+
+          }
+
+        } catch (error) {
+
+          console.error(error);
+
+          recordStatus.textContent =
+
+            "録音データを処理できませんでした。";
+
+        }
+
+      };
+
+    /*
+
+      録音中のエラー
+
+    */
+
+    mediaRecorder.onerror =
+
+      event => {
+
+        console.error(
+
+          "MediaRecorder error:",
+
+          event
+
+        );
+
+        recordStatus.textContent =
+
+          "録音中にエラーが発生しました。";
+
+      };
+
+    /*
+
+      録音開始
+
+    */
+
+    mediaRecorder.start();
+
+    recordButton.textContent =
+
+      "⏹️ 録音停止";
+
+    recordButton.style.background =
+
+      "#eeeeee";
+
+    recordStatus.textContent =
+
+      "🔴 録音中...";
+
+    recordButton.disabled = false;
+
+  } catch (error) {
+
+    console.error(
+
+      "録音開始エラー:",
+
+      error
+
+    );
+
+    /*
+
+      マイクを取得できなかった場合も
+
+      ストリームを解放
+
+    */
+
+    if (currentStream) {
+
+      currentStream
+
+        .getTracks()
+
+        .forEach(track => {
+
+          track.stop();
+
+        });
+
+      currentStream = null;
+
+    }
+
+    recordButton.textContent =
+
+      "🎙️ 録音開始";
+
+    recordButton.style.background =
+
+      "#ffe0e0";
+
+    recordStatus.textContent =
+
+      getRecordingErrorMessage(
+
+        error
+
+      );
+
+    recordButton.disabled = false;
+
+  }
+
+}
+
+/*
+
+  録音停止
+
+*/
+
+function stopRecording() {
 
   if (
 
@@ -486,343 +1012,403 @@ recordButton.onclick = async () => {
 
       "#ffe0e0";
 
-    return;
+    recordStatus.textContent =
+
+      "録音処理中...";
 
   }
 
-  try {
+}
 
-    const stream =
+/*
 
-      await navigator.mediaDevices.getUserMedia({
+  録音ボタン
 
-        audio: true
+*/
 
-      });
+recordButton.onclick =
 
-    audioChunks = [];
-
-    let mimeType = "";
+  async () => {
 
     if (
 
-      MediaRecorder.isTypeSupported(
+      mediaRecorder &&
 
-        "audio/webm;codecs=opus"
-
-      )
+      mediaRecorder.state === "recording"
 
     ) {
 
-      mimeType =
+      stopRecording();
 
-        "audio/webm;codecs=opus";
+    } else {
 
-    } else if (
-
-      MediaRecorder.isTypeSupported(
-
-        "audio/mp4"
-
-      )
-
-    ) {
-
-      mimeType =
-
-        "audio/mp4";
+      await startRecording();
 
     }
 
-    mediaRecorder =
+  };
 
-      new MediaRecorder(
+/* =========================
 
-        stream,
+   通常再生
 
-        mimeType
+========================= */
 
-          ? { mimeType }
+playButton.onclick =
 
-          : undefined
+  () => {
+
+    if (!audioUrl) {
+
+      alert(
+
+        "先に録音してください。"
 
       );
 
-    mediaRecorder.ondataavailable =
+      return;
 
-      event => {
+    }
 
-        if (event.data.size > 0) {
+    const normalAudio =
 
-          audioChunks.push(event.data);
+      new Audio(audioUrl);
 
-        }
+    normalAudio.play()
+
+      .then(() => {
+
+        status.textContent =
+
+          "▶️ 通常再生中";
+
+      })
+
+      .catch(error => {
+
+        console.error(error);
+
+        status.textContent =
+
+          "通常再生できませんでした。";
+
+      });
+
+    normalAudio.onended =
+
+      () => {
+
+        status.textContent =
+
+          "";
 
       };
 
-    mediaRecorder.onstop = () => {
+  };
 
-      audioBlob =
+/* =========================
 
-        new Blob(
+   逆再生
 
-          audioChunks,
+========================= */
 
-          {
+reverseButton.onclick =
 
-            type: mediaRecorder.mimeType
+  async () => {
 
-          }
+    if (!audioBlob) {
 
-        );
+      alert(
 
-      if (audioUrl) {
-
-        URL.revokeObjectURL(audioUrl);
-
-      }
-
-      audioUrl =
-
-        URL.createObjectURL(audioBlob);
-
-      audio =
-
-        new Audio(audioUrl);
-
-      recordStatus.textContent =
-
-        "録音完了";
-
-      recordButton.textContent =
-
-        "🎙️ 録音開始";
-
-      recordButton.style.background =
-
-        "#ffe0e0";
-
-      stream
-
-        .getTracks()
-
-        .forEach(
-
-          track => track.stop()
-
-        );
-
-    };
-
-    mediaRecorder.start();
-
-    recordButton.textContent =
-
-      "⏹️ 録音停止";
-
-    recordButton.style.background =
-
-      "#eeeeee";
-
-    recordStatus.textContent =
-
-      "🔴 録音中...";
-
-  } catch (error) {
-
-    console.error(error);
-
-    recordStatus.textContent =
-
-      "録音できませんでした。";
-
-  }
-
-};
-
-playButton.onclick = () => {
-
-  if (!audioUrl) {
-
-    alert("先に録音してください。");
-
-    return;
-
-  }
-
-  const normalAudio =
-
-    new Audio(audioUrl);
-
-  normalAudio.play();
-
-  status.textContent =
-
-    "▶️ 通常再生中";
-
-};
-
-reverseButton.onclick = async () => {
-
-  if (!audioBlob) {
-
-    alert("先に録音してください。");
-
-    return;
-
-  }
-
-  try {
-
-    status.textContent =
-
-      "🔄 逆再生を準備中...";
-
-    const arrayBuffer =
-
-      await audioBlob.arrayBuffer();
-
-    const audioContext =
-
-      new AudioContext();
-
-    const decoded =
-
-      await audioContext.decodeAudioData(
-
-        arrayBuffer
+        "先に録音してください。"
 
       );
 
-    const numberOfChannels =
-
-      decoded.numberOfChannels;
-
-    const sampleRate =
-
-      decoded.sampleRate;
-
-    const length =
-
-      decoded.length;
-
-    const offlineContext =
-
-      new OfflineAudioContext(
-
-        numberOfChannels,
-
-        length,
-
-        sampleRate
-
-      );
-
-    const buffer =
-
-      offlineContext.createBuffer(
-
-        numberOfChannels,
-
-        length,
-
-        sampleRate
-
-      );
-
-    for (
-
-      let channel = 0;
-
-      channel < numberOfChannels;
-
-      channel++
-
-    ) {
-
-      const originalData =
-
-        decoded.getChannelData(channel);
-
-      const reversedData =
-
-        buffer.getChannelData(channel);
-
-      for (
-
-        let i = 0;
-
-        i < length;
-
-        i++
-
-      ) {
-
-        reversedData[i] =
-
-          originalData[length - 1 - i];
-
-      }
+      return;
 
     }
 
-    const source =
+    try {
 
-      offlineContext.createBufferSource();
+      status.textContent =
 
-    source.buffer = buffer;
+        "🔄 逆再生を準備中...";
 
-    source.connect(
+      const arrayBuffer =
 
-      offlineContext.destination
+        await audioBlob.arrayBuffer();
 
-    );
+      /*
 
-    source.start();
+        AudioContextを作成
 
-    const renderedBuffer =
+      */
 
-      await offlineContext.startRendering();
+      const AudioContextClass =
 
-    const wavBlob =
+        window.AudioContext ||
 
-      audioBufferToWav(
+        window.webkitAudioContext;
 
-        renderedBuffer
+      if (!AudioContextClass) {
+
+        throw new Error(
+
+          "AudioContext not supported"
+
+        );
+
+      }
+
+      const audioContext =
+
+        new AudioContextClass();
+
+      /*
+
+        iPhone Safari等で
+
+        suspendedになる場合に対応
+
+      */
+
+      if (
+
+        audioContext.state ===
+
+        "suspended"
+
+      ) {
+
+        await audioContext.resume();
+
+      }
+
+      const decoded =
+
+        await audioContext.decodeAudioData(
+
+          arrayBuffer
+
+        );
+
+      const numberOfChannels =
+
+        decoded.numberOfChannels;
+
+      const sampleRate =
+
+        decoded.sampleRate;
+
+      const length =
+
+        decoded.length;
+
+      const OfflineContextClass =
+
+        window.OfflineAudioContext ||
+
+        window.webkitOfflineAudioContext;
+
+      if (!OfflineContextClass) {
+
+        throw new Error(
+
+          "OfflineAudioContext not supported"
+
+        );
+
+      }
+
+      const offlineContext =
+
+        new OfflineContextClass(
+
+          numberOfChannels,
+
+          length,
+
+          sampleRate
+
+        );
+
+      const buffer =
+
+        offlineContext.createBuffer(
+
+          numberOfChannels,
+
+          length,
+
+          sampleRate
+
+        );
+
+      /*
+
+        音声を反転
+
+      */
+
+      for (
+
+        let channel = 0;
+
+        channel < numberOfChannels;
+
+        channel++
+
+      ) {
+
+        const originalData =
+
+          decoded.getChannelData(
+
+            channel
+
+          );
+
+        const reversedData =
+
+          buffer.getChannelData(
+
+            channel
+
+          );
+
+        for (
+
+          let i = 0;
+
+          i < length;
+
+          i++
+
+        ) {
+
+          reversedData[i] =
+
+            originalData[
+
+              length - 1 - i
+
+            ];
+
+        }
+
+      }
+
+      const source =
+
+        offlineContext
+
+          .createBufferSource();
+
+      source.buffer =
+
+        buffer;
+
+      source.connect(
+
+        offlineContext.destination
 
       );
 
-    const reverseUrl =
+      source.start();
 
-      URL.createObjectURL(wavBlob);
+      const renderedBuffer =
 
-    const reverseAudio =
+        await offlineContext
 
-      new Audio(reverseUrl);
+          .startRendering();
 
-    reverseAudio.onended = () => {
+      /*
 
-      URL.revokeObjectURL(reverseUrl);
+        WAVに変換
 
-    };
+      */
 
-    reverseAudio.play();
+      const wavBlob =
 
-    status.textContent =
+        audioBufferToWav(
 
-      "🔄 逆再生中";
+          renderedBuffer
 
-  } catch (error) {
+        );
 
-    console.error(error);
+      const reverseUrl =
 
-    status.textContent =
+        URL.createObjectURL(
 
-      "逆再生できませんでした。";
+          wavBlob
 
-  }
+        );
 
-};
+      const reverseAudio =
+
+        new Audio(reverseUrl);
+
+      reverseAudio.onended =
+
+        () => {
+
+          URL.revokeObjectURL(
+
+            reverseUrl
+
+          );
+
+          status.textContent =
+
+            "";
+
+        };
+
+      await reverseAudio.play();
+
+      status.textContent =
+
+        "🔄 逆再生中";
+
+      /*
+
+        AudioContextを閉じる
+
+      */
+
+      if (
+
+        audioContext.close
+
+      ) {
+
+        audioContext.close();
+
+      }
+
+    } catch (error) {
+
+      console.error(
+
+        "逆再生エラー:",
+
+        error
+
+      );
+
+      status.textContent =
+
+        "逆再生できませんでした。もう一度録音してください。";
+
+    }
+
+  };
+
+/* =========================
+
+   WAV変換
+
+========================= */
 
 function audioBufferToWav(buffer) {
 
@@ -856,9 +1442,21 @@ function audioBufferToWav(buffer) {
 
   const view =
 
-    new DataView(arrayBuffer);
+    new DataView(
 
-  writeString(view, 0, "RIFF");
+      arrayBuffer
+
+    );
+
+  writeString(
+
+    view,
+
+    0,
+
+    "RIFF"
+
+  );
 
   view.setUint32(
 
@@ -870,9 +1468,25 @@ function audioBufferToWav(buffer) {
 
   );
 
-  writeString(view, 8, "WAVE");
+  writeString(
 
-  writeString(view, 12, "fmt ");
+    view,
+
+    8,
+
+    "WAVE"
+
+  );
+
+  writeString(
+
+    view,
+
+    12,
+
+    "fmt "
+
+  );
 
   view.setUint32(
 
@@ -950,7 +1564,15 @@ function audioBufferToWav(buffer) {
 
   );
 
-  writeString(view, 36, "data");
+  writeString(
+
+    view,
+
+    36,
+
+    "data"
+
+  );
 
   view.setUint32(
 
@@ -1093,8 +1715,6 @@ function writeString(
 /* =========================
 
    ひらがな → ローマ字
-
-   逆順で読みやすい表記を優先
 
 ========================= */
 
@@ -1336,7 +1956,9 @@ function hiraganaToRomaji(text) {
 
     if (kanaMap[two]) {
 
-      result += kanaMap[two];
+      result +=
+
+        kanaMap[two];
 
       i++;
 
@@ -1346,11 +1968,15 @@ function hiraganaToRomaji(text) {
 
     if (kanaMap[text[i]]) {
 
-      result += kanaMap[text[i]];
+      result +=
+
+        kanaMap[text[i]];
 
     } else {
 
-      result += text[i];
+      result +=
+
+        text[i];
 
     }
 
@@ -1626,7 +2252,11 @@ function romajiToHiragana(text) {
 
   let pos = 0;
 
-  while (pos < text.length) {
+  while (
+
+    pos < text.length
+
+  ) {
 
     let found = false;
 
@@ -1652,7 +2282,9 @@ function romajiToHiragana(text) {
 
       if (romajiMap[part]) {
 
-        result += romajiMap[part];
+        result +=
+
+          romajiMap[part];
 
         pos += len;
 
@@ -1678,7 +2310,9 @@ function romajiToHiragana(text) {
 
     text: result,
 
-    warning: warningFound
+    warning:
+
+      warningFound
 
   };
 
@@ -1742,11 +2376,19 @@ textInput.addEventListener(
 
     const romaji =
 
-      hiraganaToRomaji(text);
+      hiraganaToRomaji(
+
+        text
+
+      );
 
     const reversed =
 
-      reverseRomaji(romaji);
+      reverseRomaji(
+
+        romaji
+
+      );
 
     const hiragana =
 
@@ -1768,7 +2410,11 @@ textInput.addEventListener(
 
       hiragana.text;
 
-    if (hiragana.warning) {
+    if (
+
+      hiragana.warning
+
+    ) {
 
       warning.textContent =
 
@@ -1812,7 +2458,9 @@ async function copyText(text) {
 
       );
 
-    textarea.value = text;
+    textarea.value =
+
+      text;
 
     document.body.appendChild(
 
@@ -1838,29 +2486,41 @@ document.getElementById(
 
   "copyRomaji"
 
-).onclick = () => {
+).onclick =
 
-  copyText(
+  () => {
 
-    romajiResult.textContent
+    copyText(
 
-  );
+      romajiResult.textContent
 
-};
+    );
+
+  };
 
 document.getElementById(
 
   "copyReverse"
 
-).onclick = () => {
+).onclick =
 
-  copyText(
+  () => {
 
-    reverseResult.textContent
+    copyText(
 
-  );
+      reverseResult.textContent
 
-};
+    );
+
+  };
+
+/* =========================
+
+   初期チェック
+
+========================= */
+
+checkRecordingSupport();
 
 </script>
 
