@@ -84,8 +84,6 @@
 
     align-items: center;
 
-    justify-content: center;
-
     gap: 10px;
 
     margin: 15px 0;
@@ -97,6 +95,14 @@
     background: #ffe0e0;
 
     margin: 0;
+
+    flex: 1;
+
+    font-size: 16px;
+
+    padding: 12px;
+
+    font-weight: bold;
 
   }
 
@@ -169,26 +175,6 @@
     margin-top: 20px;
 
     border-radius: 8px;
-
-  }
-
-  .input-title {
-
-    font-weight: bold;
-
-    font-size: 18px;
-
-    margin-bottom: 3px;
-
-  }
-
-  .input-description {
-
-    font-size: 14px;
-
-    color: #555;
-
-    margin-bottom: 8px;
 
   }
 
@@ -314,8 +300,6 @@
 
 </div>
 
-<!-- 録音 -->
-
 <div class="record-buttons">
 
   <button id="recordButton">🎙️ 録音開始</button>
@@ -325,8 +309,6 @@
 </div>
 
 <div id="status"></div>
-
-<!-- 再生 -->
 
 <div class="play-buttons">
 
@@ -338,20 +320,7 @@
 
 <hr>
 
-<!-- 文字入力 -->
-
 <div class="input-box">
-<textarea
-
-  id="textInput"
-
-  rows="4"
-
-  placeholder="文字入力変換&#10;全てひらがなで入力してください"
-
-></textarea>
-
-  </div>
 
   <textarea
 
@@ -359,13 +328,11 @@
 
     rows="4"
 
-    placeholder="ここに入力してください"
+    placeholder="文字入力変換&#10;全てひらがなで入力してください"
 
   ></textarea>
 
 </div>
-
-<!-- ローマ字 -->
 
 <div class="result">
 
@@ -395,8 +362,6 @@
 
 </div>
 
-<!-- 逆順ローマ字 -->
-
 <div class="result">
 
   <div class="result-header">
@@ -425,8 +390,6 @@
 
 </div>
 
-<!-- 逆から読めるひらがな -->
-
 <div class="result">
 
   <div class="result-title">
@@ -440,8 +403,6 @@
   <div id="warning" class="warning"></div>
 
 </div>
-
-<!-- 変換についての説明 -->
 
 <div class="conversion-description">
 
@@ -466,12 +427,6 @@
 </footer>
 
 <script>
-
-/* =========================
-
-   録音
-
-========================= */
 
 let mediaRecorder;
 
@@ -503,15 +458,7 @@ const status =
 
   document.getElementById("status");
 
-/* =========================
-
-   録音開始・停止
-
-========================= */
-
 recordButton.onclick = async () => {
-
-  /* 録音中なら停止 */
 
   if (
 
@@ -534,8 +481,6 @@ recordButton.onclick = async () => {
     return;
 
   }
-
-  /* 録音開始 */
 
   try {
 
@@ -699,12 +644,6 @@ recordButton.onclick = async () => {
 
 };
 
-/* =========================
-
-   通常再生
-
-========================= */
-
 playButton.onclick = () => {
 
   if (!audioUrl) {
@@ -726,12 +665,6 @@ playButton.onclick = () => {
     "▶️ 通常再生中";
 
 };
-
-/* =========================
-
-   逆再生
-
-========================= */
 
 reverseButton.onclick = async () => {
 
@@ -906,12 +839,6 @@ reverseButton.onclick = async () => {
   }
 
 };
-
-/* =========================
-
-   WAV変換
-
-========================= */
 
 function audioBufferToWav(buffer) {
 
@@ -1215,12 +1142,6 @@ function writeString(
 
 }
 
-/* =========================
-
-   ひらがな → ローマ字
-
-========================= */
-
 const kanaMap = {
 
   "あ":"a",
@@ -1489,12 +1410,6 @@ function hiraganaToRomaji(text) {
 
 }
 
-/* =========================
-
-   ローマ字を逆順
-
-========================= */
-
 function reverseRomaji(text) {
 
   return text
@@ -1506,12 +1421,6 @@ function reverseRomaji(text) {
     .join("");
 
 }
-
-/* =========================
-
-   ローマ字 → ひらがな
-
-========================= */
 
 const romajiMap = {
 
@@ -1616,8 +1525,6 @@ const romajiMap = {
   "go":"ご",
 
   "za":"ざ",
-
-  "ji":"じ",
 
   "zi":"じ",
 
@@ -1789,14 +1696,6 @@ function romajiToHiragana(text) {
 
     }
 
-    /*
-
-      読めない文字は1文字だけ飛ばして、
-
-      その後ろを続けて変換する
-
-    */
-
     if (!found) {
 
       warningFound = true;
@@ -1816,12 +1715,6 @@ function romajiToHiragana(text) {
   };
 
 }
-
-/* =========================
-
-   文字入力
-
-========================= */
 
 const textInput =
 
@@ -1918,12 +1811,6 @@ textInput.addEventListener(
   }
 
 );
-
-/* =========================
-
-   コピー
-
-========================= */
 
 async function copyText(text) {
 
