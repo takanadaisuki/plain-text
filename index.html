@@ -66,7 +66,19 @@ h1 {
 
   font-size: 32px;
 
-  margin: 5px 0 10px;
+  margin: 5px 0 8px;
+
+}
+
+.top-description {
+
+  margin: 0 0 10px;
+
+  font-size: 12px;
+
+  line-height: 1.45;
+
+  color: #444;
 
 }
 
@@ -97,6 +109,36 @@ button:disabled {
   opacity: 0.35;
 
   cursor: default;
+
+}
+
+/* =========================
+
+   大枠
+
+========================= */
+
+.main-box {
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  border: 2px solid #ddd;
+
+  border-radius: 10px;
+
+  background: #fff;
+
+}
+
+.box-title {
+
+  margin-bottom: 8px;
+
+  font-size: 15px;
+
+  font-weight: bold;
 
 }
 
@@ -160,12 +202,6 @@ button:disabled {
 
 }
 
-/* =========================
-
-   エラー表示
-
-========================= */
-
 #status {
 
   min-height: 0;
@@ -194,7 +230,7 @@ button:disabled {
 
   gap: 8px;
 
-  margin: 7px 0;
+  margin: 7px 0 0;
 
 }
 
@@ -254,16 +290,6 @@ button:disabled {
 
 }
 
-hr {
-
-  margin: 10px 0;
-
-  border: 0;
-
-  border-top: 1px solid #ddd;
-
-}
-
 /* =========================
 
    文字入力
@@ -272,7 +298,7 @@ hr {
 
 .input-box {
 
-  margin-top: 6px;
+  margin-top: 2px;
 
 }
 
@@ -310,7 +336,7 @@ hr {
 
 /* =========================
 
-   変換結果
+   結果
 
 ========================= */
 
@@ -408,29 +434,13 @@ hr {
 
 /* =========================
 
-   サイト説明
-
-========================= */
-
-.site-description {
-
-  margin-top: 4px;
-
-  font-size: 11px;
-
-  line-height: 1.45;
-
-}
-
-/* =========================
-
    詳細説明
 
 ========================= */
 
 .guide {
 
-  margin-top: 12px;
+  margin-top: 14px;
 
   padding-top: 10px;
 
@@ -438,55 +448,71 @@ hr {
 
   font-size: 12px;
 
-  line-height: 1.6;
+  line-height: 1.65;
 
 }
 
 .guide h2 {
 
-  margin: 10px 0 5px;
+  margin: 14px 0 7px;
+
+  padding: 6px 8px;
 
   font-size: 15px;
+
+  border-radius: 6px;
+
+  background: #eef5fb;
 
 }
 
 .guide h3 {
 
-  margin: 10px 0 4px;
+  margin: 10px 0 5px;
+
+  padding: 5px 7px;
 
   font-size: 13px;
+
+  border-left: 4px solid #d7e7f5;
+
+  background: #f8fbfd;
 
 }
 
 .guide p {
 
-  margin: 0 0 8px;
+  margin: 0 2px 8px;
 
 }
 
 .example {
 
-  margin: 5px 0 10px;
+  margin: 6px 0 10px;
 
-  padding: 7px 9px;
+  padding: 8px 10px;
 
-  background: #f7f7f7;
+  background: #f6f6f6;
 
-  border-radius: 6px;
+  border-radius: 7px;
 
-  line-height: 1.55;
+  line-height: 1.6;
 
 }
 
 .note {
 
-  margin-top: 8px;
+  margin-top: 10px;
 
-  padding: 7px 9px;
+  padding: 9px 10px;
 
-  background: #fff8e8;
+  background: #fff8e6;
 
-  border-radius: 6px;
+  border: 1px solid #f1dfad;
+
+  border-radius: 7px;
+
+  line-height: 1.6;
 
 }
 
@@ -558,61 +584,89 @@ footer {
 
 </h1>
 
-<!-- 録音 -->
+<div class="top-description">
 
-<div class="record-area">
-
-  <button id="recordButton">
-
-    🎙️ 録音開始
-
-  </button>
-
-  <span id="recordStatus">
-
-    録音待機中
-
-  </span>
+  録音した音声を通常再生・逆再生できます。文字入力からローマ字・逆順ローマ字・逆順の読み方への変換もできます。
 
 </div>
 
-<div id="status"></div>
+<!-- =========================
 
-<!-- 再生 -->
+     音声変換
 
-<div class="play-area">
+========================= -->
 
-  <button
+<section class="main-box">
 
-    id="normalPlay"
+  <div class="box-title">
 
-    disabled
+    音声変換
 
-  >
+  </div>
 
-    ▶️ 通常再生
+  <div class="record-area">
 
-  </button>
+    <button id="recordButton">
 
-  <button
+      🎙️ 録音開始
 
-    id="reversePlay"
+    </button>
 
-    disabled
+    <span id="recordStatus">
 
-  >
+      録音待機中
 
-    🔄 逆再生
+    </span>
 
-  </button>
+  </div>
 
-</div>
+  <div id="status"></div>
 
-<hr>
+  <div class="play-area">
 
-<!-- 文字入力 -->
+    <button
 
-<div class="input-box">
+      id="normalPlay"
+
+      disabled
+
+    >
+
+      ▶️ 通常再生
+
+    </button>
+
+    <button
+
+      id="reversePlay"
+
+      disabled
+
+    >
+
+      🔄 逆再生
+
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+
+     文字変換
+
+========================= -->
+
+<section class="main-box">
+
+  <div class="box-title">
+
+    文字変換
+
+  </div>
+
+  <div class="input-box">
 
 <textarea
 
@@ -626,95 +680,89 @@ footer {
 
 ></textarea>
 
-</div>
+  </div>
 
-<!-- 変換結果 -->
+  <div class="results">
 
-<div class="results">
+    <div class="result-line">
 
-  <div class="result-line">
+      <span class="result-label">
 
-    <span class="result-label">
+        逆順読み方：
 
-      逆順読み方：
+      </span>
 
-    </span>
+      <span id="reverseReading"></span>
 
-    <span id="reverseReading"></span>
+    </div>
+
+    <div class="result-line">
+
+      <span class="result-label">
+
+        逆順ローマ字：
+
+      </span>
+
+      <span id="reverseRomaji"></span>
+
+    </div>
+
+    <div class="result-line">
+
+      <span class="result-label">
+
+        ローマ字：
+
+      </span>
+
+      <span id="romaji"></span>
+
+    </div>
+
+    <div class="result-line">
+
+      <span class="result-label">
+
+        読み方：
+
+      </span>
+
+      <span id="reading"></span>
+
+    </div>
+
+    <div id="warning">
+
+      注意：表記不可の文字があります。
+
+    </div>
 
   </div>
 
-  <div class="result-line">
+  <div class="copy-area">
 
-    <span class="result-label">
+    <button id="copyAll">
 
-      逆順ローマ字：
+      📋 まとめてコピー
 
-    </span>
+    </button>
 
-    <span id="reverseRomaji"></span>
+    <div id="copyMessage">
 
-  </div>
+      コピーしました
 
-  <div class="result-line">
-
-    <span class="result-label">
-
-      ローマ字：
-
-    </span>
-
-    <span id="romaji"></span>
+    </div>
 
   </div>
 
-  <div class="result-line">
+</section>
 
-    <span class="result-label">
+<!-- =========================
 
-      読み方：
+     詳細説明
 
-    </span>
-
-    <span id="reading"></span>
-
-  </div>
-
-  <div id="warning">
-
-    注意：表記不可の文字があります。
-
-  </div>
-
-</div>
-
-<!-- コピー -->
-
-<div class="copy-area">
-
-  <button id="copyAll">
-
-    📋 まとめてコピー
-
-  </button>
-
-  <div id="copyMessage">
-
-    コピーしました
-
-  </div>
-
-</div>
-
-<!-- サイト説明 -->
-
-<div class="site-description">
-
-  このサイトでは、録音した音声を通常再生・逆再生できます。文字入力からローマ字・逆順ローマ字・逆順の読み方への変換もできます。
-
-</div>
-
-<!-- 詳細説明 -->
+========================= -->
 
 <div class="guide">
 
@@ -972,18 +1020,6 @@ let audioContext = null;
 
 let currentSource = null;
 
-/*
-
-  idle
-
-  recording
-
-  normal
-
-  reverse
-
-*/
-
 let appState = "idle";
 
 /* =========================
@@ -1052,9 +1088,11 @@ function getAudioContext() {
 
 function updateUI() {
 
-  /* 録音中 */
+  if (
 
-  if (appState === "recording") {
+    appState === "recording"
+
+  ) {
 
     recordButton.disabled = false;
 
@@ -1104,9 +1142,11 @@ function updateUI() {
 
   }
 
-  /* 通常再生中 */
+  if (
 
-  if (appState === "normal") {
+    appState === "normal"
+
+  ) {
 
     recordButton.disabled =
 
@@ -1154,9 +1194,11 @@ function updateUI() {
 
   }
 
-  /* 逆再生中 */
+  if (
 
-  if (appState === "reverse") {
+    appState === "reverse"
+
+  ) {
 
     recordButton.disabled =
 
@@ -1204,8 +1246,6 @@ function updateUI() {
 
   }
 
-  /* 待機 */
-
   appState =
 
     "idle";
@@ -1252,7 +1292,11 @@ function updateUI() {
 
     !recordedBuffer;
 
-  if (recordedBuffer) {
+  if (
+
+    recordedBuffer
+
+  ) {
 
     recordStatus.textContent =
 
@@ -1294,7 +1338,11 @@ function getMimeType() {
 
   ];
 
-  for (const type of types) {
+  for (
+
+    const type of types
+
+  ) {
 
     try {
 
@@ -1330,7 +1378,11 @@ function getMimeType() {
 
 function stopMicrophone() {
 
-  if (mediaStream) {
+  if (
+
+    mediaStream
+
+  ) {
 
     mediaStream
 
@@ -1338,11 +1390,15 @@ function stopMicrophone() {
 
       .forEach(
 
-        track => track.stop()
+        track =>
+
+          track.stop()
 
       );
 
-    mediaStream = null;
+    mediaStream =
+
+      null;
 
   }
 
@@ -1354,11 +1410,21 @@ function stopMicrophone() {
 
 ========================= */
 
-function showMicError(error) {
+function showMicError(
 
-  console.error(error);
+  error
 
-  appState = "idle";
+) {
+
+  console.error(
+
+    error
+
+  );
+
+  appState =
+
+    "idle";
 
   recordStatus.textContent =
 
@@ -1450,9 +1516,15 @@ async function startRecording() {
 
   }
 
-  status.textContent = "";
+  status.textContent =
 
-  if (!window.isSecureContext) {
+    "";
+
+  if (
+
+    !window.isSecureContext
+
+  ) {
 
     recordStatus.textContent =
 
@@ -1470,7 +1542,9 @@ async function startRecording() {
 
     !navigator.mediaDevices ||
 
-    !navigator.mediaDevices.getUserMedia
+    !navigator.mediaDevices
+
+      .getUserMedia
 
   ) {
 
@@ -1538,7 +1612,9 @@ async function startRecording() {
 
               {
 
-                mimeType: mimeType
+                mimeType:
+
+                  mimeType
 
               }
 
@@ -1608,7 +1684,9 @@ async function startRecording() {
 
             {
 
-              type: type
+              type:
+
+                type
 
             }
 
@@ -1674,7 +1752,11 @@ async function startRecording() {
 
         catch (error) {
 
-          console.error(error);
+          console.error(
+
+            error
+
+          );
 
           recordedBuffer =
 
@@ -1698,7 +1780,11 @@ async function startRecording() {
 
       event => {
 
-        console.error(event);
+        console.error(
+
+          event
+
+        );
 
         stopMicrophone();
 
@@ -1820,9 +1906,13 @@ recordButton.addEventListener(
 
     if (
 
-      appState === "normal" ||
+      appState ===
 
-      appState === "reverse"
+        "normal" ||
+
+      appState ===
+
+        "reverse"
 
     ) {
 
@@ -1844,7 +1934,11 @@ recordButton.addEventListener(
 
 function stopPlayback() {
 
-  if (currentSource) {
+  if (
+
+    currentSource
+
+  ) {
 
     const source =
 
@@ -1992,7 +2086,9 @@ normalPlayButton.addEventListener(
 
     if (
 
-      appState === "normal"
+      appState ===
+
+        "normal"
 
     ) {
 
@@ -2028,7 +2124,11 @@ normalPlayButton.addEventListener(
 
     catch (error) {
 
-      console.error(error);
+      console.error(
+
+        error
+
+      );
 
       appState =
 
@@ -2060,7 +2160,9 @@ reversePlayButton.addEventListener(
 
     if (
 
-      appState === "reverse"
+      appState ===
+
+        "reverse"
 
     ) {
 
@@ -2180,7 +2282,11 @@ reversePlayButton.addEventListener(
 
     catch (error) {
 
-      console.error(error);
+      console.error(
+
+        error
+
+      );
 
       appState =
 
@@ -2266,15 +2372,23 @@ const kanaMap = {
 
 ========================= */
 
-function hiraganaToRomaji(text) {
+function hiraganaToRomaji(
 
-  let result = "";
+  text
+
+) {
+
+  let result =
+
+    "";
 
   for (
 
     let i = 0;
 
-    i < text.length;
+    i <
+
+      text.length;
 
     i++
 
@@ -2282,7 +2396,9 @@ function hiraganaToRomaji(text) {
 
     if (
 
-      text[i] === "っ"
+      text[i] ===
+
+        "っ"
 
     ) {
 
@@ -2352,13 +2468,21 @@ function hiraganaToRomaji(text) {
 
     if (
 
-      kanaMap[text[i]]
+      kanaMap[
+
+        text[i]
+
+      ]
 
     ) {
 
       result +=
 
-        kanaMap[text[i]];
+        kanaMap[
+
+          text[i]
+
+        ];
 
     }
 
@@ -2382,7 +2506,11 @@ function hiraganaToRomaji(text) {
 
 ========================= */
 
-function reverseText(text) {
+function reverseText(
+
+  text
+
+) {
 
   return Array
 
@@ -2470,11 +2598,17 @@ function romajiToReadableHiragana(
 
 ) {
 
-  let result = "";
+  let result =
 
-  let position = 0;
+    "";
 
-  let hasUnreadable = false;
+  let position =
+
+    0;
+
+  let hasUnreadable =
+
+    false;
 
   while (
 
@@ -2484,7 +2618,9 @@ function romajiToReadableHiragana(
 
   ) {
 
-    let matched = false;
+    let matched =
+
+      false;
 
     for (
 
@@ -2508,13 +2644,21 @@ function romajiToReadableHiragana(
 
       if (
 
-        romajiMap[part]
+        romajiMap[
+
+          part
+
+        ]
 
       ) {
 
         result +=
 
-          romajiMap[part];
+          romajiMap[
+
+            part
+
+          ];
 
         position +=
 
@@ -2544,9 +2688,13 @@ function romajiToReadableHiragana(
 
   return {
 
-    text: result,
+    text:
 
-    warning: hasUnreadable
+      result,
+
+    warning:
+
+      hasUnreadable
 
   };
 
@@ -2744,7 +2892,11 @@ copyButton.addEventListener(
 
     catch (error) {
 
-      console.error(error);
+      console.error(
+
+        error
+
+      );
 
     }
 
@@ -2814,7 +2966,11 @@ copyButton.addEventListener(
 
       catch (error) {
 
-        console.error(error);
+        console.error(
+
+          error
+
+        );
 
       }
 
@@ -2834,7 +2990,11 @@ copyButton.addEventListener(
 
     );
 
-    if (copyTimer) {
+    if (
+
+      copyTimer
+
+    ) {
 
       clearTimeout(
 
@@ -2886,7 +3046,7 @@ window.addEventListener(
 
 );
 
-/* 初期UI */
+/* 初期状態 */
 
 updateUI();
 
