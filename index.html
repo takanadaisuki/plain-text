@@ -20,7 +20,7 @@
 
   name="description"
 
-  content="録音した音声を逆再生できる逆再生セリフ作成ツールです。ひらがなからローマ字、逆順ローマ字、逆順の読み方への変換もできます。ご自由にお使いください。"
+  content="録音した音声を逆再生できる逆再生セリフ作成ツールです。ひらがなからローマ字、逆順ローマ字、逆順の読み方への変換もできます。"
 
 >
 
@@ -260,12 +260,6 @@ button:disabled {
 
   color: #005f9e;
 
-  box-shadow:
-
-    0 0 0 2px
-
-    rgba(22, 132, 204, 0.08);
-
 }
 
 #reversePlay {
@@ -282,11 +276,29 @@ button:disabled {
 
   color: #a6003c;
 
-  box-shadow:
+}
 
-    0 0 0 2px
+/* =========================
 
-    rgba(216, 27, 96, 0.08);
+   プライバシー
+
+========================= */
+
+.privacy-note {
+
+  margin-top: 10px;
+
+  padding: 9px 10px;
+
+  background: #f3f8f5;
+
+  border: 1px solid #d9e8df;
+
+  border-radius: 8px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
 
 }
 
@@ -586,7 +598,7 @@ footer {
 
 <div class="top-description">
 
-  録音した音声を通常再生・逆再生できます。文字入力からローマ字・逆順ローマ字・逆順の読み方への変換もできます。
+  録音した音声を通常再生・逆再生できます。文字入力からローマ字・逆順ローマ字・逆順の読み方への変換もできます。ご自由にお使いください。
 
 </div>
 
@@ -651,6 +663,20 @@ footer {
   </div>
 
 </section>
+
+<!-- =========================
+
+     プライバシー
+
+========================= -->
+
+<div class="privacy-note">
+
+  🔒 このサイトではアクセス解析やトラッキング機能を使用していません。<br>
+
+  入力した文字や録音した音声が、サイト運営者に送信・保存されることもありません。
+
+</div>
 
 <!-- =========================
 
@@ -1088,11 +1114,7 @@ function getAudioContext() {
 
 function updateUI() {
 
-  if (
-
-    appState === "recording"
-
-  ) {
+  if (appState === "recording") {
 
     recordButton.disabled = false;
 
@@ -1142,11 +1164,7 @@ function updateUI() {
 
   }
 
-  if (
-
-    appState === "normal"
-
-  ) {
+  if (appState === "normal") {
 
     recordButton.disabled =
 
@@ -1194,11 +1212,7 @@ function updateUI() {
 
   }
 
-  if (
-
-    appState === "reverse"
-
-  ) {
+  if (appState === "reverse") {
 
     recordButton.disabled =
 
@@ -1246,9 +1260,7 @@ function updateUI() {
 
   }
 
-  appState =
-
-    "idle";
+  appState = "idle";
 
   recordButton.disabled =
 
@@ -1292,11 +1304,7 @@ function updateUI() {
 
     !recordedBuffer;
 
-  if (
-
-    recordedBuffer
-
-  ) {
+  if (recordedBuffer) {
 
     recordStatus.textContent =
 
@@ -1338,11 +1346,7 @@ function getMimeType() {
 
   ];
 
-  for (
-
-    const type of types
-
-  ) {
+  for (const type of types) {
 
     try {
 
@@ -1378,11 +1382,7 @@ function getMimeType() {
 
 function stopMicrophone() {
 
-  if (
-
-    mediaStream
-
-  ) {
+  if (mediaStream) {
 
     mediaStream
 
@@ -1390,9 +1390,7 @@ function stopMicrophone() {
 
       .forEach(
 
-        track =>
-
-          track.stop()
+        track => track.stop()
 
       );
 
@@ -1410,17 +1408,9 @@ function stopMicrophone() {
 
 ========================= */
 
-function showMicError(
+function showMicError(error) {
 
-  error
-
-) {
-
-  console.error(
-
-    error
-
-  );
+  console.error(error);
 
   appState =
 
@@ -1516,15 +1506,9 @@ async function startRecording() {
 
   }
 
-  status.textContent =
+  status.textContent = "";
 
-    "";
-
-  if (
-
-    !window.isSecureContext
-
-  ) {
+  if (!window.isSecureContext) {
 
     recordStatus.textContent =
 
@@ -1542,9 +1526,7 @@ async function startRecording() {
 
     !navigator.mediaDevices ||
 
-    !navigator.mediaDevices
-
-      .getUserMedia
+    !navigator.mediaDevices.getUserMedia
 
   ) {
 
@@ -1564,7 +1546,7 @@ async function startRecording() {
 
     typeof MediaRecorder ===
 
-      "undefined"
+    "undefined"
 
   ) {
 
@@ -1612,9 +1594,7 @@ async function startRecording() {
 
               {
 
-                mimeType:
-
-                  mimeType
+                mimeType: mimeType
 
               }
 
@@ -1684,9 +1664,7 @@ async function startRecording() {
 
             {
 
-              type:
-
-                type
+              type: type
 
             }
 
@@ -1752,11 +1730,7 @@ async function startRecording() {
 
         catch (error) {
 
-          console.error(
-
-            error
-
-          );
+          console.error(error);
 
           recordedBuffer =
 
@@ -1780,11 +1754,7 @@ async function startRecording() {
 
       event => {
 
-        console.error(
-
-          event
-
-        );
+        console.error(event);
 
         stopMicrophone();
 
@@ -1804,11 +1774,7 @@ async function startRecording() {
 
       };
 
-    mediaRecorder.start(
-
-      1000
-
-    );
+    mediaRecorder.start(1000);
 
     appState =
 
@@ -1822,11 +1788,7 @@ async function startRecording() {
 
     stopMicrophone();
 
-    showMicError(
-
-      error
-
-    );
+    showMicError(error);
 
   }
 
@@ -1892,9 +1854,7 @@ recordButton.addEventListener(
 
     if (
 
-      appState ===
-
-        "recording"
+      appState === "recording"
 
     ) {
 
@@ -1906,13 +1866,9 @@ recordButton.addEventListener(
 
     if (
 
-      appState ===
+      appState === "normal" ||
 
-        "normal" ||
-
-      appState ===
-
-        "reverse"
+      appState === "reverse"
 
     ) {
 
@@ -1934,11 +1890,7 @@ recordButton.addEventListener(
 
 function stopPlayback() {
 
-  if (
-
-    currentSource
-
-  ) {
+  if (currentSource) {
 
     const source =
 
@@ -2086,9 +2038,7 @@ normalPlayButton.addEventListener(
 
     if (
 
-      appState ===
-
-        "normal"
+      appState === "normal"
 
     ) {
 
@@ -2124,11 +2074,7 @@ normalPlayButton.addEventListener(
 
     catch (error) {
 
-      console.error(
-
-        error
-
-      );
+      console.error(error);
 
       appState =
 
@@ -2160,9 +2106,7 @@ reversePlayButton.addEventListener(
 
     if (
 
-      appState ===
-
-        "reverse"
+      appState === "reverse"
 
     ) {
 
@@ -2282,11 +2226,7 @@ reversePlayButton.addEventListener(
 
     catch (error) {
 
-      console.error(
-
-        error
-
-      );
+      console.error(error);
 
       appState =
 
@@ -2372,23 +2312,15 @@ const kanaMap = {
 
 ========================= */
 
-function hiraganaToRomaji(
+function hiraganaToRomaji(text) {
 
-  text
-
-) {
-
-  let result =
-
-    "";
+  let result = "";
 
   for (
 
     let i = 0;
 
-    i <
-
-      text.length;
+    i < text.length;
 
     i++
 
@@ -2396,9 +2328,7 @@ function hiraganaToRomaji(
 
     if (
 
-      text[i] ===
-
-        "っ"
+      text[i] === "っ"
 
     ) {
 
@@ -2450,11 +2380,7 @@ function hiraganaToRomaji(
 
       );
 
-    if (
-
-      kanaMap[two]
-
-    ) {
+    if (kanaMap[two]) {
 
       result +=
 
@@ -2468,21 +2394,13 @@ function hiraganaToRomaji(
 
     if (
 
-      kanaMap[
-
-        text[i]
-
-      ]
+      kanaMap[text[i]]
 
     ) {
 
       result +=
 
-        kanaMap[
-
-          text[i]
-
-        ];
+        kanaMap[text[i]];
 
     }
 
@@ -2506,11 +2424,7 @@ function hiraganaToRomaji(
 
 ========================= */
 
-function reverseText(
-
-  text
-
-) {
+function reverseText(text) {
 
   return Array
 
@@ -2588,7 +2502,7 @@ const romajiMap = {
 
 /* =========================
 
-   読める部分を変換
+   読める部分だけ変換
 
 ========================= */
 
@@ -2598,17 +2512,11 @@ function romajiToReadableHiragana(
 
 ) {
 
-  let result =
+  let result = "";
 
-    "";
+  let position = 0;
 
-  let position =
-
-    0;
-
-  let hasUnreadable =
-
-    false;
+  let hasUnreadable = false;
 
   while (
 
@@ -2618,9 +2526,7 @@ function romajiToReadableHiragana(
 
   ) {
 
-    let matched =
-
-      false;
+    let matched = false;
 
     for (
 
@@ -2644,21 +2550,13 @@ function romajiToReadableHiragana(
 
       if (
 
-        romajiMap[
-
-          part
-
-        ]
+        romajiMap[part]
 
       ) {
 
         result +=
 
-          romajiMap[
-
-            part
-
-          ];
+          romajiMap[part];
 
         position +=
 
@@ -2688,13 +2586,9 @@ function romajiToReadableHiragana(
 
   return {
 
-    text:
+    text: result,
 
-      result,
-
-    warning:
-
-      hasUnreadable
+    warning: hasUnreadable
 
   };
 
@@ -2892,11 +2786,7 @@ copyButton.addEventListener(
 
     catch (error) {
 
-      console.error(
-
-        error
-
-      );
+      console.error(error);
 
     }
 
@@ -2966,11 +2856,7 @@ copyButton.addEventListener(
 
       catch (error) {
 
-        console.error(
-
-          error
-
-        );
+        console.error(error);
 
       }
 
@@ -2990,11 +2876,7 @@ copyButton.addEventListener(
 
     );
 
-    if (
-
-      copyTimer
-
-    ) {
+    if (copyTimer) {
 
       clearTimeout(
 
