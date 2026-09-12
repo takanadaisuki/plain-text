@@ -6,21 +6,15 @@
 
 <meta charset="UTF-8">
 
-<meta
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  name="viewport"
-
-  content="width=device-width, initial-scale=1.0"
-
->
-
-<title>逆再生セリフ作成用｜音声逆再生・ローマ字逆読み</title>
+<title>逆再生セリフ作成｜音声を逆再生・逆読み文字変換</title>
 
 <meta
 
   name="description"
 
-  content="録音した音声を逆再生できる逆再生セリフ作成ツールです。ひらがなからローマ字、逆順ローマ字、逆順の読み方への変換もできます。"
+  content="逆再生セリフを簡単に作成できるツールです。スマホで音声を録音して逆再生できます。ひらがなをローマ字・逆順ローマ字・逆順の読み方に変換することもできます。"
 
 >
 
@@ -29,6 +23,12 @@
 * {
 
   box-sizing: border-box;
+
+}
+
+html {
+
+  scroll-behavior: smooth;
 
 }
 
@@ -194,6 +194,12 @@ button:disabled {
 
   color: #b00000;
 
+  box-shadow:
+
+    0 0 0 2px
+
+    rgba(223, 41, 41, 0.08);
+
 }
 
 #status {
@@ -318,7 +324,7 @@ button:disabled {
 
 /* =========================
 
-   結果
+   変換結果
 
 ========================= */
 
@@ -352,17 +358,43 @@ button:disabled {
 
 }
 
+/* =========================
+
+   表記不可
+
+========================= */
+
 #warning {
 
   display: none;
 
-  margin-top: 2px;
+  margin-top: 5px;
+
+  padding: 6px 8px;
 
   color: #c90000;
 
-  font-size: 12px;
+  background: #fff2f2;
+
+  border: 1px solid #f2caca;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+}
+
+#warningTitle {
 
   font-weight: bold;
+
+}
+
+#warningReason {
+
+  margin-top: 1px;
 
 }
 
@@ -440,6 +472,60 @@ button:disabled {
 
 /* =========================
 
+   目次
+
+========================= */
+
+.toc {
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  background: #f8fafc;
+
+  border: 1px solid #dde5ec;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+}
+
+.toc-title {
+
+  margin-bottom: 4px;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+}
+
+.toc a {
+
+  color: #315f82;
+
+  text-decoration: none;
+
+}
+
+.toc a:hover {
+
+  text-decoration: underline;
+
+}
+
+.toc-sub {
+
+  padding-left: 14px;
+
+}
+
+/* =========================
+
    詳細説明
 
 ========================= */
@@ -466,6 +552,8 @@ button:disabled {
 
   background: #eef5fb;
 
+  scroll-margin-top: 10px;
+
 }
 
 .guide h3 {
@@ -479,6 +567,8 @@ button:disabled {
   border-left: 4px solid #d7e7f5;
 
   background: #f8fbfd;
+
+  scroll-margin-top: 10px;
 
 }
 
@@ -580,11 +670,7 @@ footer {
 
 <body>
 
-<h1>
-
-  🎙️ 逆再生セリフ作成用
-
-</h1>
+<h1>🎙️ 逆再生セリフ作成用</h1>
 
 <div class="top-description">
 
@@ -592,11 +678,7 @@ footer {
 
 </div>
 
-<!-- =========================
-
-     音声変換
-
-========================= -->
+<!-- 音声変換 -->
 
 <section class="main-box">
 
@@ -626,25 +708,13 @@ footer {
 
   <div class="play-area">
 
-    <button
-
-      id="normalPlay"
-
-      disabled
-
-    >
+    <button id="normalPlay" disabled>
 
       ▶️ 通常再生
 
     </button>
 
-    <button
-
-      id="reversePlay"
-
-      disabled
-
-    >
+    <button id="reversePlay" disabled>
 
       🔄 逆再生
 
@@ -654,11 +724,7 @@ footer {
 
 </section>
 
-<!-- =========================
-
-     文字変換
-
-========================= -->
+<!-- 文字変換 -->
 
 <section class="main-box">
 
@@ -688,11 +754,7 @@ footer {
 
     <div class="result-line">
 
-      <span class="result-label">
-
-        逆順読み方：
-
-      </span>
+      <span class="result-label">逆順読み方：</span>
 
       <span id="reverseReading"></span>
 
@@ -700,11 +762,7 @@ footer {
 
     <div class="result-line">
 
-      <span class="result-label">
-
-        逆順ローマ字：
-
-      </span>
+      <span class="result-label">逆順ローマ字：</span>
 
       <span id="reverseRomaji"></span>
 
@@ -712,11 +770,7 @@ footer {
 
     <div class="result-line">
 
-      <span class="result-label">
-
-        ローマ字：
-
-      </span>
+      <span class="result-label">ローマ字：</span>
 
       <span id="romaji"></span>
 
@@ -724,11 +778,7 @@ footer {
 
     <div class="result-line">
 
-      <span class="result-label">
-
-        読み方：
-
-      </span>
+      <span class="result-label">読み方：</span>
 
       <span id="reading"></span>
 
@@ -736,7 +786,9 @@ footer {
 
     <div id="warning">
 
-      注意：表記不可の文字があります。
+      <div id="warningTitle"></div>
+
+      <div id="warningReason"></div>
 
     </div>
 
@@ -760,11 +812,7 @@ footer {
 
 </section>
 
-<!-- =========================
-
-     プライバシー
-
-========================= -->
+<!-- プライバシー -->
 
 <div class="privacy-note">
 
@@ -774,221 +822,379 @@ footer {
 
 </div>
 
-<!-- =========================
+<!-- 目次 -->
 
-     詳細説明
+<div class="toc">
 
-========================= -->
+  <div class="toc-title">
+
+    目次
+
+  </div>
+
+  <div>
+
+    ・<a href="#mechanism">文字変換の仕組み</a>
+
+  </div>
+
+  <div>
+
+    ・<a href="#examples">変換例</a>
+
+  </div>
+
+  <div>
+
+    ・<a href="#notes">注意事項</a>
+
+  </div>
+
+  <div class="toc-sub">
+
+    ① <a href="#note1">実際の読み方と表記が異なる場合</a>
+
+  </div>
+
+  <div class="toc-sub">
+
+    ② <a href="#note2">「ん（n）」が連続する場合</a>
+
+  </div>
+
+  <div class="toc-sub">
+
+    ③ <a href="#note3">子音から始まる・読めない部分がある場合</a>
+
+  </div>
+
+  <div class="toc-sub">
+
+    ④ <a href="#note4">伸ばす音「ー」について</a>
+
+  </div>
+
+  <div class="toc-sub">
+
+    ⑤ <a href="#note5">小さい「っ」について</a>
+
+  </div>
+
+</div>
+
+<!-- 詳細説明 -->
 
 <div class="guide">
 
-  <h2>文字変換の仕組み</h2>
+<h2 id="mechanism">
 
-  <p>
+  文字変換の仕組み
 
-    入力したひらがなをローマ字に変換し、そのローマ字を1文字ずつ逆順に並べ替えます。
+</h2>
 
-    さらに、逆順になったローマ字のうち、日本語として読める部分をひらがなに変換して表示します。
+<p>
 
-  </p>
+  入力したひらがなをローマ字に変換し、そのローマ字を1文字ずつ逆順に並べ替えます。
 
-  <p>
+  さらに、逆順になったローマ字から日本語として読める部分をひらがなに変換して表示します。
 
-    逆から読んだときにできるだけ扱いやすくなるよう、一般的なヘボン式とは一部異なるローマ字表記を使用しています。
+</p>
 
-  </p>
+<p>
 
-  <div class="example">
+  逆から読んだときにできるだけ扱いやすくなるよう、一般的なヘボン式とは一部異なるローマ字表記を使用しています。
 
-    し → si<br>
+</p>
 
-    ち → ti<br>
+<div class="example">
 
-    つ → tu<br>
+  し → si<br>
 
-    ふ → hu<br>
+  ち → ti<br>
 
-    しゃ → sya<br>
+  つ → tu<br>
 
-    ちゃ → tya<br>
+  ふ → hu<br>
 
-    じゃ → ja<br>
+  しゃ → sya<br>
 
-    じょ → jo
+  ちゃ → tya<br>
 
-  </div>
+  じゃ → ja<br>
 
-  <h2>変換例</h2>
+  じょ → jo
 
-  <div class="example">
+</div>
 
-    あいす<br>
+<h2 id="examples">
 
-    ↓<br>
+  変換例
 
-    aisu<br>
+</h2>
 
-    ↓<br>
+<div class="example">
 
-    usia<br>
+  あいす<br>
 
-    ↓<br>
+  ↓<br>
 
-    うしあ
+  aisu<br>
 
-  </div>
+  ↓<br>
 
-  <p>
+  usia<br>
 
-    「あいす」は「aisu」となり、文字を逆順にすると「usia」になります。
+  ↓<br>
 
-    「u」「si」「a」と読むことができるため、逆順読み方は「うしあ」と表示されます。
+  うしあ
 
-  </p>
+</div>
 
-  <div class="example">
+<p>
 
-    きょう<br>
+  「あいす」は「aisu」となり、文字を逆順にすると「usia」になります。
 
-    ↓<br>
+  「u」「si」「a」と読むことができるため、逆順読み方は「うしあ」と表示されます。
 
-    kyou<br>
+</p>
 
-    ↓<br>
+<div class="example">
 
-    uoyk<br>
+  あさって<br>
 
-    ↓<br>
+  ↓<br>
 
-    うお
+  asatte<br>
 
-  </div>
+  ↓<br>
 
-  <p>
+  ettasa<br>
 
-    「uoyk」のうち「uo」は「うお」と読めますが、「yk」は日本語として表記できないため、その部分は飛ばします。
+  ↓<br>
 
-  </p>
+  えったさ
 
-  <h2>注意事項</h2>
+</div>
 
-  <h3>① 実際の読み方と表記が異なる場合</h3>
+<p>
 
-  <p>
+  同じ子音が続き、その後ろを日本語として読むことができる場合は、
 
-    入力されたひらがなを文字どおりにローマ字へ変換するため、実際の発音とは異なる場合があります。
+  最初の子音を小さい「っ」として変換します。
 
-  </p>
+</p>
 
-  <div class="example">
+<h2 id="notes">
 
-    こんにちは<br>
+  注意事項
 
-    ↓<br>
+</h2>
 
-    konnitiha
+<h3 id="note1">
 
-  </div>
+  ① 実際の読み方と表記が異なる場合
 
-  <p>
+</h3>
 
-    「こんにちは」の最後の「は」は文字としては「ha」になりますが、実際には「わ」と発音します。
+<p>
 
-    実際の読み方を優先したい場合は、「こんにちわ」と入力するなど、ご自身で調整してください。
+  入力されたひらがなを文字どおりにローマ字へ変換するため、
 
-  </p>
+  実際の発音とは異なる場合があります。
 
-  <h3>② 「ん（n）」が連続する場合</h3>
+</p>
 
-  <p>
+<div class="example">
 
-    「ん」が含まれる言葉では、前後の文字との組み合わせによってローマ字の「n」が連続する場合があります。
+  こんにちは<br>
 
-  </p>
+  ↓<br>
 
-  <div class="example">
+  konnitiha
 
-    あんない<br>
+</div>
 
-    ↓<br>
+<p>
 
-    annai
+  「こんにちは」の最後の「は」は文字としては「ha」になりますが、
 
-  </div>
+  実際には「わ」と発音します。
 
-  <p>
+  実際の読み方を優先したい場合は「こんにちわ」と入力するなど、
 
-    「annai」のように「n」が連続すると、文字上の区切りと実際の発音が分かりにくくなる場合があります。
+  ご自身で調整してください。
 
-    実際に録音・逆再生して、聞こえ方に合わせて必要に応じて調整してください。
+</p>
 
-  </p>
+<h3 id="note2">
 
-  <h3>③ 子音から始まる・読めない部分がある場合</h3>
+  ② 「ん（n）」が連続する場合
 
-  <p>
+</h3>
 
-    ローマ字を逆順にすると、子音だけの文字列が先頭や途中に現れ、日本語のひらがなとして表記できない場合があります。
+<p>
 
-  </p>
+  「ん」が含まれる言葉では、前後の文字との組み合わせによって
 
-  <div class="example">
+  ローマ字の「n」が連続する場合があります。
 
-    きょう<br>
+</p>
 
-    ↓<br>
+<div class="example">
 
-    kyou<br>
+  あんない<br>
 
-    ↓<br>
+  ↓<br>
 
-    uoyk<br>
+  annai
 
-    ↓<br>
+</div>
 
-    うお
+<p>
 
-  </div>
+  「annai」のように「n」が連続すると、
 
-  <p>
+  文字上の区切りと実際の発音が分かりにくくなる場合があります。
 
-    この場合、「yk」は読めないため飛ばします。
+  実際に録音・逆再生し、聞こえ方に合わせて必要に応じて調整してください。
 
-    読めない文字が途中にあっても、そこで変換を終了せず、その後に読める文字があれば続けて変換します。
+</p>
 
-  </p>
+<h3 id="note3">
 
-  <div class="example">
+  ③ 子音から始まる・読めない部分がある場合
 
-    kokyoukikan<br>
+</h3>
 
-    ↓<br>
+<p>
 
-    nakikuoykok<br>
+  ローマ字を逆順にすると、母音を伴わない子音などが現れ、
 
-    ↓<br>
+  ひらがなとして表記できない場合があります。
 
-    なきくおこ
+</p>
 
-  </div>
+<div class="example">
 
-  <p>
+  きょう<br>
 
-    このように、表記できない文字だけを飛ばし、残りの読める部分はできるだけすべてひらがなとして表示します。
+  ↓<br>
 
-  </p>
+  kyou<br>
 
-  <div class="note">
+  ↓<br>
 
-    ※この文字変換は、正式なローマ字表記を目的としたものではありません。
+  uoyk
 
-    逆再生セリフを作りやすくするための独自ルールです。
+</div>
 
-    文字上の変換結果と実際の聞こえ方が完全には一致しない場合があります。
+<p>
 
-    最終的には、実際に録音して逆再生し、聞こえ方を確認しながら調整してください。
+  表記できない文字がある場合は、変換結果の下に赤字で
 
-  </div>
+  「表記不可の文字」とその理由を表示します。
+
+  読めない文字が途中にあっても、その後に読める部分があれば続けて変換します。
+
+</p>
+
+<h3 id="note4">
+
+  ④ 伸ばす音「ー」について
+
+</h3>
+
+<p>
+
+  「ー（長音）」が含まれる場合は、「ー」を「-」として残したままローマ字に変換します。
+
+  逆順にすると「-」の位置も一緒に反転します。
+
+</p>
+
+<div class="example">
+
+  こーら<br>
+
+  ↓<br>
+
+  ko-ra<br>
+
+  ↓<br>
+
+  ar-ok<br>
+
+  ↓<br>
+
+  aro-k
+
+</div>
+
+<p>
+
+  「こーら」は「ko-ra」となり、逆順ローマ字は「ar-ok」になります。
+
+  読める部分を発音しやすい順に変換すると「aro-k」と表示します。
+
+  最後の「k」のように母音を伴わない子音は、そのまま表示し、
+
+  表記できない理由も赤字で案内します。
+
+</p>
+
+<h3 id="note5">
+
+  ⑤ 小さい「っ」について
+
+</h3>
+
+<p>
+
+  小さい「っ」は、次に続く子音を重ねる形でローマ字に変換します。
+
+  また、逆順ローマ字でも同じ子音が連続し、その後ろが読める場合は、
+
+  小さい「っ」として変換します。
+
+</p>
+
+<div class="example">
+
+  あさって<br>
+
+  ↓<br>
+
+  asatte<br>
+
+  ↓<br>
+
+  ettasa<br>
+
+  ↓<br>
+
+  えったさ
+
+</div>
+
+<p>
+
+  この場合「tt」を小さい「っ」を含む音として読むことができるため、
+
+  「ettasa」は「えったさ」と表示されます。
+
+</p>
+
+<div class="note">
+
+  ※この文字変換は、正式なローマ字表記を目的としたものではありません。
+
+  逆再生セリフを作りやすくするための独自ルールです。
+
+  文字上の変換結果と実際の聞こえ方が完全には一致しない場合があります。
+
+  最終的には、実際に録音して逆再生し、聞こえ方を確認しながら調整してください。
+
+</div>
 
 </div>
 
@@ -1018,7 +1224,7 @@ footer {
 
 /* =========================
 
-   状態
+   音声：状態
 
 ========================= */
 
@@ -1037,12 +1243,6 @@ let audioContext = null;
 let currentSource = null;
 
 let appState = "idle";
-
-/* =========================
-
-   要素
-
-========================= */
 
 const recordButton =
 
@@ -1063,12 +1263,6 @@ const normalPlayButton =
 const reversePlayButton =
 
   document.getElementById("reversePlay");
-
-/* =========================
-
-   AudioContext
-
-========================= */
 
 function getAudioContext() {
 
@@ -1098,7 +1292,7 @@ function getAudioContext() {
 
 /* =========================
 
-   UI更新
+   UI
 
 ========================= */
 
@@ -1122,13 +1316,9 @@ function updateUI() {
 
       "🔴 録音中";
 
-    normalPlayButton.disabled =
+    normalPlayButton.disabled = true;
 
-      true;
-
-    reversePlayButton.disabled =
-
-      true;
+    reversePlayButton.disabled = true;
 
     normalPlayButton.textContent =
 
@@ -1156,9 +1346,7 @@ function updateUI() {
 
   if (appState === "normal") {
 
-    recordButton.disabled =
-
-      true;
+    recordButton.disabled = true;
 
     recordButton.textContent =
 
@@ -1170,9 +1358,7 @@ function updateUI() {
 
     );
 
-    normalPlayButton.disabled =
-
-      false;
+    normalPlayButton.disabled = false;
 
     normalPlayButton.textContent =
 
@@ -1184,9 +1370,7 @@ function updateUI() {
 
     );
 
-    reversePlayButton.disabled =
-
-      true;
+    reversePlayButton.disabled = true;
 
     reversePlayButton.textContent =
 
@@ -1204,9 +1388,7 @@ function updateUI() {
 
   if (appState === "reverse") {
 
-    recordButton.disabled =
-
-      true;
+    recordButton.disabled = true;
 
     recordButton.textContent =
 
@@ -1218,9 +1400,7 @@ function updateUI() {
 
     );
 
-    reversePlayButton.disabled =
-
-      false;
+    reversePlayButton.disabled = false;
 
     reversePlayButton.textContent =
 
@@ -1232,9 +1412,7 @@ function updateUI() {
 
     );
 
-    normalPlayButton.disabled =
-
-      true;
+    normalPlayButton.disabled = true;
 
     normalPlayButton.textContent =
 
@@ -1252,9 +1430,7 @@ function updateUI() {
 
   appState = "idle";
 
-  recordButton.disabled =
-
-    false;
+  recordButton.disabled = false;
 
   recordButton.textContent =
 
@@ -1342,11 +1518,7 @@ function getMimeType() {
 
       if (
 
-        MediaRecorder.isTypeSupported(
-
-          type
-
-        )
+        MediaRecorder.isTypeSupported(type)
 
       ) {
 
@@ -1364,12 +1536,6 @@ function getMimeType() {
 
 }
 
-/* =========================
-
-   マイク停止
-
-========================= */
-
 function stopMicrophone() {
 
   if (mediaStream) {
@@ -1384,27 +1550,17 @@ function stopMicrophone() {
 
       );
 
-    mediaStream =
-
-      null;
+    mediaStream = null;
 
   }
 
 }
 
-/* =========================
-
-   マイクエラー
-
-========================= */
-
 function showMicError(error) {
 
   console.error(error);
 
-  appState =
-
-    "idle";
+  appState = "idle";
 
   recordStatus.textContent =
 
@@ -1412,13 +1568,9 @@ function showMicError(error) {
 
   if (
 
-    error.name ===
+    error.name === "NotAllowedError" ||
 
-      "NotAllowedError" ||
-
-    error.name ===
-
-      "PermissionDeniedError"
+    error.name === "PermissionDeniedError"
 
   ) {
 
@@ -1430,13 +1582,9 @@ function showMicError(error) {
 
   else if (
 
-    error.name ===
+    error.name === "NotFoundError" ||
 
-      "NotFoundError" ||
-
-    error.name ===
-
-      "DevicesNotFoundError"
+    error.name === "DevicesNotFoundError"
 
   ) {
 
@@ -1448,13 +1596,9 @@ function showMicError(error) {
 
   else if (
 
-    error.name ===
+    error.name === "NotReadableError" ||
 
-      "NotReadableError" ||
-
-    error.name ===
-
-      "TrackStartError"
+    error.name === "TrackStartError"
 
   ) {
 
@@ -1536,7 +1680,7 @@ async function startRecording() {
 
     typeof MediaRecorder ===
 
-      "undefined"
+    "undefined"
 
   ) {
 
@@ -1666,9 +1810,7 @@ async function startRecording() {
 
           const arrayBuffer =
 
-            await recordedBlob
-
-              .arrayBuffer();
+            await recordedBlob.arrayBuffer();
 
           const context =
 
@@ -1686,9 +1828,7 @@ async function startRecording() {
 
           if (
 
-            context.state ===
-
-              "suspended"
+            context.state === "suspended"
 
           ) {
 
@@ -1698,21 +1838,15 @@ async function startRecording() {
 
           recordedBuffer =
 
-            await context
+            await context.decodeAudioData(
 
-              .decodeAudioData(
+              arrayBuffer.slice(0)
 
-                arrayBuffer.slice(0)
+            );
 
-              );
+          appState = "idle";
 
-          appState =
-
-            "idle";
-
-          status.textContent =
-
-            "";
+          status.textContent = "";
 
           updateUI();
 
@@ -1722,13 +1856,9 @@ async function startRecording() {
 
           console.error(error);
 
-          recordedBuffer =
+          recordedBuffer = null;
 
-            null;
-
-          appState =
-
-            "idle";
+          appState = "idle";
 
           status.textContent =
 
@@ -1748,9 +1878,7 @@ async function startRecording() {
 
         stopMicrophone();
 
-        appState =
-
-          "idle";
+        appState = "idle";
 
         recordStatus.textContent =
 
@@ -1766,9 +1894,7 @@ async function startRecording() {
 
     mediaRecorder.start(1000);
 
-    appState =
-
-      "recording";
+    appState = "recording";
 
     updateUI();
 
@@ -1796,9 +1922,7 @@ function stopRecording() {
 
     mediaRecorder &&
 
-    mediaRecorder.state ===
-
-      "recording"
+    mediaRecorder.state === "recording"
 
   ) {
 
@@ -1829,12 +1953,6 @@ function stopRecording() {
   }
 
 }
-
-/* =========================
-
-   録音ボタン
-
-========================= */
 
 recordButton.addEventListener(
 
@@ -1874,7 +1992,7 @@ recordButton.addEventListener(
 
 /* =========================
 
-   再生停止
+   再生
 
 ========================= */
 
@@ -1886,13 +2004,9 @@ function stopPlayback() {
 
       currentSource;
 
-    currentSource =
+    currentSource = null;
 
-      null;
-
-    source.onended =
-
-      null;
+    source.onended = null;
 
     try {
 
@@ -1912,19 +2026,11 @@ function stopPlayback() {
 
   }
 
-  appState =
-
-    "idle";
+  appState = "idle";
 
   updateUI();
 
 }
-
-/* =========================
-
-   音声再生
-
-========================= */
 
 async function playBuffer(
 
@@ -1950,9 +2056,7 @@ async function playBuffer(
 
   if (
 
-    context.state ===
-
-      "suspended"
+    context.state === "suspended"
 
   ) {
 
@@ -1992,19 +2096,13 @@ async function playBuffer(
 
       if (
 
-        currentSource ===
-
-          source
+        currentSource === source
 
       ) {
 
-        currentSource =
+        currentSource = null;
 
-          null;
-
-        appState =
-
-          "idle";
+        appState = "idle";
 
         updateUI();
 
@@ -2013,12 +2111,6 @@ async function playBuffer(
     };
 
 }
-
-/* =========================
-
-   通常再生
-
-========================= */
 
 normalPlayButton.addEventListener(
 
@@ -2066,9 +2158,7 @@ normalPlayButton.addEventListener(
 
       console.error(error);
 
-      appState =
-
-        "idle";
+      appState = "idle";
 
       status.textContent =
 
@@ -2081,12 +2171,6 @@ normalPlayButton.addEventListener(
   }
 
 );
-
-/* =========================
-
-   逆再生
-
-========================= */
 
 reversePlayButton.addEventListener(
 
@@ -2128,17 +2212,11 @@ reversePlayButton.addEventListener(
 
         context.createBuffer(
 
-          recordedBuffer
+          recordedBuffer.numberOfChannels,
 
-            .numberOfChannels,
+          recordedBuffer.length,
 
-          recordedBuffer
-
-            .length,
-
-          recordedBuffer
-
-            .sampleRate
+          recordedBuffer.sampleRate
 
         );
 
@@ -2148,9 +2226,7 @@ reversePlayButton.addEventListener(
 
         channel <
 
-          recordedBuffer
-
-            .numberOfChannels;
+          recordedBuffer.numberOfChannels;
 
         channel++
 
@@ -2158,31 +2234,25 @@ reversePlayButton.addEventListener(
 
         const originalData =
 
-          recordedBuffer
+          recordedBuffer.getChannelData(
 
-            .getChannelData(
+            channel
 
-              channel
-
-            );
+          );
 
         const reversedData =
 
-          reversed
+          reversed.getChannelData(
 
-            .getChannelData(
+            channel
 
-              channel
-
-            );
+          );
 
         for (
 
           let i = 0;
 
-          i <
-
-            originalData.length;
+          i < originalData.length;
 
           i++
 
@@ -2218,9 +2288,7 @@ reversePlayButton.addEventListener(
 
       console.error(error);
 
-      appState =
-
-        "idle";
+      appState = "idle";
 
       status.textContent =
 
@@ -2292,13 +2360,15 @@ const kanaMap = {
 
   "びゃ":"bya","びゅ":"byu","びょ":"byo",
 
-  "ぴゃ":"pya","ぴゅ":"pyu","ぴょ":"pyo"
+  "ぴゃ":"pya","ぴゅ":"pyu","ぴょ":"pyo",
+
+  "ー":"-"
 
 };
 
 /* =========================
 
-   変換
+   ひらがな → ローマ字変換
 
 ========================= */
 
@@ -2315,6 +2385,8 @@ function hiraganaToRomaji(text) {
     i++
 
   ) {
+
+    /* 小さい「っ」 */
 
     if (
 
@@ -2348,7 +2420,13 @@ function hiraganaToRomaji(text) {
 
         kanaMap[nextOne];
 
-      if (next) {
+      if (
+
+        next &&
+
+        /^[a-z]/.test(next)
+
+      ) {
 
         result +=
 
@@ -2382,11 +2460,7 @@ function hiraganaToRomaji(text) {
 
     }
 
-    if (
-
-      kanaMap[text[i]]
-
-    ) {
+    if (kanaMap[text[i]]) {
 
       result +=
 
@@ -2490,37 +2564,151 @@ const romajiMap = {
 
 };
 
+const consonants =
+
+  "bcdfghjklmpqrstvwxyz";
+
 /* =========================
 
-   読める部分だけ変換
+   逆順ローマ字を読む
 
 ========================= */
 
-function romajiToReadableHiragana(
-
-  text
-
-) {
+function romajiToReadableHiragana(text) {
 
   let result = "";
 
   let position = 0;
 
-  let hasUnreadable = false;
+  const unreadable = [];
 
   while (
 
-    position <
-
-      text.length
+    position < text.length
 
   ) {
 
-    let matched = false;
+    const current =
+
+      text[position];
+
+    /* =====================
+
+       長音記号
+
+    ===================== */
+
+    if (current === "-") {
+
+      result += "-";
+
+      position++;
+
+      continue;
+
+    }
+
+    /* =====================
+
+       小さい「っ」
+
+       tt + a → った
+
+       kk + a → っか
+
+       ss + a → っさ
+
+    ===================== */
+
+    if (
+
+      position + 2 <
+
+        text.length &&
+
+      text[position] ===
+
+        text[position + 1] &&
+
+      consonants.includes(
+
+        text[position]
+
+      )
+
+    ) {
+
+      let followingMatched =
+
+        false;
+
+      for (
+
+        let length = 3;
+
+        length >= 2;
+
+        length--
+
+      ) {
+
+        const following =
+
+          text.substring(
+
+            position + 1,
+
+            position + 1 + length
+
+          );
+
+        if (
+
+          romajiMap[following]
+
+        ) {
+
+          result +=
+
+            "っ" +
+
+            romajiMap[following];
+
+          position +=
+
+            1 + length;
+
+          followingMatched =
+
+            true;
+
+          break;
+
+        }
+
+      }
+
+      if (followingMatched) {
+
+        continue;
+
+      }
+
+    }
+
+    /* =====================
+
+       通常変換
+
+    ===================== */
+
+    let matched =
+
+      false;
 
     for (
 
-      let length = 4;
+      let length = 3;
 
       length >= 1;
 
@@ -2562,15 +2750,37 @@ function romajiToReadableHiragana(
 
     }
 
-    if (!matched) {
+    if (matched) {
 
-      hasUnreadable =
-
-        true;
-
-      position++;
+      continue;
 
     }
+
+    /* =====================
+
+       表記できない文字
+
+       表示自体は残す
+
+    ===================== */
+
+    result += current;
+
+    unreadable.push({
+
+      char: current,
+
+      reason:
+
+        getUnreadableReason(
+
+          current
+
+        )
+
+    });
+
+    position++;
 
   }
 
@@ -2578,7 +2788,111 @@ function romajiToReadableHiragana(
 
     text: result,
 
-    warning: hasUnreadable
+    unreadable: unreadable
+
+  };
+
+}
+
+/* =========================
+
+   表記不可の理由
+
+========================= */
+
+function getUnreadableReason(char) {
+
+  if (
+
+    /^[bcdfghjklmpqrstvwxyz]$/
+
+      .test(char)
+
+  ) {
+
+    return "母音を伴わない子音のため、ひらがなとして表記できません。";
+
+  }
+
+  if (
+
+    /^[a-z]$/.test(char)
+
+  ) {
+
+    return "この文字の並びは、現在の変換ルールではひらがなとして表記できません。";
+
+  }
+
+  return "現在の変換ルールに対応していない文字です。";
+
+}
+
+/* =========================
+
+   警告をまとめる
+
+========================= */
+
+function createWarningData(
+
+  unreadable
+
+) {
+
+  const chars = [];
+
+  const reasons = [];
+
+  unreadable.forEach(
+
+    item => {
+
+      if (
+
+        !chars.includes(
+
+          item.char
+
+        )
+
+      ) {
+
+        chars.push(
+
+          item.char
+
+        );
+
+      }
+
+      if (
+
+        !reasons.includes(
+
+          item.reason
+
+        )
+
+      ) {
+
+        reasons.push(
+
+          item.reason
+
+        );
+
+      }
+
+    }
+
+  );
+
+  return {
+
+    chars,
+
+    reasons
 
   };
 
@@ -2638,6 +2952,22 @@ const warningElement =
 
   );
 
+const warningTitle =
+
+  document.getElementById(
+
+    "warningTitle"
+
+  );
+
+const warningReason =
+
+  document.getElementById(
+
+    "warningReason"
+
+  );
+
 textInput.addEventListener(
 
   "input",
@@ -2688,13 +3018,53 @@ textInput.addEventListener(
 
       reading;
 
-    warningElement.style.display =
+    if (
 
-      converted.warning
+      converted.unreadable.length > 0
 
-        ? "block"
+    ) {
 
-        : "none";
+      const warningData =
+
+        createWarningData(
+
+          converted.unreadable
+
+        );
+
+      warningTitle.textContent =
+
+        "⚠️ 表記不可の文字：" +
+
+        warningData.chars.join("、");
+
+      warningReason.textContent =
+
+        "理由：" +
+
+        warningData.reasons.join(" ");
+
+      warningElement.style.display =
+
+        "block";
+
+    }
+
+    else {
+
+      warningElement.style.display =
+
+        "none";
+
+      warningTitle.textContent =
+
+        "";
+
+      warningReason.textContent =
+
+        "";
+
+    }
 
   }
 
@@ -2722,15 +3092,19 @@ const copyMessage =
 
   );
 
-let copyTimer =
-
-  null;
+let copyTimer = null;
 
 copyButton.addEventListener(
 
   "click",
 
   async () => {
+
+    /*
+
+      警告・赤字部分はコピーしない
+
+    */
 
     const copyText =
 
@@ -2742,9 +3116,7 @@ copyButton.addEventListener(
 
 読み方：${readingElement.textContent}`;
 
-    let success =
-
-      false;
+    let success = false;
 
     try {
 
@@ -2766,9 +3138,7 @@ copyButton.addEventListener(
 
           );
 
-        success =
-
-          true;
+        success = true;
 
       }
 
@@ -2917,8 +3287,6 @@ window.addEventListener(
   }
 
 );
-
-/* 初期状態 */
 
 updateUI();
 
