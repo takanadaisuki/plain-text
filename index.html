@@ -340,7 +340,7 @@ button:disabled {
 
   font-size: 14px;
 
-  line-height: 1.65;
+  line-height: 1.55;
 
   word-break: break-all;
 
@@ -358,9 +358,17 @@ button:disabled {
 
 }
 
+.unreadable-inline {
+
+  color: #d00000;
+
+  font-weight: bold;
+
+}
+
 /* =========================
 
-   表記不可
+   表記不可警告
 
 ========================= */
 
@@ -368,7 +376,7 @@ button:disabled {
 
   display: none;
 
-  margin-top: 5px;
+  margin-top: 6px;
 
   padding: 6px 8px;
 
@@ -376,7 +384,7 @@ button:disabled {
 
   background: #fff2f2;
 
-  border: 1px solid #f2caca;
+  border: 1px solid #f0c5c5;
 
   border-radius: 6px;
 
@@ -490,7 +498,7 @@ button:disabled {
 
   font-size: 12px;
 
-  line-height: 1.7;
+  line-height: 1.75;
 
 }
 
@@ -509,12 +517,6 @@ button:disabled {
   color: #315f82;
 
   text-decoration: none;
-
-}
-
-.toc a:hover {
-
-  text-decoration: underline;
 
 }
 
@@ -556,22 +558,6 @@ button:disabled {
 
 }
 
-.guide h3 {
-
-  margin: 10px 0 5px;
-
-  padding: 5px 7px;
-
-  font-size: 13px;
-
-  border-left: 4px solid #d7e7f5;
-
-  background: #f8fbfd;
-
-  scroll-margin-top: 10px;
-
-}
-
 .guide p {
 
   margin: 0 2px 8px;
@@ -592,9 +578,51 @@ button:disabled {
 
 }
 
-.note {
+/* =========================
 
-  margin-top: 10px;
+   注意事項カード
+
+========================= */
+
+.note-card {
+
+  margin: 10px 0;
+
+  padding: 10px;
+
+  border: 1px solid #d9e3ec;
+
+  border-radius: 9px;
+
+  background: #fbfdff;
+
+  scroll-margin-top: 10px;
+
+}
+
+.note-card h3 {
+
+  margin: -2px 0 8px;
+
+  padding: 6px 7px;
+
+  font-size: 13px;
+
+  background: #eef5fb;
+
+  border-radius: 6px;
+
+}
+
+.note-card p:last-child {
+
+  margin-bottom: 0;
+
+}
+
+.final-note {
+
+  margin-top: 12px;
 
   padding: 9px 10px;
 
@@ -650,7 +678,7 @@ footer {
 
 /* =========================
 
-   PC
+   PC表示
 
 ========================= */
 
@@ -678,7 +706,11 @@ footer {
 
 </div>
 
-<!-- 音声変換 -->
+<!-- =========================
+
+     音声変換
+
+========================= -->
 
 <section class="main-box">
 
@@ -724,7 +756,11 @@ footer {
 
 </section>
 
-<!-- 文字変換 -->
+<!-- =========================
+
+     文字変換
+
+========================= -->
 
 <section class="main-box">
 
@@ -812,7 +848,11 @@ footer {
 
 </section>
 
-<!-- プライバシー -->
+<!-- =========================
+
+     プライバシー
+
+========================= -->
 
 <div class="privacy-note">
 
@@ -822,7 +862,11 @@ footer {
 
 </div>
 
-<!-- 目次 -->
+<!-- =========================
+
+     目次
+
+========================= -->
 
 <div class="toc">
 
@@ -864,7 +908,7 @@ footer {
 
   <div class="toc-sub">
 
-    ③ <a href="#note3">子音から始まる・読めない部分がある場合</a>
+    ③ <a href="#note3">子音・表記できない文字について</a>
 
   </div>
 
@@ -880,9 +924,19 @@ footer {
 
   </div>
 
+  <div class="toc-sub">
+
+    ⑥ <a href="#note6">逆順でできる特殊な読み方</a>
+
+  </div>
+
 </div>
 
-<!-- 詳細説明 -->
+<!-- =========================
+
+     詳細説明
+
+========================= -->
 
 <div class="guide">
 
@@ -902,7 +956,9 @@ footer {
 
 <p>
 
-  逆から読んだときにできるだけ扱いやすくなるよう、一般的なヘボン式とは一部異なるローマ字表記を使用しています。
+  逆から読んだときにできるだけ発音しやすくなるよう、
+
+  一般的なローマ字表記とは一部異なる、このサイト独自の変換ルールを使用しています。
 
 </p>
 
@@ -978,11 +1034,17 @@ footer {
 
 <p>
 
-  同じ子音が続き、その後ろを日本語として読むことができる場合は、
+  逆順にしたときに同じ子音が連続し、その後ろを日本語として読める場合は、
 
-  最初の子音を小さい「っ」として変換します。
+  小さい「っ」として変換します。
 
 </p>
+
+<!-- =========================
+
+     注意事項
+
+========================= -->
 
 <h2 id="notes">
 
@@ -990,7 +1052,11 @@ footer {
 
 </h2>
 
-<h3 id="note1">
+<!-- ① -->
+
+<section class="note-card" id="note1">
+
+<h3>
 
   ① 実際の読み方と表記が異なる場合
 
@@ -1026,7 +1092,13 @@ footer {
 
 </p>
 
-<h3 id="note2">
+</section>
+
+<!-- ② -->
+
+<section class="note-card" id="note2">
+
+<h3>
 
   ② 「ん（n）」が連続する場合
 
@@ -1056,13 +1128,19 @@ footer {
 
   文字上の区切りと実際の発音が分かりにくくなる場合があります。
 
-  実際に録音・逆再生し、聞こえ方に合わせて必要に応じて調整してください。
+  実際に録音・逆再生して、聞こえ方に合わせて調整してください。
 
 </p>
 
-<h3 id="note3">
+</section>
 
-  ③ 子音から始まる・読めない部分がある場合
+<!-- ③ -->
+
+<section class="note-card" id="note3">
+
+<h3>
+
+  ③ 子音・表記できない文字について
 
 </h3>
 
@@ -1070,7 +1148,7 @@ footer {
 
   ローマ字を逆順にすると、母音を伴わない子音などが現れ、
 
-  ひらがなとして表記できない場合があります。
+  ひらがなだけでは正確に表記できない場合があります。
 
 </p>
 
@@ -1084,21 +1162,45 @@ footer {
 
   ↓<br>
 
-  uoyk
+  uoyk<br>
+
+  ↓<br>
+
+  うおyk
 
 </div>
 
 <p>
 
-  表記できない文字がある場合は、変換結果の下に赤字で
+  この例では「uo」は「うお」と読めますが、
 
-  「表記不可の文字」とその理由を表示します。
-
-  読めない文字が途中にあっても、その後に読める部分があれば続けて変換します。
+  最後の「yk」は単独では対応するひらがながないため、そのまま残します。
 
 </p>
 
-<h3 id="note4">
+<p>
+
+  表記できない部分は変換結果の中でも赤字で表示し、
+
+  「表記不可の文字」と、その文字が表記できない理由も赤字で表示します。
+
+</p>
+
+<p>
+
+  ただし、読めない文字が見つかってもそこで変換を終了しません。
+
+  その後に読める文字があれば続けて変換します。
+
+</p>
+
+</section>
+
+<!-- ④ -->
+
+<section class="note-card" id="note4">
+
+<h3>
 
   ④ 伸ばす音「ー」について
 
@@ -1106,7 +1208,7 @@ footer {
 
 <p>
 
-  「ー（長音）」が含まれる場合は、「ー」を「-」として残したままローマ字に変換します。
+  「ー（長音）」が含まれる場合は、「ー」を「-」として残してローマ字に変換します。
 
   逆順にすると「-」の位置も一緒に反転します。
 
@@ -1126,7 +1228,7 @@ footer {
 
   ↓<br>
 
-  aro-k
+  あろ-k
 
 </div>
 
@@ -1134,15 +1236,19 @@ footer {
 
   「こーら」は「ko-ra」となり、逆順ローマ字は「ar-ok」になります。
 
-  読める部分を発音しやすい順に変換すると「aro-k」と表示します。
+  読める部分はひらがなへ変換し、最後の「k」のように
 
-  最後の「k」のように母音を伴わない子音は、そのまま表示し、
-
-  表記できない理由も赤字で案内します。
+  ひらがなだけでは表記できない部分はそのまま残します。
 
 </p>
 
-<h3 id="note5">
+</section>
+
+<!-- ⑤ -->
+
+<section class="note-card" id="note5">
+
+<h3>
 
   ⑤ 小さい「っ」について
 
@@ -1151,10 +1257,6 @@ footer {
 <p>
 
   小さい「っ」は、次に続く子音を重ねる形でローマ字に変換します。
-
-  また、逆順ローマ字でも同じ子音が連続し、その後ろが読める場合は、
-
-  小さい「っ」として変換します。
 
 </p>
 
@@ -1178,21 +1280,147 @@ footer {
 
 <p>
 
-  この場合「tt」を小さい「っ」を含む音として読むことができるため、
+  逆順ローマ字でも同じ子音が続き、
 
-  「ettasa」は「えったさ」と表示されます。
+  その後ろの文字と組み合わせて読める場合は、
+
+  最初の子音を小さい「っ」として扱います。
 
 </p>
 
-<div class="note">
+<div class="example">
+
+  tta → った<br>
+
+  kka → っか<br>
+
+  ssa → っさ<br>
+
+  ppa → っぱ
+
+</div>
+
+</section>
+
+<!-- ⑥ -->
+
+<section class="note-card" id="note6">
+
+<h3>
+
+  ⑥ 逆順でできる特殊な読み方
+
+</h3>
+
+<p>
+
+  ローマ字を1文字ずつ逆順にすると、
+
+  通常のローマ字表記ではあまり使われない文字の並びが現れることがあります。
+
+</p>
+
+<p>
+
+  このサイトでは、逆再生セリフをできるだけ発音しやすくするため、
+
+  一部の並びを独自ルールでひらがなに変換します。
+
+</p>
+
+<div class="example">
+
+  おきゅう<br>
+
+  ↓<br>
+
+  okyuu<br>
+
+  ↓<br>
+
+  uuyko<br>
+
+  ↓<br>
+
+  ううきょ
+
+</div>
+
+<p>
+
+  この例では、逆順ローマ字に現れた「yko」を
+
+  「きょ」として扱います。
+
+</p>
+
+<div class="example">
+
+  yka → きゃ　yku → きゅ　yko → きょ<br>
+
+  ysa → しゃ　ysu → しゅ　yso → しょ<br>
+
+  yta → ちゃ　ytu → ちゅ　yto → ちょ<br>
+
+  yna → にゃ　ynu → にゅ　yno → にょ<br>
+
+  yha → ひゃ　yhu → ひゅ　yho → ひょ<br>
+
+  yma → みゃ　ymu → みゅ　ymo → みょ<br>
+
+  yra → りゃ　yru → りゅ　yro → りょ<br>
+
+  yga → ぎゃ　ygu → ぎゅ　ygo → ぎょ<br>
+
+  yba → びゃ　ybu → びゅ　ybo → びょ<br>
+
+  ypa → ぴゃ　ypu → ぴゅ　ypo → ぴょ
+
+</div>
+
+<p>
+
+  また、次のような組み合わせも、
+
+  逆再生セリフ用の発音の目安として変換します。
+
+</p>
+
+<div class="example">
+
+  yi → い<br>
+
+  wi → うぃ<br>
+
+  wu → う<br>
+
+  we → うぇ<br>
+
+  wo → うぉ
+
+</div>
+
+<p>
+
+  これらは正式なローマ字表記を示すものではなく、
+
+  逆再生したときの音を作りやすくするための独自ルールです。
+
+</p>
+
+</section>
+
+<div class="final-note">
 
   ※この文字変換は、正式なローマ字表記を目的としたものではありません。
 
-  逆再生セリフを作りやすくするための独自ルールです。
+  逆再生セリフを作りやすくするための補助機能です。
 
-  文字上の変換結果と実際の聞こえ方が完全には一致しない場合があります。
+  文字上の変換結果と、実際に録音して逆再生したときの聞こえ方が
 
-  最終的には、実際に録音して逆再生し、聞こえ方を確認しながら調整してください。
+  完全に一致するとは限りません。
+
+  最終的には実際に録音・逆再生して、聞こえ方を確認しながら調整してください。
 
 </div>
 
@@ -1222,11 +1450,11 @@ footer {
 
 <script>
 
-/* =========================
+/* =========================================================
 
-   音声：状態
+   音声機能
 
-========================= */
+========================================================= */
 
 let mediaRecorder = null;
 
@@ -1290,12 +1518,6 @@ function getAudioContext() {
 
 }
 
-/* =========================
-
-   UI
-
-========================= */
-
 function updateUI() {
 
   if (appState === "recording") {
@@ -1306,11 +1528,7 @@ function updateUI() {
 
       "⏹️ 録音停止";
 
-    recordButton.classList.add(
-
-      "recording"
-
-    );
+    recordButton.classList.add("recording");
 
     recordStatus.textContent =
 
@@ -1328,17 +1546,9 @@ function updateUI() {
 
       "🔄 逆再生";
 
-    normalPlayButton.classList.remove(
+    normalPlayButton.classList.remove("playing");
 
-      "playing"
-
-    );
-
-    reversePlayButton.classList.remove(
-
-      "playing"
-
-    );
+    reversePlayButton.classList.remove("playing");
 
     return;
 
@@ -1352,11 +1562,7 @@ function updateUI() {
 
       "🎙️ 録音開始";
 
-    recordButton.classList.remove(
-
-      "recording"
-
-    );
+    recordButton.classList.remove("recording");
 
     normalPlayButton.disabled = false;
 
@@ -1364,11 +1570,7 @@ function updateUI() {
 
       "⏹️ 再生停止";
 
-    normalPlayButton.classList.add(
-
-      "playing"
-
-    );
+    normalPlayButton.classList.add("playing");
 
     reversePlayButton.disabled = true;
 
@@ -1376,11 +1578,7 @@ function updateUI() {
 
       "🔄 逆再生";
 
-    reversePlayButton.classList.remove(
-
-      "playing"
-
-    );
+    reversePlayButton.classList.remove("playing");
 
     return;
 
@@ -1394,11 +1592,7 @@ function updateUI() {
 
       "🎙️ 録音開始";
 
-    recordButton.classList.remove(
-
-      "recording"
-
-    );
+    recordButton.classList.remove("recording");
 
     reversePlayButton.disabled = false;
 
@@ -1406,11 +1600,7 @@ function updateUI() {
 
       "⏹️ 再生停止";
 
-    reversePlayButton.classList.add(
-
-      "playing"
-
-    );
+    reversePlayButton.classList.add("playing");
 
     normalPlayButton.disabled = true;
 
@@ -1418,11 +1608,7 @@ function updateUI() {
 
       "▶️ 通常再生";
 
-    normalPlayButton.classList.remove(
-
-      "playing"
-
-    );
+    normalPlayButton.classList.remove("playing");
 
     return;
 
@@ -1436,11 +1622,7 @@ function updateUI() {
 
     "🎙️ 録音開始";
 
-  recordButton.classList.remove(
-
-    "recording"
-
-  );
+  recordButton.classList.remove("recording");
 
   normalPlayButton.textContent =
 
@@ -1450,17 +1632,9 @@ function updateUI() {
 
     "🔄 逆再生";
 
-  normalPlayButton.classList.remove(
+  normalPlayButton.classList.remove("playing");
 
-    "playing"
-
-  );
-
-  reversePlayButton.classList.remove(
-
-    "playing"
-
-  );
+  reversePlayButton.classList.remove("playing");
 
   normalPlayButton.disabled =
 
@@ -1479,12 +1653,6 @@ function updateUI() {
   }
 
 }
-
-/* =========================
-
-   録音形式
-
-========================= */
 
 function getMimeType() {
 
@@ -1619,12 +1787,6 @@ function showMicError(error) {
   updateUI();
 
 }
-
-/* =========================
-
-   録音開始
-
-========================= */
 
 async function startRecording() {
 
@@ -1910,12 +2072,6 @@ async function startRecording() {
 
 }
 
-/* =========================
-
-   録音停止
-
-========================= */
-
 function stopRecording() {
 
   if (
@@ -1936,11 +2092,7 @@ function stopRecording() {
 
     mediaRecorder.stop();
 
-    recordButton.classList.remove(
-
-      "recording"
-
-    );
+    recordButton.classList.remove("recording");
 
     recordButton.textContent =
 
@@ -1990,11 +2142,11 @@ recordButton.addEventListener(
 
 );
 
-/* =========================
+/* =========================================================
 
    再生
 
-========================= */
+========================================================= */
 
 function stopPlayback() {
 
@@ -2302,11 +2454,11 @@ reversePlayButton.addEventListener(
 
 );
 
-/* =========================
+/* =========================================================
 
    ひらがな → ローマ字
 
-========================= */
+========================================================= */
 
 const kanaMap = {
 
@@ -2365,12 +2517,6 @@ const kanaMap = {
   "ー":"-"
 
 };
-
-/* =========================
-
-   ひらがな → ローマ字変換
-
-========================= */
 
 function hiraganaToRomaji(text) {
 
@@ -2482,12 +2628,6 @@ function hiraganaToRomaji(text) {
 
 }
 
-/* =========================
-
-   逆順
-
-========================= */
-
 function reverseText(text) {
 
   return Array
@@ -2500,11 +2640,11 @@ function reverseText(text) {
 
 }
 
-/* =========================
+/* =========================================================
 
-   ローマ字 → ひらがな
+   通常のローマ字読み
 
-========================= */
+========================================================= */
 
 const romajiMap = {
 
@@ -2546,7 +2686,7 @@ const romajiMap = {
 
   "ra":"ら","ri":"り","ru":"る","re":"れ","ro":"ろ",
 
-  "wa":"わ","wo":"を",
+  "wa":"わ",
 
   "ga":"が","gi":"ぎ","gu":"ぐ","ge":"げ","go":"ご",
 
@@ -2564,23 +2704,137 @@ const romajiMap = {
 
 };
 
+/* =========================================================
+
+   逆再生用の特殊読み
+
+========================================================= */
+
+const specialReverseMap = {
+
+  /* y / w 系 */
+
+  "yi":"い",
+
+  "wi":"うぃ",
+
+  "wu":"う",
+
+  "we":"うぇ",
+
+  "wo":"うぉ",
+
+  /* 逆向き拗音 */
+
+  "yka":"きゃ",
+
+  "yku":"きゅ",
+
+  "yko":"きょ",
+
+  "ysa":"しゃ",
+
+  "ysu":"しゅ",
+
+  "yso":"しょ",
+
+  "yta":"ちゃ",
+
+  "ytu":"ちゅ",
+
+  "yto":"ちょ",
+
+  "yna":"にゃ",
+
+  "ynu":"にゅ",
+
+  "yno":"にょ",
+
+  "yha":"ひゃ",
+
+  "yhu":"ひゅ",
+
+  "yho":"ひょ",
+
+  "yma":"みゃ",
+
+  "ymu":"みゅ",
+
+  "ymo":"みょ",
+
+  "yra":"りゃ",
+
+  "yru":"りゅ",
+
+  "yro":"りょ",
+
+  "yga":"ぎゃ",
+
+  "ygu":"ぎゅ",
+
+  "ygo":"ぎょ",
+
+  "yba":"びゃ",
+
+  "ybu":"びゅ",
+
+  "ybo":"びょ",
+
+  "ypa":"ぴゃ",
+
+  "ypu":"ぴゅ",
+
+  "ypo":"ぴょ"
+
+};
+
 const consonants =
 
   "bcdfghjklmpqrstvwxyz";
 
-/* =========================
+/* =========================================================
 
-   逆順ローマ字を読む
+   表記不可理由
 
-========================= */
+========================================================= */
+
+function getUnreadableReason(text) {
+
+  if (
+
+    /^[bcdfghjklmpqrstvwxyz]+$/.test(text)
+
+  ) {
+
+    return "母音を伴わない子音のため、対応するひらがなを正確に表記できません。";
+
+  }
+
+  if (
+
+    /^[a-z]+$/.test(text)
+
+  ) {
+
+    return "現在の逆再生用変換ルールでは、対応するひらがなを正確に表記できません。";
+
+  }
+
+  return "現在の変換ルールに対応していない文字です。";
+
+}
+
+/* =========================================================
+
+   逆順ローマ字 → 読み方
+
+========================================================= */
 
 function romajiToReadableHiragana(text) {
 
-  let result = "";
+  const tokens = [];
 
   let position = 0;
-
-  const unreadable = [];
 
   while (
 
@@ -2588,21 +2842,73 @@ function romajiToReadableHiragana(text) {
 
   ) {
 
-    const current =
-
-      text[position];
-
     /* =====================
 
-       長音記号
+       特殊逆順読み
+
+       長いものから確認
 
     ===================== */
 
-    if (current === "-") {
+    let specialMatched = false;
 
-      result += "-";
+    for (
 
-      position++;
+      let length = 3;
+
+      length >= 2;
+
+      length--
+
+    ) {
+
+      const part =
+
+        text.substring(
+
+          position,
+
+          position + length
+
+        );
+
+      if (
+
+        specialReverseMap[part]
+
+      ) {
+
+        tokens.push({
+
+          display:
+
+            specialReverseMap[part],
+
+          raw:
+
+            part,
+
+          readable:
+
+            true
+
+        });
+
+        position +=
+
+          length;
+
+        specialMatched =
+
+          true;
+
+        break;
+
+      }
+
+    }
+
+    if (specialMatched) {
 
       continue;
 
@@ -2611,12 +2917,6 @@ function romajiToReadableHiragana(text) {
     /* =====================
 
        小さい「っ」
-
-       tt + a → った
-
-       kk + a → っか
-
-       ss + a → っさ
 
     ===================== */
 
@@ -2638,7 +2938,7 @@ function romajiToReadableHiragana(text) {
 
     ) {
 
-      let followingMatched =
+      let sokuonMatched =
 
         false;
 
@@ -2668,17 +2968,35 @@ function romajiToReadableHiragana(text) {
 
         ) {
 
-          result +=
+          tokens.push({
 
-            "っ" +
+            display:
 
-            romajiMap[following];
+              "っ" +
+
+              romajiMap[following],
+
+            raw:
+
+              text.substring(
+
+                position,
+
+                position + 1 + length
+
+              ),
+
+            readable:
+
+              true
+
+          });
 
           position +=
 
             1 + length;
 
-          followingMatched =
+          sokuonMatched =
 
             true;
 
@@ -2688,7 +3006,7 @@ function romajiToReadableHiragana(text) {
 
       }
 
-      if (followingMatched) {
+      if (sokuonMatched) {
 
         continue;
 
@@ -2698,11 +3016,11 @@ function romajiToReadableHiragana(text) {
 
     /* =====================
 
-       通常変換
+       通常読み
 
     ===================== */
 
-    let matched =
+    let normalMatched =
 
       false;
 
@@ -2732,15 +3050,27 @@ function romajiToReadableHiragana(text) {
 
       ) {
 
-        result +=
+        tokens.push({
 
-          romajiMap[part];
+          display:
+
+            romajiMap[part],
+
+          raw:
+
+            part,
+
+          readable:
+
+            true
+
+        });
 
         position +=
 
           length;
 
-        matched =
+        normalMatched =
 
           true;
 
@@ -2750,7 +3080,7 @@ function romajiToReadableHiragana(text) {
 
     }
 
-    if (matched) {
+    if (normalMatched) {
 
       continue;
 
@@ -2758,129 +3088,293 @@ function romajiToReadableHiragana(text) {
 
     /* =====================
 
-       表記できない文字
-
-       表示自体は残す
+       長音
 
     ===================== */
 
-    result += current;
+    if (
 
-    unreadable.push({
+      text[position] === "-"
 
-      char: current,
+    ) {
+
+      tokens.push({
+
+        display: "-",
+
+        raw: "-",
+
+        readable: true
+
+      });
+
+      position++;
+
+      continue;
+
+    }
+
+    /* =====================
+
+       表記不可
+
+       連続する表記不可文字をまとめる
+
+    ===================== */
+
+    let unreadableText =
+
+      text[position];
+
+    position++;
+
+    while (
+
+      position < text.length
+
+    ) {
+
+      /*
+
+        次の位置から何らかの
+
+        正常な読みが始まるなら終了
+
+      */
+
+      let nextReadable =
+
+        false;
+
+      for (
+
+        let length = 3;
+
+        length >= 1;
+
+        length--
+
+      ) {
+
+        const part =
+
+          text.substring(
+
+            position,
+
+            position + length
+
+          );
+
+        if (
+
+          specialReverseMap[part] ||
+
+          romajiMap[part] ||
+
+          part === "-"
+
+        ) {
+
+          nextReadable =
+
+            true;
+
+          break;
+
+        }
+
+      }
+
+      if (nextReadable) {
+
+        break;
+
+      }
+
+      unreadableText +=
+
+        text[position];
+
+      position++;
+
+    }
+
+    tokens.push({
+
+      display:
+
+        unreadableText,
+
+      raw:
+
+        unreadableText,
+
+      readable:
+
+        false,
 
       reason:
 
         getUnreadableReason(
 
-          current
+          unreadableText
 
         )
 
     });
 
-    position++;
-
   }
 
-  return {
-
-    text: result,
-
-    unreadable: unreadable
-
-  };
+  return tokens;
 
 }
 
-/* =========================
+/* =========================================================
 
-   表記不可の理由
+   HTML表示
 
-========================= */
+========================================================= */
 
-function getUnreadableReason(char) {
+function renderTokens(
 
-  if (
+  element,
 
-    /^[bcdfghjklmpqrstvwxyz]$/
-
-      .test(char)
-
-  ) {
-
-    return "母音を伴わない子音のため、ひらがなとして表記できません。";
-
-  }
-
-  if (
-
-    /^[a-z]$/.test(char)
-
-  ) {
-
-    return "この文字の並びは、現在の変換ルールではひらがなとして表記できません。";
-
-  }
-
-  return "現在の変換ルールに対応していない文字です。";
-
-}
-
-/* =========================
-
-   警告をまとめる
-
-========================= */
-
-function createWarningData(
-
-  unreadable
+  tokens
 
 ) {
 
-  const chars = [];
+  element.innerHTML = "";
 
-  const reasons = [];
+  tokens.forEach(
 
-  unreadable.forEach(
+    token => {
 
-    item => {
+      const span =
 
-      if (
+        document.createElement(
 
-        !chars.includes(
-
-          item.char
-
-        )
-
-      ) {
-
-        chars.push(
-
-          item.char
+          "span"
 
         );
+
+      span.textContent =
+
+        token.display;
+
+      if (!token.readable) {
+
+        span.className =
+
+          "unreadable-inline";
 
       }
 
-      if (
+      element.appendChild(
 
-        !reasons.includes(
+        span
 
-          item.reason
+      );
 
-        )
+    }
 
-      ) {
+  );
 
-        reasons.push(
+}
 
-          item.reason
+/* =========================================================
+
+   逆順ローマ字にも表記不可部分を赤表示
+
+========================================================= */
+
+function renderReverseRomaji(
+
+  element,
+
+  tokens
+
+) {
+
+  element.innerHTML = "";
+
+  tokens.forEach(
+
+    token => {
+
+      const span =
+
+        document.createElement(
+
+          "span"
 
         );
+
+      span.textContent =
+
+        token.raw;
+
+      if (!token.readable) {
+
+        span.className =
+
+          "unreadable-inline";
+
+      }
+
+      element.appendChild(
+
+        span
+
+      );
+
+    }
+
+  );
+
+}
+
+/* =========================================================
+
+   警告
+
+========================================================= */
+
+function getWarnings(tokens) {
+
+  const warnings = [];
+
+  tokens.forEach(
+
+    token => {
+
+      if (!token.readable) {
+
+        const alreadyExists =
+
+          warnings.some(
+
+            item =>
+
+              item.text === token.raw
+
+          );
+
+        if (!alreadyExists) {
+
+          warnings.push({
+
+            text:
+
+              token.raw,
+
+            reason:
+
+              token.reason
+
+          });
+
+        }
 
       }
 
@@ -2888,21 +3382,15 @@ function createWarningData(
 
   );
 
-  return {
-
-    chars,
-
-    reasons
-
-  };
+  return warnings;
 
 }
 
-/* =========================
+/* =========================================================
 
-   入力処理
+   文字入力
 
-========================= */
+========================================================= */
 
 const textInput =
 
@@ -2994,7 +3482,7 @@ textInput.addEventListener(
 
       );
 
-    const converted =
+    const tokens =
 
       romajiToReadableHiragana(
 
@@ -3002,13 +3490,25 @@ textInput.addEventListener(
 
       );
 
-    reverseReadingElement.textContent =
+    /* 読み方 */
 
-      converted.text;
+    renderTokens(
 
-    reverseRomajiElement.textContent =
+      reverseReadingElement,
 
-      reverseRomaji;
+      tokens
+
+    );
+
+    /* 逆順ローマ字 */
+
+    renderReverseRomaji(
+
+      reverseRomajiElement,
+
+      tokens
+
+    );
 
     romajiElement.textContent =
 
@@ -3018,31 +3518,67 @@ textInput.addEventListener(
 
       reading;
 
+    /* 警告 */
+
+    const warnings =
+
+      getWarnings(tokens);
+
     if (
 
-      converted.unreadable.length > 0
+      warnings.length > 0
 
     ) {
-
-      const warningData =
-
-        createWarningData(
-
-          converted.unreadable
-
-        );
 
       warningTitle.textContent =
 
         "⚠️ 表記不可の文字：" +
 
-        warningData.chars.join("、");
+        warnings
+
+          .map(
+
+            item => item.text
+
+          )
+
+          .join("、");
+
+      const uniqueReasons =
+
+        [];
+
+      warnings.forEach(
+
+        item => {
+
+          if (
+
+            !uniqueReasons.includes(
+
+              item.reason
+
+            )
+
+          ) {
+
+            uniqueReasons.push(
+
+              item.reason
+
+            );
+
+          }
+
+        }
+
+      );
 
       warningReason.textContent =
 
         "理由：" +
 
-        warningData.reasons.join(" ");
+        uniqueReasons.join(" ");
 
       warningElement.style.display =
 
@@ -3070,11 +3606,11 @@ textInput.addEventListener(
 
 );
 
-/* =========================
+/* =========================================================
 
    コピー
 
-========================= */
+========================================================= */
 
 const copyButton =
 
@@ -3102,7 +3638,11 @@ copyButton.addEventListener(
 
     /*
 
-      警告・赤字部分はコピーしない
+      textContentを使うので、
+
+      赤色などの装飾はコピーされません。
+
+      警告文もコピーしません。
 
     */
 
@@ -3182,13 +3722,11 @@ copyButton.addEventListener(
 
           "0";
 
-        document.body
+        document.body.appendChild(
 
-          .appendChild(
+          temp
 
-            temp
-
-          );
+        );
 
         temp.focus();
 
@@ -3268,11 +3806,11 @@ copyButton.addEventListener(
 
 );
 
-/* =========================
+/* =========================================================
 
    ページ終了
 
-========================= */
+========================================================= */
 
 window.addEventListener(
 
